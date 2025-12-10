@@ -7,12 +7,43 @@
 
     <style>
         :root {
-            --main: #4a6cf7;
-            --accent: #6c8cff;
-            --bg: #f3f5f9;
+            --main: #7b9cff;
+            --main-dark: #4a6cf7;
+            --bg: #f7f8fc;
+            --bg-dark: #1e1f25;
             --text: #2a2a2a;
-            --radius: 14px;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --text-dark: #e8e8e8;
+            --input-bg: #ffffff;
+            --input-bg-dark: #2b2d34;
+            --card-bg: #ffffff;
+            --card-bg-dark: #2d2f36;
+            --radius: 16px;
+            --shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ダークモード対応 */
+        body.dark {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        body.dark .container {
+            background: var(--card-bg-dark);
+        }
+        body.dark input {
+            background: var(--input-bg-dark);
+            border-color: #555;
+            color: var(--text-dark);
+        }
+        body.dark .header {
+            background: var(--main-dark);
+        }
+        body.dark .result {
+            background: #39405a;
+            border-left-color: #9cb3ff;
+            color: #eaefff;
+        }
+        body.dark button {
+            background: var(--main-dark);
         }
 
         body {
@@ -20,57 +51,77 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-            color: var(--text);
+            transition: 0.4s ease;
         }
 
         .header {
             background: var(--main);
-            padding: 28px;
+            padding: 26px;
             text-align: center;
             color: white;
             font-size: 26px;
             font-weight: 700;
             letter-spacing: 1px;
-            box-shadow: 0 4px 18px rgba(74,108,247,0.3);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        /* ダークモード切り替えボタン */
+        .theme-toggle {
+            position: absolute;
+            right: 22px;
+            top: 22px;
+            background: rgba(255,255,255,0.3);
+            padding: 8px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+            color: #fff;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.45);
         }
 
         .container {
             max-width: 520px;
             margin: 40px auto;
             padding: 30px;
-            background: white;
+            background: var(--card-bg);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            animation: fadeIn 0.6s ease;
+            transition: 0.4s;
         }
 
         label {
             display: block;
             margin-top: 18px;
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             color: #555;
         }
 
-        input[type="number"] {
+        body.dark label {
+            color: #dcdcdc;
+        }
+
+        input {
             width: 100%;
-            padding: 14px 12px;
+            padding: 14px 18px;
             margin-top: 6px;
             border: 1px solid #dcdfea;
-            border-radius: var(--radius);
+            border-radius: 40px;
             font-size: 17px;
             transition: 0.25s ease;
+            background: var(--input-bg);
             box-sizing: border-box;
         }
 
         input:focus {
             border-color: var(--main);
-            box-shadow: 0 0 0 3px rgba(74,108,247,0.15);
+            box-shadow: 0 0 0 4px rgba(74,108,247,0.15);
             outline: none;
-        }
-
-        .checkbox-area {
-            margin-top: 20px;
-            font-size: 16px;
         }
 
         button {
@@ -81,49 +132,63 @@
             color: white;
             border: none;
             font-size: 18px;
-            border-radius: var(--radius);
+            border-radius: 40px;
             cursor: pointer;
             transition: 0.25s ease;
             font-weight: 600;
         }
 
         button:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(74,108,247,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(74,108,247,0.3);
         }
 
         .result {
             margin-top: 30px;
             padding: 20px;
-            background: #eef2ff;
-            border-left: 5px solid var(--main);
+            background: #eef3ff;
+            border-left: 6px solid var(--main);
             border-radius: var(--radius);
             font-size: 18px;
             font-weight: 600;
             color: #1e2c5a;
+            animation: fadeIn 0.6s ease;
         }
 
         footer {
             text-align: center;
-            margin: 50px 0;
+            margin: 40px 0;
             color: #777;
             font-size: 14px;
             letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 22px;
+                padding: 22px;
+            }
+            .header {
+                font-size: 22px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">燃費計算ツール</div>
+    <div class="header">
+        燃費計算ツール
+        <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+    </div>
 
     <div class="container">
         <label>走行距離（km）</label>
         <input type="number" id="distance" placeholder="例：120">
-
-        <div class="checkbox-area">
-            <input type="checkbox" id="roundTrip"> 往復する（距離×2）
-        </div>
 
         <label>燃費（km/L）</label>
         <input type="number" id="fuelEconomy" placeholder="例：15">
@@ -133,6 +198,9 @@
 
         <label>割り勘人数（任意）</label>
         <input type="number" id="people" placeholder="例：3">
+
+        <label>往復（チェックで往復計算）</label>
+        <input type="checkbox" id="roundTrip" style="width:auto; margin-top:10px;">
 
         <button onclick="calc()">計算する</button>
 
@@ -144,61 +212,70 @@
     </footer>
 
     <script>
-        // --------------------
         // 前回入力の読み込み
-        // --------------------
         window.onload = function () {
-            const keys = ["distance", "fuelEconomy", "gasPrice", "people"];
-            keys.forEach(key => {
-                if (localStorage.getItem(key) !== null) {
-                    document.getElementById(key).value = localStorage.getItem(key);
+            const keys = ["distance","fuelEconomy","gasPrice","people","roundTrip"];
+            keys.forEach(k=>{
+                let v = localStorage.getItem(k);
+                if(v !== null){
+                    if(k === "roundTrip"){
+                        document.getElementById(k).checked = (v === "true");
+                    } else {
+                        document.getElementById(k).value = v;
+                    }
                 }
             });
-
-            if (localStorage.getItem("roundTrip") === "true") {
-                document.getElementById("roundTrip").checked = true;
-            }
         };
 
+        function saveInput() {
+            localStorage.setItem("distance", document.getElementById("distance").value);
+            localStorage.setItem("fuelEconomy", document.getElementById("fuelEconomy").value);
+            localStorage.setItem("gasPrice", document.getElementById("gasPrice").value);
+            localStorage.setItem("people", document.getElementById("people").value);
+            localStorage.setItem("roundTrip", document.getElementById("roundTrip").checked);
+        }
+
         function calc() {
-            let d = parseFloat(document.getElementById("distance").value);
+            const d = parseFloat(document.getElementById("distance").value);
             const e = parseFloat(document.getElementById("fuelEconomy").value);
             const p = parseFloat(document.getElementById("gasPrice").value);
             const people = parseFloat(document.getElementById("people").value);
-            const roundTrip = document.getElementById("roundTrip").checked;
+            const round = document.getElementById("roundTrip").checked;
 
-            // 入力チェック
             if (isNaN(d) || isNaN(e) || isNaN(p) || d <= 0 || e <= 0 || p <= 0) {
                 alert("すべての値を正しく入力してください。");
                 return;
             }
 
             // 往復処理
-            if (roundTrip) d *= 2;
+            const distanceFinal = round ? d * 2 : d;
 
-            const fuel = d / e;
+            const fuel = distanceFinal / e;
             const cost = Math.round(fuel * p);
 
+            let resultText = `
+                走行距離：${distanceFinal} km<br>
+                必要なガソリン量：${fuel.toFixed(2)} L<br>
+                ガソリン代：<strong>${cost} 円</strong>
+            `;
+
             // 割り勘
-            let perPerson = "";
             if (!isNaN(people) && people > 0) {
-                const one = Math.round(cost / people);
-                perPerson = `<br>一人あたり：<strong>${one} 円</strong>`;
+                const per = Math.round(cost / people);
+                resultText += `<br><br>1人あたり：<strong>${per} 円</strong>`;
             }
 
-            // 結果表示
             document.getElementById("result").style.display = "block";
-            document.getElementById("result").innerHTML =
-                `必要なガソリン量：${fuel.toFixed(2)} L<br>` +
-                `ガソリン代：<strong>${cost} 円</strong>` +
-                perPerson;
+            document.getElementById("result").innerHTML = resultText;
 
-            // 入力を保存
-            localStorage.setItem("distance", document.getElementById("distance").value);
-            localStorage.setItem("fuelEconomy", document.getElementById("fuelEconomy").value);
-            localStorage.setItem("gasPrice", document.getElementById("gasPrice").value);
-            localStorage.setItem("people", document.getElementById("people").value);
-            localStorage.setItem("roundTrip", roundTrip);
+            saveInput();
+        }
+
+        // ダークモード切り替え
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+            document.querySelector(".theme-toggle").innerHTML =
+                document.body.classList.contains("dark") ? "☀️" : "🌙";
         }
     </script>
 
