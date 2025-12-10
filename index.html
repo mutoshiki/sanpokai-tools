@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>燃費計算</title>
-</head>
-<body>
-<h2>燃費計算ツール</h2>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>燃費計算ツール</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f6fa;
+            color: #333;
+        }
 
-距離（km）: <input id="dist" type="number"><br><br>
-燃費（km/L）: <input id="fuel" type="number"><br><br>
-ガソリン価格（円/L）: <input id="price" type="number"><br><br>
+        .header {
+            background: #4a6cf7;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-<button onclick="calc()">計算</button>
-
-<p id="result"></p>
-
-<script>
-function calc(){
-  const d = Number(document.getElementById('dist').value);
-  const f = Number(document.getElementById('fuel').value);
-  const p = Number(document.getElementById('price').value);
-  if(!d || !f || !p){
-    document.getElementById('result').innerText = '入力が不足しています。';
-    return;
-  }
-  const gas = d / f;
-  const cost = gas * p;
-  document.getElementById('result').innerText =
-    '必要なガソリン量: ' + gas.toFixed(2) + ' L\n' +
-    'ガソリン代: ' + cost.toFixed(0) + ' 円';
-}
-</script>
-</body>
-</html>
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow
