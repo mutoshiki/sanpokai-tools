@@ -21,27 +21,6 @@
             --shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
         }
 
-        /* 共通 */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
-            transition: 0.4s ease;
-        }
-
-        .header {
-            background: var(--main);
-            padding: 26px;
-            text-align: center;
-            color: white;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
         /* ダークモード対応 */
         body.dark {
             background: var(--bg-dark);
@@ -66,41 +45,28 @@
         body.dark button {
             background: var(--main-dark);
         }
-        body.dark label {
-            color: #dcdcdc;
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+            transition: 0.4s ease;
         }
 
-        /* システムのテーマに合わせる（自動検出） */
-        @media (prefers-color-scheme: dark) {
-            body:not(.light) {
-                background: var(--bg-dark);
-                color: var(--text-dark);
-            }
-            body:not(.light) .container {
-                background: var(--card-bg-dark);
-            }
-            body:not(.light) input {
-                background: var(--input-bg-dark);
-                color: var(--text-dark);
-                border-color: #555;
-            }
-            body:not(.light) .header {
-                background: var(--main-dark);
-            }
-            body:not(.light) .result {
-                background: #39405a;
-                border-left-color: #9cb3ff;
-                color: #eaefff;
-            }
-            body:not(.light) button {
-                background: var(--main-dark);
-            }
-            body:not(.light) label {
-                color: #dcdcdc;
-            }
+        .header {
+            background: var(--main);
+            padding: 26px;
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+            position: relative;
         }
 
-        /* テーマ切替ボタン */
+        /* ダークモード切り替えボタン */
         .theme-toggle {
             position: absolute;
             right: 22px;
@@ -134,6 +100,10 @@
             font-size: 14px;
             font-weight: 700;
             color: #555;
+        }
+
+        body.dark label {
+            color: #dcdcdc;
         }
 
         input {
@@ -242,7 +212,7 @@
     </footer>
 
     <script>
-        // ===== 入力保存・復元 =====
+        // 前回入力の読み込み
         window.onload = function () {
             const keys = ["distance","fuelEconomy","gasPrice","people","roundTrip"];
             keys.forEach(k=>{
@@ -255,17 +225,6 @@
                     }
                 }
             });
-
-            // テーマ適用（ユーザー設定 or システム設定）
-            const savedTheme = localStorage.getItem("theme");
-            const systemPrefDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-            if (savedTheme === "dark" || (!savedTheme && systemPrefDark)) {
-                document.body.classList.add("dark");
-                document.querySelector(".theme-toggle").innerHTML = "☀️";
-            } else {
-                document.querySelector(".theme-toggle").innerHTML = "🌙";
-            }
         };
 
         function saveInput() {
@@ -276,7 +235,6 @@
             localStorage.setItem("roundTrip", document.getElementById("roundTrip").checked);
         }
 
-        // ===== 計算 =====
         function calc() {
             const d = parseFloat(document.getElementById("distance").value);
             const e = parseFloat(document.getElementById("fuelEconomy").value);
@@ -289,7 +247,9 @@
                 return;
             }
 
+            // 往復処理
             const distanceFinal = round ? d * 2 : d;
+
             const fuel = distanceFinal / e;
             const cost = Math.round(fuel * p);
 
@@ -299,23 +259,25 @@
                 ガソリン代：<strong>${cost} 円</strong>
             `;
 
+            // 割り勘
             if (!isNaN(people) && people > 0) {
                 const per = Math.round(cost / people);
                 resultText += `<br><br>1人あたり：<strong>${per} 円</strong>`;
             }
 
-            const result = document.getElementById("result");
-            result.style.display = "block";
-            result.innerHTML = resultText;
+            document.getElementById("result").style.display = "block";
+            document.getElementById("result").innerHTML = resultText;
+
             saveInput();
         }
 
-        // ===== テーマ切り替え =====
+        // ダークモード切り替え
         function toggleTheme() {
-            const isDark = document.body.classList.toggle("dark");
-            document.querySelector(".theme-toggle").innerHTML = isDark ? "☀️" : "🌙";
-            localStorage.setItem("theme", isDark ? "dark" : "light");
+            document.body.classList.toggle("dark");
+            document.querySelector(".theme-toggle").innerHTML =
+                document.body.classList.contains("dark") ? "☀️" : "🌙";
         }
     </script>
+
 </body>
 </html>
