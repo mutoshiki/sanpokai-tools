@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>燃費計算</title>
+</head>
+<body>
+<h2>燃費計算ツール</h2>
+
+距離（km）: <input id="dist" type="number"><br><br>
+燃費（km/L）: <input id="fuel" type="number"><br><br>
+ガソリン価格（円/L）: <input id="price" type="number"><br><br>
+
+<button onclick="calc()">計算</button>
+
+<p id="result"></p>
+
+<script>
+function calc(){
+  const d = Number(document.getElementById('dist').value);
+  const f = Number(document.getElementById('fuel').value);
+  const p = Number(document.getElementById('price').value);
+  if(!d || !f || !p){
+    document.getElementById('result').innerText = '入力が不足しています。';
+    return;
+  }
+  const gas = d / f;
+  const cost = gas * p;
+  document.getElementById('result').innerText =
+    '必要なガソリン量: ' + gas.toFixed(2) + ' L\n' +
+    'ガソリン代: ' + cost.toFixed(0) + ' 円';
+}
+</script>
+</body>
+</html>
