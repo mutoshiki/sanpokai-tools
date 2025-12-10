@@ -74,6 +74,17 @@ body.dark .theme-toggle{
     background: rgba(255,255,255,0.18);
 }
 
+    /* 往復チェックボックスラベル */
+body.dark label[for="roundTrip"] {
+    color: #f0f0f0; /* 明るい文字に変更 */
+}
+
+/* 履歴一覧の日付 */
+body.dark .historyItem b {
+    color: #cfcfff; /* 日付を明るめの色に */
+}
+
+
     
 .header{
     background:var(--main);
@@ -252,8 +263,8 @@ body.dark #historyBox{ background:#2f323c; }
     <div id="result" class="result" style="display:none;" role="status" aria-live="polite"></div>
 
     <div class="copy-row" id="copyRow" style="display:none;">
-        <button class="copy-btn primary" id="copyCostBtn" aria-label="ガソリン代をコピー">📋 ガソリン代</button>
-        <button class="copy-btn secondary" id="copyPerBtn" aria-label="一人あたりの金額をコピー" style="display:none;">📋 1人あたり</button>
+        <button class="copy-btn primary" id="copyCostBtn" aria-label="ガソリン代をコピー">📋 ガソリン代コピー</button>
+        <button class="copy-btn secondary" id="copyPerBtn" aria-label="一人あたりの金額をコピー" style="display:none;">📋 1人あたりコピー</button>
     </div>
 
     <div id="historyBox" aria-live="polite" style="margin-top:20px;">
