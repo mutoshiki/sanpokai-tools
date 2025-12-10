@@ -1,195 +1,282 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>燃費計算サイト</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>燃費計算ツール</title>
+
     <style>
         :root {
-            --bg: #fafafa;
-            --card: #ffffff;
-            --text: #333;
-            --accent: #ff82a9;
-            --accent-dark: #ff5c8a;
-            --input-bg: #fff;
+            --main: #7b9cff;
+            --main-dark: #4a6cf7;
+            --bg: #f7f8fc;
+            --bg-dark: #1e1f25;
+            --text: #2a2a2a;
+            --text-dark: #e8e8e8;
+            --input-bg: #ffffff;
+            --input-bg-dark: #2b2d34;
+            --card-bg: #ffffff;
+            --card-bg-dark: #2d2f36;
+            --radius: 16px;
+            --shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #1a1a1a;
-                --card: #262626;
-                --text: #f1f1f1;
-                --accent: #ff9ec4;
-                --accent-dark: #ff7aa8;
-                --input-bg: #333;
-            }
+        /* ダークモード対応 */
+        body.dark {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+        body.dark .container {
+            background: var(--card-bg-dark);
+        }
+        body.dark input {
+            background: var(--input-bg-dark);
+            border-color: #555;
+            color: var(--text-dark);
+        }
+        body.dark .header {
+            background: var(--main-dark);
+        }
+        body.dark .result {
+            background: #39405a;
+            border-left-color: #9cb3ff;
+            color: #eaefff;
+        }
+        body.dark button {
+            background: var(--main-dark);
         }
 
         body {
-            font-family: "Helvetica", "Segoe UI", sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
             padding: 0;
-            background: var(--bg);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            padding: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+            transition: 0.4s ease;
+        }
+
+        .header {
+            background: var(--main);
+            padding: 26px;
+            text-align: center;
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        /* ダークモード切り替えボタン */
+        .theme-toggle {
+            position: absolute;
+            right: 22px;
+            top: 22px;
+            background: rgba(255,255,255,0.3);
+            padding: 8px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+            color: #fff;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.45);
         }
 
         .container {
-            width: 100%;
-            max-width: 420px;
-            background: var(--card);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-            animation: fadeIn 0.8s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            color: var(--accent-dark);
+            max-width: 520px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.6s ease;
+            transition: 0.4s;
         }
 
         label {
             display: block;
-            margin: 10px 0 4px;
-            font-weight: bold;
+            margin-top: 18px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #555;
         }
 
-        /* 入力＋ミニリセットボタンの横並び */
-        .input-row {
-            display: flex;
-            gap: 8px;
-            align-items: center;
+        body.dark label {
+            color: #dcdcdc;
         }
 
         input {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            border: 2px solid #ddd;
+            width: 100%;
+            padding: 14px 18px;
+            margin-top: 6px;
+            border: 1px solid #dcdfea;
+            border-radius: 40px;
+            font-size: 17px;
+            transition: 0.25s ease;
             background: var(--input-bg);
-            font-size: 1rem;
             box-sizing: border-box;
-            transition: 0.25s;
         }
 
         input:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 6px var(--accent);
+            border-color: var(--main);
+            box-shadow: 0 0 0 4px rgba(74,108,247,0.15);
             outline: none;
-        }
-
-        .clear-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            border: none;
-            background: #ddd;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: 0.25s;
-        }
-
-        .clear-btn:hover {
-            background: #bbb;
         }
 
         button {
             width: 100%;
-            padding: 14px;
-            font-size: 1.1rem;
+            margin-top: 30px;
+            padding: 15px;
+            background: var(--main);
+            color: white;
             border: none;
-            border-radius: 12px;
+            font-size: 18px;
+            border-radius: 40px;
             cursor: pointer;
-            margin-top: 18px;
-            transition: 0.25s;
+            transition: 0.25s ease;
+            font-weight: 600;
         }
 
-        #calcBtn {
-            background: var(--accent);
-            color: #fff;
-        }
-        #calcBtn:hover {
-            background: var(--accent-dark);
-        }
-
-        #resetBtn {
-            background: #ccc;
-            margin-top: 10px;
-        }
-        #resetBtn:hover {
-            background: #b5b5b5;
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(74,108,247,0.3);
         }
 
         .result {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.3rem;
-            font-weight: bold;
+            margin-top: 30px;
+            padding: 20px;
+            background: #eef3ff;
+            border-left: 6px solid var(--main);
+            border-radius: var(--radius);
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e2c5a;
+            animation: fadeIn 0.6s ease;
         }
 
+        footer {
+            text-align: center;
+            margin: 40px 0;
+            color: #777;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 22px;
+                padding: 22px;
+            }
+            .header {
+                font-size: 22px;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>燃費計算</h1>
 
-        <label>走行距離 (km)</label>
-        <div class="input-row">
-            <input id="distance" type="number" placeholder="例：100">
-            <button class="clear-btn" onclick="distance.value=''">✕</button>
-        </div>
-
-        <label>燃費 (km/L)</label>
-        <div class="input-row">
-            <input id="efficiency" type="number" placeholder="例：15">
-            <button class="clear-btn" onclick="efficiency.value=''">✕</button>
-        </div>
-
-        <label>ガソリン価格 (円/L)</label>
-        <div class="input-row">
-            <input id="price" type="number" placeholder="例：170">
-            <button class="clear-btn" onclick="price.value=''">✕</button>
-        </div>
-
-        <button id="calcBtn">計算する</button>
-        <button id="resetBtn">リセット</button>
-
-        <div id="result" class="result"></div>
+    <div class="header">
+        燃費計算ツール
+        <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
     </div>
 
-    <script>
-        document.getElementById("calcBtn").onclick = function () {
-            const d = parseFloat(distance.value);
-            const e = parseFloat(efficiency.value);
-            const p = parseFloat(price.value);
+    <div class="container">
+        <label>走行距離（km）</label>
+        <input type="number" id="distance" placeholder="例：120">
 
-            if (!d || !e || !p) {
-                result.innerHTML = "すべて入力してください。";
+        <label>燃費（km/L）</label>
+        <input type="number" id="fuelEconomy" placeholder="例：15">
+
+        <label>ガソリン価格（円/L）</label>
+        <input type="number" id="gasPrice" placeholder="例：170">
+
+        <label>割り勘人数（任意）</label>
+        <input type="number" id="people" placeholder="例：3">
+
+        <label>往復（チェックで往復計算）</label>
+        <input type="checkbox" id="roundTrip" style="width:auto; margin-top:10px;">
+
+        <button onclick="calc()">計算する</button>
+
+        <div id="result" class="result" style="display:none;"></div>
+    </div>
+
+    <footer>
+        © 2025 Nenpi Calculator
+    </footer>
+
+    <script>
+        // 前回入力の読み込み
+        window.onload = function () {
+            const keys = ["distance","fuelEconomy","gasPrice","people","roundTrip"];
+            keys.forEach(k=>{
+                let v = localStorage.getItem(k);
+                if(v !== null){
+                    if(k === "roundTrip"){
+                        document.getElementById(k).checked = (v === "true");
+                    } else {
+                        document.getElementById(k).value = v;
+                    }
+                }
+            });
+        };
+
+        function saveInput() {
+            localStorage.setItem("distance", document.getElementById("distance").value);
+            localStorage.setItem("fuelEconomy", document.getElementById("fuelEconomy").value);
+            localStorage.setItem("gasPrice", document.getElementById("gasPrice").value);
+            localStorage.setItem("people", document.getElementById("people").value);
+            localStorage.setItem("roundTrip", document.getElementById("roundTrip").checked);
+        }
+
+        function calc() {
+            const d = parseFloat(document.getElementById("distance").value);
+            const e = parseFloat(document.getElementById("fuelEconomy").value);
+            const p = parseFloat(document.getElementById("gasPrice").value);
+            const people = parseFloat(document.getElementById("people").value);
+            const round = document.getElementById("roundTrip").checked;
+
+            if (isNaN(d) || isNaN(e) || isNaN(p) || d <= 0 || e <= 0 || p <= 0) {
+                alert("すべての値を正しく入力してください。");
                 return;
             }
 
-            const gas = d / e;
-            const cost = Math.round(gas * p);
+            // 往復処理
+            const distanceFinal = round ? d * 2 : d;
 
-            result.innerHTML = `ガソリン代：<span style="color: var(--accent-dark);">${cost} 円</span>`;
-        };
+            const fuel = distanceFinal / e;
+            const cost = Math.round(fuel * p);
 
-        document.getElementById("resetBtn").onclick = function () {
-            distance.value = "";
-            efficiency.value = "";
-            price.value = "";
-            result.innerHTML = "";
-        };
+            let resultText = `
+                走行距離：${distanceFinal} km<br>
+                必要なガソリン量：${fuel.toFixed(2)} L<br>
+                ガソリン代：<strong>${cost} 円</strong>
+            `;
+
+            // 割り勘
+            if (!isNaN(people) && people > 0) {
+                const per = Math.round(cost / people);
+                resultText += `<br><br>1人あたり：<strong>${per} 円</strong>`;
+            }
+
+            document.getElementById("result").style.display = "block";
+            document.getElementById("result").innerHTML = resultText;
+
+            saveInput();
+        }
+
+        // ダークモード切り替え
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+            document.querySelector(".theme-toggle").innerHTML =
+                document.body.classList.contains("dark") ? "☀️" : "🌙";
+        }
     </script>
 
 </body>
