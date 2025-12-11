@@ -69,7 +69,6 @@ body.dark .result{
     color:#f0f0ff;
     border-left-color:#9cb3ff;
 }
-/* 【★修正】計算結果の強調文字をダークモード用の明るい色にする */
 body.dark .result strong {
     color: var(--highlight-color-dark); /* #ffda79 */
 }
@@ -99,7 +98,6 @@ body.dark .car-round-label {
 body.dark .historyItem b {
     color: #cfcfff;
 }
-/* 【★修正】履歴アイテム内の強調文字をダークモード用の明るい色にする */
 body.dark .historyItem strong {
     color: var(--highlight-color-dark) !important;
 }
@@ -230,6 +228,7 @@ button.sub-btn{
 
 /* 複数車フォーム */
 .car-list-container { padding-top: 5px; }
+/* 複数台のラベル調整 */
 .car-input-labels { display: flex; gap: 6px; margin-bottom: 5px; font-size: 12px; font-weight: 500; color: #555; align-items: center; padding-right: 18px; }
 .car-input-labels > div { flex: 1; text-align: center; }
 .car-input-labels > div:first-child { flex: 0 0 100px; text-align: left; }
@@ -274,6 +273,9 @@ button.sub-btn{
     .car-row-inner{ flex-wrap: wrap; }
     .car-round-group{ flex:1 1 100%; justify-content: flex-end; }
     .car-input-labels > div:first-child, .carName { flex: 0 0 80px; }
+    
+    /* 複数台モードの入力幅調整 */
+    .multi-car-input { max-width: 15%; } 
 }
 </style>
 </head>
@@ -302,6 +304,8 @@ button.sub-btn{
         <label for="gasPrice">ガソリン価格（円/L）</label>
         <input id="gasPrice" type="number" inputmode="decimal" aria-label="ガソリン価格" placeholder="例：170">
 
+        <label for="extraCost">諸経費（円）<span style="font-size:0.8em; font-weight:normal; opacity:0.8;">（駐車場代、高速代など）</span></label>
+        <input id="extraCost" type="number" inputmode="decimal" aria-label="諸経費" placeholder="例：1500" value="0">
         <label for="people">割り勘人数（任意）</label>
         <input id="people" type="number" inputmode="decimal" aria-label="割り勘人数" placeholder="例：3">
 
@@ -315,9 +319,10 @@ button.sub-btn{
         <div class="car-list-container">
             <div class="car-input-labels">
                 <div>車名</div>
-                <div>距離</div>
-                <div>燃費</div>
-                <div>価格</div>
+                <div class="multi-car-input">距離(km)</div>
+                <div class="multi-car-input">燃費(km/L)</div>
+                <div class="multi-car-input">価格(円/L)</div>
+                <div class="multi-car-input">諸経費(円)</div>
                 <div></div> 
             </div>
             <div id="carList">
@@ -336,7 +341,7 @@ button.sub-btn{
     <div id="result" class="result" style="display:none;" role="status" aria-live="polite"></div>
 
     <div class="copy-row" id="copyRow" style="display:none;">
-        <button class="copy-btn primary" id="copyCostBtn" aria-label="ガソリン代をコピー">📋 ガソリン代コピー</button>
+        <button class="copy-btn primary" id="copyCostBtn" aria-label="ガソリン代をコピー">📋 合計費用コピー</button>
         <button class="copy-btn secondary" id="copyPerBtn" aria-label="一人あたりの金額をコピー" style="display:none;">📋 1人あたりコピー</button>
     </div>
 
@@ -391,8 +396,11 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     document.getElementById('calcBtn').addEventListener('click', calc);
     document.getElementById('resetBtn').addEventListener('click', resetInputs);
+    // 【★修正】コピーボタンのラベルを「合計費用」に変更
     document.getElementById('copyCostBtn').addEventListener('click', copyCost);
+    document.getElementById('copyCostBtn').textContent = '📋 合計費用コピー';
     document.getElementById('copyPerBtn').addEventListener('click', copyPerCost);
+    // 【★修正：ここまで】
     document.getElementById('addCarBtn').addEventListener('click',()=>addCarRow());
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', switchMode));
 
@@ -433,6 +441,9 @@ function saveSingleCarInputs() {
         gasPrice: document.getElementById('gasPrice').value,
         people: document.getElementById('people').value,
         roundTrip: document.getElementById('roundTrip').checked,
+        // 【★修正：諸経費の保存】
+        extraCost: document.getElementById('extraCost').value,
+        // 【★修正：ここまで】
     };
     localStorage.setItem(SINGLE_CAR_KEY, JSON.stringify(singleCarData));
 }
@@ -444,6 +455,9 @@ function loadSingleCarInputs() {
     document.getElementById('gasPrice').value = data.gasPrice || '';
     document.getElementById('people').value = data.people || '';
     document.getElementById('roundTrip').checked = data.roundTrip || false;
+    // 【★修正：諸経費の復元】
+    document.getElementById('extraCost').value = data.extraCost || '0'; 
+    // 【★修正：ここまで】
 }
 
 /* ---- 複数台追加/削除/再インデックス処理 ---- */
@@ -458,6 +472,7 @@ function addCarRow(data={}) {
         ? `<button class="delCarBtn" style="background:none;border:none;color:red;cursor:pointer;font-size:18px;padding:0;line-height:1;position:relative;top:2px;" aria-label="車を削除">&times;</button>` 
         : '';
     
+    // 【★修正：複数台モードに諸経費入力欄を追加】
     div.innerHTML = `
         <strong class="car-item-header" style="display:flex; justify-content:space-between; align-items:center;">
             <span class="car-label">車 ${idx + 1}</span>
@@ -465,15 +480,17 @@ function addCarRow(data={}) {
         </strong>
         <div class="car-row-inner">
             <input type="text" placeholder="車名 (任意)" value="${data.name || ''}" class="carName" aria-label="車${idx + 1} 名前">
-            <input type="number" inputmode="decimal" placeholder="" value="${data.distance || ''}" class="carDistance" aria-label="車${idx + 1} 走行距離">
-            <input type="number" inputmode="decimal" placeholder="" value="${data.economy || ''}" class="carEconomy" aria-label="車${idx + 1} 燃費">
-            <input type="number" inputmode="decimal" placeholder="" value="${data.price || ''}" class="carPrice" aria-label="車${idx + 1} ガソリン価格">
+            <input type="number" inputmode="decimal" placeholder="" value="${data.distance || ''}" class="carDistance multi-car-input" aria-label="車${idx + 1} 走行距離">
+            <input type="number" inputmode="decimal" placeholder="" value="${data.economy || ''}" class="carEconomy multi-car-input" aria-label="車${idx + 1} 燃費">
+            <input type="number" inputmode="decimal" placeholder="" value="${data.price || ''}" class="carPrice multi-car-input" aria-label="車${idx + 1} ガソリン価格">
+            <input type="number" inputmode="decimal" placeholder="0" value="${data.extraCost || '0'}" class="carExtraCost multi-car-input" aria-label="車${idx + 1} 諸経費">
             <div class="car-round-group">
                 <input type="checkbox" id="carRound${idx}" class="carRound" ${data.round ? 'checked' : ''} aria-label="車${idx + 1} 往復">
                 <label for="carRound${idx}" class="car-round-label">往復</label>
             </div>
         </div>
     `;
+    // 【★修正：ここまで】
     container.appendChild(div);
 
     const delBtn = div.querySelector('.delCarBtn');
@@ -490,6 +507,9 @@ function addCarRow(data={}) {
         div.querySelector('.carDistance').setAttribute('aria-label', `${baseName} 走行距離`);
         div.querySelector('.carEconomy').setAttribute('aria-label', `${baseName} 燃費`);
         div.querySelector('.carPrice').setAttribute('aria-label', `${baseName} ガソリン価格`);
+        // 【★修正：諸経費のラベル調整】
+        div.querySelector('.carExtraCost').setAttribute('aria-label', `${baseName} 諸経費`);
+        // 【★修正：ここまで】
         div.querySelector('.carRound').setAttribute('aria-label', `${baseName} 往復`);
     };
     
@@ -534,6 +554,9 @@ function removeCarRow(carItem){
         item.querySelector('.carDistance').setAttribute('aria-label', `${baseName} 走行距離`);
         item.querySelector('.carEconomy').setAttribute('aria-label', `${baseName} 燃費`);
         item.querySelector('.carPrice').setAttribute('aria-label', `${baseName} ガソリン価格`);
+        // 【★修正：諸経費のラベル調整】
+        item.querySelector('.carExtraCost').setAttribute('aria-label', `${baseName} 諸経費`);
+        // 【★修正：ここまで】
         
         const roundCheckbox = item.querySelector('.carRound');
         roundCheckbox.id = `carRound${index}`;
@@ -560,6 +583,8 @@ function toggleTheme(){
 function calc(){
     const isMulti = currentMode === 'multi';
     let totalCost = 0;
+    let totalGasCost = 0; // ガソリン代のみの合計
+    let totalExtraCost = 0; // 諸経費のみの合計
     let html = '';
     let per = 0;
 
@@ -580,6 +605,8 @@ function calc(){
         const gInput = document.getElementById('gasPrice');
         const pInput = document.getElementById('people');
         const rInput = document.getElementById('roundTrip');
+        // 【★修正：諸経費の取得】
+        const xInput = document.getElementById('extraCost');
 
         if(!dInput || !eInput || !gInput) return;
 
@@ -588,6 +615,8 @@ function calc(){
         const g = parseFloat(gInput.value);
         const pe = parseInt(pInput.value) || 0;
         const round = rInput.checked;
+        const x = parseFloat(xInput.value) || 0;
+        // 【★修正：ここまで】
 
         if(isNaN(d) || isNaN(e) || isNaN(g) || d <= 0 || e <= 0 || g <= 0){ 
             displayError('走行距離、燃費、ガソリン価格を正しく入力してください'); 
@@ -596,22 +625,37 @@ function calc(){
 
         const dist = round ? d * 2 : d;
         const fuel = dist / e;
-        const cost = Math.round(fuel * g);
-        totalCost = cost;
+        const gasCost = Math.round(fuel * g);
+        totalGasCost = gasCost;
+        totalExtraCost = x;
+        
+        // 【★修正：最終合計コストはガソリン代 + 諸経費】
+        totalCost = gasCost + x;
+        // 【★修正：ここまで】
 
         html = `走行距離：${dist} km${round ? ' (往復)' : ''}<br>
                 必要ガソリン量：${fuel.toFixed(2)} L<br>
-                ガソリン代：<strong>${cost} 円</strong>`;
+                ガソリン代：<strong style="font-size:1.1em;">${gasCost} 円</strong><br>`;
+        
+        // 諸経費が0でなければ表示
+        if (x > 0) {
+            html += `諸経費：<strong style="font-size:1.1em;">${x} 円</strong><br>`;
+        }
+        
+        html += `<br>合計費用：<strong style="font-size:1.2em;">${totalCost} 円</strong>`;
+
 
         if(pe > 0){
-            per = Math.round(cost / pe);
-            html += `<br><br>1人あたり：<strong>${per} 円</strong>`;
+            per = Math.round(totalCost / pe);
+            html += `<br><br>1人あたり：<strong style="font-size:1.2em;">${per} 円</strong>`;
             if(copyPerBtn) copyPerBtn.style.display = 'inline-block';
         } else {
             if(copyPerBtn) copyPerBtn.style.display = 'none';
         }
 
-        if(typeof saveHistory === 'function') saveHistory({ mode:'single', d, e, g, pe, round, cost, timestamp: Date.now() });
+        // 【★修正：履歴に諸経費を追加】
+        if(typeof saveHistory === 'function') saveHistory({ mode:'single', d, e, g, pe, round, gasCost, extraCost: x, totalCost, timestamp: Date.now() });
+        // 【★修正：ここまで】
         if(typeof saveSingleCarInputs === 'function') saveSingleCarInputs();
 
     } else {
@@ -632,12 +676,17 @@ function calc(){
             const eInput = row.querySelector('.carEconomy');
             const pInput = row.querySelector('.carPrice');
             const rInput = row.querySelector('.carRound');
+            // 【★修正：諸経費の取得】
+            const xInput = row.querySelector('.carExtraCost');
 
             const name = (nameInput && nameInput.value) ? nameInput.value : `車${i+1}`;
             const d = parseFloat(dInput ? dInput.value : 0);
             const e = parseFloat(eInput ? eInput.value : 0);
             const g = parseFloat(pInput ? pInput.value : 0);
             const round = rInput ? rInput.checked : false;
+            const x = parseFloat(xInput ? xInput.value : 0) || 0;
+            // 【★修正：ここまで】
+
 
             if(isNaN(d) || isNaN(e) || isNaN(g) || d <= 0 || e <= 0 || g <= 0){
                 displayError(`${name} の入力を確認してください`);
@@ -646,19 +695,25 @@ function calc(){
 
             const dist = round ? d * 2 : d;
             const fuel = dist / e;
-            const cost = Math.round(fuel * g);
-            totalCost += cost;
+            const gasCost = Math.round(fuel * g);
+            const carTotalCost = gasCost + x; // 車ごとの合計費用
+
+            totalGasCost += gasCost;
+            totalExtraCost += x;
+            totalCost += carTotalCost; // 全車の合計費用
 
             // ダークモードに対応できるよう、styleを調整
             const historyBorderColor = document.body.classList.contains('dark') ? 'rgba(255,255,255,0.15)' : 'rgba(120,120,120,0.3)';
+            const extraCostHtml = x > 0 ? `<br>諸経費: ${x} 円` : '';
 
             html += `<div style="margin-bottom:12px; padding-bottom:12px; border-bottom:1px dashed ${historyBorderColor};">
                         <strong>${name}</strong><br>
                         <span style="font-size:0.9em; opacity:0.9;">距離:${dist}km${round ? '(往)' : ''} / 燃費:${e} / 単価:${g}</span><br>
-                        ガソリン代: <strong>${cost} 円</strong>
+                        ガソリン代: ${gasCost} 円${extraCostHtml}<br>
+                        合計費用: <strong style="font-size:1.0em;">${carTotalCost} 円</strong>
                      </div>`;
             
-            carData.push({ name, distance:d, economy:e, price:g, round, cost });
+            carData.push({ name, distance:d, economy:e, price:g, round, gasCost, extraCost: x, totalCost: carTotalCost });
         }
         
         // 最後の区切り線は不要なので、一つ上のdivから border-bottom を削除
@@ -672,8 +727,9 @@ function calc(){
             html = lastDiv.innerHTML;
         }
 
-
-        html += `<div style="margin-top:8px; font-size:1.1em;">合計ガソリン代：<strong>${totalCost} 円</strong></div>`;
+        // 合計ガソリン代と合計諸経費が分かっていると便利なので追加表示
+        html += `<div style="margin-top:10px; font-size:0.9em; opacity:0.9;">(内訳: ガソリン代 ${totalGasCost} 円 + 諸経費 ${totalExtraCost} 円)</div>`;
+        html += `<div style="margin-top:4px; font-size:1.1em;">合計費用：<strong>${totalCost} 円</strong></div>`;
         
         if(pe > 0){
             per = Math.round(totalCost / pe);
@@ -683,7 +739,9 @@ function calc(){
             if(copyPerBtn) copyPerBtn.style.display = 'none';
         }
 
-        if(typeof saveHistory === 'function') saveHistory({ mode:'multi', cars:carData, pe, totalCost, timestamp: Date.now() });
+        // 【★修正：履歴に諸経費の合計を追加】
+        if(typeof saveHistory === 'function') saveHistory({ mode:'multi', cars:carData, pe, totalCost, totalGasCost, totalExtraCost, timestamp: Date.now() });
+        // 【★修正：ここまで】
         if(typeof saveMultiCarInputs === 'function') saveMultiCarInputs();
     }
 
@@ -708,6 +766,9 @@ function saveMultiCarInputs(){
         economy: row.querySelector('.carEconomy').value,
         price: row.querySelector('.carPrice').value,
         round: row.querySelector('.carRound').checked,
+        // 【★修正：諸経費の保存】
+        extraCost: row.querySelector('.carExtraCost').value,
+        // 【★修正：ここまで】
     }));
     localStorage.setItem(CAR_LIST_KEY, JSON.stringify(carData));
     localStorage.setItem(MULTI_PEOPLE_KEY, document.getElementById('multiPeople').value);
@@ -726,6 +787,9 @@ function resetInputs(){
         document.getElementById('distance').value = '';
         document.getElementById('fuelEconomy').value = '';
         document.getElementById('gasPrice').value = '';
+        // 【★修正：諸経費を0にリセット】
+        document.getElementById('extraCost').value = '0';
+        // 【★修正：ここまで】
         document.getElementById('people').value = '';
         document.getElementById('roundTrip').checked = false;
         saveSingleCarInputs();
@@ -741,7 +805,7 @@ function resetInputs(){
 
 function copyCost(){
     navigator.clipboard.writeText(lastCost + ' 円');
-    alert(`ガソリン代 ${lastCost} 円 をコピーしました`);
+    alert(`合計費用 ${lastCost} 円 をコピーしました`);
 }
 
 function copyPerCost(){
@@ -763,7 +827,7 @@ function loadHistory(){
     const list = document.getElementById('historyList');
     list.innerHTML = '';
     
-    // 【★修正】JavaScriptでCSS変数を取得するように変更
+    // JavaScriptでCSS変数を取得するように変更
     const isDark = document.body.classList.contains('dark');
     const strongColor = isDark ? 'var(--highlight-color-dark)' : 'var(--highlight-color)';
     const hrStyle = isDark ? 'border:0; border-top:1px solid rgba(255,255,255,0.15); margin: 6px 0;' : 'border:0; border-top:1px solid rgba(0,0,0,0.1); margin: 6px 0;';
@@ -779,28 +843,38 @@ function loadHistory(){
         
         if(item.mode === 'single'){
             const isRound = item.round ? ' (往復)' : '';
-            const perPerson = item.pe > 0 ? ` (1人あたり: <strong style="color:${strongColor};">${Math.round(item.cost/item.pe)} 円</strong> / ${item.pe}人)` : '';
+            const perPerson = item.pe > 0 ? ` (1人あたり: <strong style="color:${strongColor};">${Math.round(item.totalCost/item.pe)} 円</strong> / ${item.pe}人)` : '';
+            // 【★修正：履歴の表示に諸経費を追加】
+            const extraCostDisplay = item.extraCost > 0 ? `<br>諸経費: ${item.extraCost} 円` : '';
             
             content = `
                 走行距離: ${item.d} km${isRound} / 燃費: ${item.e} km/L<br>
-                ガソリン代: <strong style="color:${strongColor};">${item.cost} 円</strong>${perPerson}
+                ガソリン代: ${item.gasCost} 円${extraCostDisplay}<br>
+                合計費用: <strong style="color:${strongColor};">${item.totalCost} 円</strong>${perPerson}
             `;
+            // 【★修正：ここまで】
         } else {
             const carDetails = item.cars.map(c => {
                 const isRound = c.round ? ' (往復)' : '';
                 const name = c.name || '車';
-                return `<li>${name}: 距離${c.distance}km${isRound} / 代 <strong style="color:${strongColor};">${c.cost}円</strong></li>`;
+                // 【★修正：複数台の履歴表示に諸経費を追加】
+                const extraCostDisplay = c.extraCost > 0 ? ` + 諸経費${c.extraCost}` : '';
+                return `<li>${name}: 距離${c.distance}km${isRound} / 代 ${c.gasCost}円${extraCostDisplay} (計 <strong style="color:${strongColor};">${c.totalCost}円</strong>)</li>`;
             }).join('');
             
             const perPerson = item.pe > 0 ? ` (1人あたり: <strong style="color:${strongColor};">${Math.round(item.totalCost/item.pe)} 円</strong> / ${item.pe}人)` : '';
 
+            // 【★修正：合計費用の内訳を追加】
+            const breakdown = item.totalExtraCost > 0 ? ` (内訳: ガソリン代 ${item.totalGasCost} 円 + 諸経費 ${item.totalExtraCost} 円)` : '';
+
             content = `
-                <ul style="list-style-type:none; padding-left:10px; margin: 4px 0 8px 0;">
+                <ul style="list-style-type:none; padding-left:10px; margin: 4px 0 8px 0; font-size:0.95em;">
                     ${carDetails}
                 </ul>
                 <hr style="${hrStyle}">
-                合計ガソリン代: <strong style="color:${strongColor};">${item.totalCost} 円</strong>${perPerson}
+                合計費用: <strong style="color:${strongColor};">${item.totalCost} 円</strong>${breakdown}${perPerson}
             `;
+            // 【★修正：ここまで】
         }
 
         div.innerHTML = `<b>${date}</b>${content}`;
@@ -821,6 +895,9 @@ function restore(data){
         document.getElementById('distance').value = data.d;
         document.getElementById('fuelEconomy').value = data.e;
         document.getElementById('gasPrice').value = data.g;
+        // 【★修正：諸経費の復元】
+        document.getElementById('extraCost').value = data.extraCost || '0';
+        // 【★修正：ここまで】
         document.getElementById('people').value = data.pe || '';
         document.getElementById('roundTrip').checked = data.round || false;
     } else {
