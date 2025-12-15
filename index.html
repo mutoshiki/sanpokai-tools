@@ -751,20 +751,22 @@ function calcCircle(){
     let html = '';
 
     html += `<strong>【参加者から集める金額】</strong><br>`;
-    html += `参加者で割り勘する金額（ガソリン代＋諸経費）：${warikanBase} 円<br>`;
+   html += `参加者で割り勘する金額（参加者負担分）：${warikanBase} 円<br>`;
+
     html += `1人あたり（100円単位切り上げ）：<strong>${basePer} 円</strong><br>`;
     html += `回収総額：${collectedTotal} 円<br>`;
-    html += `切り上げによる余剰金（サークル会計へ）：${excess} 円<br><br>`;
+ html += `切り上げ差額（サークル会計へ）：${excess} 円<br><br>`;
 
-    html += `<strong>【サークル会計で処理する金額】</strong><br>`;
+
+    html += `<strong>【サークル会計から支出する金額】</strong><br>`;
     html += `調整費：${adjust} 円<br>`;
     html += `レンタカー代：${rent} 円<br>`;
     html += `高速代：${highway} 円<br>`;
-    html += `余剰金を差し引き：-${excess} 円<br><br>`;
+    html += `切り上げ差額の充当：${excess} 円<br><br>`;
+
 
    const sign = circleFund >= 0 ? '+' : '';
-const sign = circleFund >= 0 ? '+' : '';
-html += `<strong>今回の精算差額：${sign}${circleFund} 円</strong>`;
+html += `<strong>サークル会計への反映額：${sign}${circleFund} 円</strong>`;
 
 if(circleFund > 0){
     html += `<br><span style="color:green;">※ サークル会計に ${circleFund} 円が加算されます</span>`;
