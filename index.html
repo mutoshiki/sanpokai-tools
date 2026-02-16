@@ -11,23 +11,27 @@
         :root {
             /* --- Modern International Palette --- */
             /* Light Mode */
-            --bg-color: #F5F5F7;            /* 高級感のあるライトグレー */
-            --text-primary: #1D1D1F;        /* ほぼ黒に近いグレー */
-            --text-secondary: #86868B;      /* 落ち着いたグレー */
+            --bg-color: #F5F5F7;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
             
-            --card-bg: #FFFFFF;
+            --card-bg: rgba(255, 255, 255, 0.85); /* 少し透過させて背景を馴染ませる */
+            --card-border: rgba(255, 255, 255, 0.4);
             --card-hover-bg: #FFFFFF;
             
-            --accent: #FF5A1F;              /* International Orange (洗練された赤橙) */
+            --accent: #FF5A1F;
             --accent-soft: rgba(255, 90, 31, 0.08);
 
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 4px 24px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
             
-            --radius-card: 24px;            /* 大きめの角丸でモダンに */
-            --radius-inner: 16px;
+            --radius-card: 24px;
+            
+            /* Pattern Icons */
+            --pattern-color: #1D1D1F;
+            --pattern-opacity: 0.03; /* 極薄 */
 
-            /* Mockup Colors */
+            /* Mockup */
             --mock-bg: #F5F5F7;
             --mock-border: #E5E5EA;
             --mock-bar: #1D1D1F;
@@ -36,19 +40,23 @@
 
         @media (prefers-color-scheme: dark) {
             :root {
-                /* Dark Mode (Deep Matte) */
+                /* Dark Mode */
                 --bg-color: #000000;
                 --text-primary: #F5F5F7;
                 --text-secondary: #86868B;
                 
-                --card-bg: #1C1C1E;
+                --card-bg: rgba(28, 28, 30, 0.85);
+                --card-border: rgba(255, 255, 255, 0.1);
                 --card-hover-bg: #2C2C2E;
                 
-                --accent: #FF7B47;          /* 少し明るめのオレンジ */
+                --accent: #FF7B47;
                 --accent-soft: rgba(255, 123, 71, 0.15);
 
-                --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
-                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+                --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+                --pattern-color: #FFFFFF;
+                --pattern-opacity: 0.03;
 
                 --mock-bg: #000000;
                 --mock-border: #3A3A3C;
@@ -70,21 +78,57 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
-            transition: background-color 0.4s ease;
+            overflow-x: hidden; /* 背景のはみ出し防止 */
+            -webkit-font-smoothing: antialiased;
         }
+
+        /* --- Background Pattern --- */
+        .wallpaper {
+            position: fixed;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            z-index: -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            gap: 60px; /* アイコン同士の間隔 */
+            transform: rotate(-12deg); /* 全体を少し傾けてスタイリッシュに */
+            pointer-events: none; /* クリックを邪魔しない */
+            /* ゆっくり動く背景アニメーション */
+            animation: slowPan 60s infinite linear;
+        }
+
+        .wallpaper i {
+            font-size: 28px;
+            color: var(--pattern-color);
+            opacity: var(--pattern-opacity);
+            width: 80px; /* グリッド幅を確保 */
+            text-align: center;
+        }
+        
+        @keyframes slowPan {
+            0% { transform: rotate(-12deg) translateY(0); }
+            50% { transform: rotate(-12deg) translateY(-20px); }
+            100% { transform: rotate(-12deg) translateY(0); }
+        }
+
 
         .container {
             width: 88%;
             max-width: 440px;
             padding-top: 60px;
             padding-bottom: 60px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* --- Header (Typography Focused) --- */
+        /* --- Header --- */
         header {
             margin-bottom: 48px;
-            text-align: left; /* 左揃えで海外サイト風に */
+            text-align: left;
         }
 
         .brand-icon {
@@ -99,13 +143,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px); /* すりガラス効果 */
         }
 
         h1 {
             font-size: 2.2rem;
             font-weight: 800;
             margin: 0;
-            letter-spacing: -0.02em; /* 文字間を詰めてタイトに */
+            letter-spacing: -0.02em;
             line-height: 1.1;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
             -webkit-background-clip: text;
@@ -122,10 +167,10 @@
             text-transform: uppercase;
         }
 
-        /* --- Card Styles (Glass & Depth) --- */
+        /* --- Cards (Glassmorphism) --- */
         .card {
             display: grid;
-            grid-template-columns: auto 1fr auto; /* アイコン | テキスト | 矢印 */
+            grid-template-columns: auto 1fr auto;
             align-items: center;
             background-color: var(--card-bg);
             padding: 24px;
@@ -134,10 +179,12 @@
             color: var(--text-primary);
             margin-bottom: 24px;
             box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(128, 128, 128, 0.1); /* 極薄の境界線 */
+            border: 1px solid var(--card-border);
+            /* すりガラス効果 */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
             gap: 20px;
         }
 
@@ -146,7 +193,6 @@
             background-color: var(--card-hover-bg);
         }
 
-        /* PCでのホバーエフェクト */
         @media (hover: hover) {
             .card:hover {
                 transform: translateY(-4px);
@@ -155,7 +201,7 @@
             }
         }
 
-        /* --- Mini Mockup (Refined) --- */
+        /* --- Mini Mockup --- */
         .mockup {
             width: 56px;
             height: 90px;
@@ -165,150 +211,64 @@
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
-            /* 内部レイアウト */
             display: flex;
             flex-direction: column;
-            padding: 0;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
         }
 
-        /* Mockup: Gasoline */
+        /* Animation: Gasoline */
         .m-gas { padding: 8px 6px; display: flex; flex-direction: column; gap: 5px; height: 100%; }
         .m-bar { 
-            height: 4px; 
-            border-radius: 2px; 
-            background-color: var(--mock-bar); 
-            opacity: 0.2;
-            width: 0;
+            height: 4px; border-radius: 2px; background-color: var(--mock-bar); opacity: 0.2; width: 0;
             animation: slideInBar 4s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
         }
         .m-bar:nth-child(1) { width: 80%; animation-delay: 0s; }
         .m-bar:nth-child(2) { width: 50%; animation-delay: 0.2s; }
         .m-bar:nth-child(3) { width: 70%; animation-delay: 0.4s; }
-        
         .m-total {
-            margin-top: auto;
-            height: 6px;
-            background-color: var(--mock-active);
-            border-radius: 2px;
-            width: 100%;
-            transform: scaleX(0);
-            transform-origin: left;
+            margin-top: auto; height: 6px; background-color: var(--mock-active); border-radius: 2px; width: 100%;
+            transform: scaleX(0); transform-origin: left;
             animation: growTotal 4s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
             animation-delay: 1.0s;
         }
+        @keyframes slideInBar { 0% { transform: translateX(-10px); opacity: 0; } 10% { transform: translateX(0); opacity: 0.2; } 90% { opacity: 0.2; } 100% { opacity: 0; } }
+        @keyframes growTotal { 0% { transform: scaleX(0); } 10% { transform: scaleX(1); } 90% { transform: scaleX(1); opacity: 1; } 100% { opacity: 0; } }
 
-        @keyframes slideInBar {
-            0% { transform: translateX(-10px); opacity: 0; }
-            10% { transform: translateX(0); opacity: 0.2; }
-            90% { opacity: 0.2; }
-            100% { opacity: 0; }
-        }
-        @keyframes growTotal {
-            0% { transform: scaleX(0); }
-            10% { transform: scaleX(1); }
-            90% { transform: scaleX(1); opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* Mockup: Car */
+        /* Animation: Car */
         .m-car-wrap { padding: 6px; display: flex; flex-direction: column; gap: 6px; height: 100%; }
         .m-car-box {
-            border: 1px solid var(--mock-border);
-            background-color: var(--card-bg); /* 白抜き */
-            border-radius: 6px;
-            padding: 3px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3px;
-            min-height: 24px;
+            border: 1px solid var(--mock-border); background-color: var(--card-bg); border-radius: 6px; padding: 3px;
+            display: flex; flex-wrap: wrap; gap: 3px; min-height: 24px;
         }
         .m-dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            transform: scale(0);
+            width: 6px; height: 6px; border-radius: 50%; transform: scale(0);
             animation: popDot 3s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .d-blue { background-color: #5AC8FA; }
         .d-red { background-color: #FF2D55; }
-        
         .m-car-box:nth-child(1) .m-dot:nth-child(1) { animation-delay: 0.1s; }
         .m-car-box:nth-child(1) .m-dot:nth-child(2) { animation-delay: 0.2s; }
         .m-car-box:nth-child(1) .m-dot:nth-child(3) { animation-delay: 0.3s; }
         .m-car-box:nth-child(2) .m-dot:nth-child(1) { animation-delay: 0.8s; }
         .m-car-box:nth-child(2) .m-dot:nth-child(2) { animation-delay: 0.9s; }
+        @keyframes popDot { 0% { transform: scale(0); } 10% { transform: scale(1); } 90% { transform: scale(1); opacity: 1; } 100% { opacity: 0; transform: scale(0.5); } }
 
-        @keyframes popDot {
-            0% { transform: scale(0); }
-            10% { transform: scale(1); }
-            90% { transform: scale(1); opacity: 1; }
-            100% { opacity: 0; transform: scale(0.5); }
-        }
 
-        /* --- Text Area --- */
-        .text-area {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.3;
-        }
-
-        .card-desc {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        /* --- Action Button (The Arrow) --- */
-        .action-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .action-btn {
-            background-color: var(--accent);
-            color: #fff;
-            transform: rotate(-45deg); /* 斜め上に飛ぶような演出 */
-        }
+        /* --- Text & Actions --- */
+        .text-area { display: flex; flex-direction: column; gap: 4px; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+        .card-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; font-weight: 400; }
         
-        /* スマホ向け調整: 常時少し目立たせる */
-        @media (hover: none) {
-            .action-btn {
-                background-color: transparent;
-                color: var(--text-secondary);
-            }
+        .action-btn {
+            width: 32px; height: 32px; border-radius: 50%; background-color: transparent;
+            color: var(--text-secondary); display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.05);
         }
+        .card:hover .action-btn { background-color: var(--accent); color: #fff; transform: rotate(-45deg); border-color: transparent; }
 
-        /* --- Footer --- */
-        footer {
-            margin-top: auto;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            opacity: 0.6;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.05em;
-        }
+        footer { margin-top: auto; text-align: center; color: var(--text-secondary); font-size: 0.75rem; opacity: 0.6; font-family: 'Inter', sans-serif; letter-spacing: 0.05em; position: relative; z-index: 1; }
 
-        /* Entrance Animation */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .card { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .card:nth-of-type(1) { animation-delay: 0.1s; }
         .card:nth-of-type(2) { animation-delay: 0.2s; }
@@ -316,6 +276,62 @@
     </style>
 </head>
 <body>
+
+    <div class="wallpaper">
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-tree"></i>
+        <i class="fas fa-compass"></i>
+        <i class="fas fa-route"></i>
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-car-side"></i>
+        <i class="fas fa-campground"></i>
+        <i class="fas fa-shoe-prints"></i>
+        
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-tree"></i>
+        <i class="fas fa-compass"></i>
+        <i class="fas fa-route"></i>
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-car-side"></i>
+        <i class="fas fa-campground"></i>
+        <i class="fas fa-shoe-prints"></i>
+        
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-tree"></i>
+        <i class="fas fa-compass"></i>
+        <i class="fas fa-route"></i>
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-car-side"></i>
+        <i class="fas fa-campground"></i>
+        <i class="fas fa-shoe-prints"></i>
+        
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-tree"></i>
+        <i class="fas fa-compass"></i>
+        <i class="fas fa-route"></i>
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-car-side"></i>
+        <i class="fas fa-campground"></i>
+        <i class="fas fa-shoe-prints"></i>
+
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-tree"></i>
+        <i class="fas fa-compass"></i>
+        <i class="fas fa-route"></i>
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-car-side"></i>
+        <i class="fas fa-campground"></i>
+        <i class="fas fa-shoe-prints"></i>
+        
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-tree"></i>
+        <i class="fas fa-compass"></i>
+        <i class="fas fa-route"></i>
+        <i class="fas fa-mountain"></i>
+        <i class="fas fa-car-side"></i>
+        <i class="fas fa-campground"></i>
+        <i class="fas fa-shoe-prints"></i>
+    </div>
 
     <div class="container">
         <header>
