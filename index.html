@@ -2,206 +2,374 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>山歩会tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sanpokai Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- カラーパレット設定（カフェ風テーマ） --- */
         :root {
-            /* ライトモード（Cafe Latte Theme） */
-            --bg-color: #f2efe9;       /* ラテベージュ */
-            --text-main: #4e342e;      /* エスプレッソ */
-            --text-title: #3e2723;     /* 濃い茶色 */
-            --text-sub: #8d6e63;       /* ココアブラウン */
+            /* --- Modern International Palette --- */
+            /* Light Mode */
+            --bg-color: #F5F5F7;            /* 高級感のあるライトグレー */
+            --text-primary: #1D1D1F;        /* ほぼ黒に近いグレー */
+            --text-secondary: #86868B;      /* 落ち着いたグレー */
             
-            --card-bg: #fdfbf7;        /* クリームホワイト */
-            --card-border: #d7ccc8;    /* ミルクココア */
-            --card-shadow: 0 4px 12px rgba(78, 52, 46, 0.08); /* 茶色ベースの柔らかい影 */
-            --card-hover-shadow: 0 8px 20px rgba(78, 52, 46, 0.12);
+            --card-bg: #FFFFFF;
+            --card-hover-bg: #FFFFFF;
             
-            --accent-color: #558b2f;   /* 抹茶グリーン */
-            --arrow-color: #bcaaa4;    /* 薄い茶色 */
-            --radius: 16px;            /* 角丸を統一 */
+            --accent: #FF5A1F;              /* International Orange (洗練された赤橙) */
+            --accent-soft: rgba(255, 90, 31, 0.08);
+
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+            
+            --radius-card: 24px;            /* 大きめの角丸でモダンに */
+            --radius-inner: 16px;
+
+            /* Mockup Colors */
+            --mock-bg: #F5F5F7;
+            --mock-border: #E5E5EA;
+            --mock-bar: #1D1D1F;
+            --mock-active: #FF5A1F;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                /* ダークモード（Dark Roast Theme） */
-                --bg-color: #251d1a;       /* ダークコーヒー */
-                --text-main: #d7ccc8;      /* ミルクティー */
-                --text-title: #efebe9;     /* ほぼ白に近い茶色 */
-                --text-sub: #a1887f;       /* グレイッシュブラウン */
+                /* Dark Mode (Deep Matte) */
+                --bg-color: #000000;
+                --text-primary: #F5F5F7;
+                --text-secondary: #86868B;
                 
-                --card-bg: #3e2723;        /* ダークロースト */
-                --card-border: #5d4037;    /* 濃い茶色の枠線 */
-                --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-                --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+                --card-bg: #1C1C1E;
+                --card-hover-bg: #2C2C2E;
                 
-                --accent-color: #aed581;   /* ライトグリーン（視認性調整） */
-                --arrow-color: #8d6e63;
+                --accent: #FF7B47;          /* 少し明るめのオレンジ */
+                --accent-soft: rgba(255, 123, 71, 0.15);
+
+                --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+
+                --mock-bg: #000000;
+                --mock-border: #3A3A3C;
+                --mock-bar: #8E8E93;
+                --mock-active: #FF7B47;
             }
         }
 
-        /* --- 全体のレイアウト --- */
+        /* --- Reset & Base --- */
+        * { box-sizing: border-box; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: 'Inter', 'Noto Sans JP', -apple-system, sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-main);
+            color: var(--text-primary);
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased; /* 文字を滑らかに */
+            transition: background-color 0.4s ease;
         }
 
         .container {
-            width: 90%;
-            max-width: 480px; /* 少し幅を絞ってスマートに */
-            margin-top: 80px;
-            margin-bottom: 60px;
-            text-align: center;
+            width: 88%;
+            max-width: 440px;
+            padding-top: 60px;
+            padding-bottom: 60px;
         }
 
-        /* アイコン画像 */
-        .profile-img {
-            width: 90px;
-            height: 90px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            margin: 0 auto 24px;
+        /* --- Header (Typography Focused) --- */
+        header {
+            margin-bottom: 48px;
+            text-align: left; /* 左揃えで海外サイト風に */
+        }
+
+        .brand-icon {
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: inline-block;
+            background: var(--accent-soft);
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            color: #fff; /* アイコンの中身は白で統一 */
-            box-shadow: var(--card-shadow);
         }
 
-        /* タイトル */
         h1 {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            color: var(--text-title);
+            font-size: 2.2rem;
             font-weight: 800;
-            letter-spacing: 0.05em;
+            margin: 0;
+            letter-spacing: -0.02em; /* 文字間を詰めてタイトに */
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* --- リンクカードのスタイル --- */
-        .link-card {
-            display: flex;
+        .subtitle {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* --- Card Styles (Glass & Depth) --- */
+        .card {
+            display: grid;
+            grid-template-columns: auto 1fr auto; /* アイコン | テキスト | 矢印 */
             align-items: center;
             background-color: var(--card-bg);
-            color: var(--text-main);
+            padding: 24px;
+            border-radius: var(--radius-card);
             text-decoration: none;
-            padding: 20px 24px;
-            margin-bottom: 16px;
-            border-radius: var(--radius);
-            box-shadow: var(--card-shadow);
-            border: 1px solid var(--card-border);
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-            text-align: left;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(128, 128, 128, 0.1); /* 極薄の境界線 */
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            gap: 20px;
         }
 
-        .link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--card-hover-shadow);
-            border-color: var(--accent-color);
-        }
-
-        /* クリック時の挙動（スマホ向け） */
-        .link-card:active {
+        .card:active {
             transform: scale(0.98);
+            background-color: var(--card-hover-bg);
         }
 
-        /* 左側のアイコン */
-        .card-icon {
-            font-size: 28px;
-            margin-right: 20px;
-            width: 36px;
-            text-align: center;
+        /* PCでのホバーエフェクト */
+        @media (hover: hover) {
+            .card:hover {
+                transform: translateY(-4px);
+                box-shadow: var(--shadow-lg);
+                border-color: var(--accent);
+            }
+        }
+
+        /* --- Mini Mockup (Refined) --- */
+        .mockup {
+            width: 56px;
+            height: 90px;
+            background-color: var(--mock-bg);
+            border: 1.5px solid var(--mock-border);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
             flex-shrink: 0;
-            opacity: 0.9;
+            /* 内部レイアウト */
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
         }
 
-        /* テキストエリア */
-        .link-text {
-            flex-grow: 1;
+        /* Mockup: Gasoline */
+        .m-gas { padding: 8px 6px; display: flex; flex-direction: column; gap: 5px; height: 100%; }
+        .m-bar { 
+            height: 4px; 
+            border-radius: 2px; 
+            background-color: var(--mock-bar); 
+            opacity: 0.2;
+            width: 0;
+            animation: slideInBar 4s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .m-bar:nth-child(1) { width: 80%; animation-delay: 0s; }
+        .m-bar:nth-child(2) { width: 50%; animation-delay: 0.2s; }
+        .m-bar:nth-child(3) { width: 70%; animation-delay: 0.4s; }
+        
+        .m-total {
+            margin-top: auto;
+            height: 6px;
+            background-color: var(--mock-active);
+            border-radius: 2px;
+            width: 100%;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: growTotal 4s infinite cubic-bezier(0.22, 0.61, 0.36, 1);
+            animation-delay: 1.0s;
         }
 
-        .link-title {
-            font-weight: bold;
-            font-size: 1.05rem;
-            display: block;
-            margin-bottom: 4px;
-            color: var(--text-title);
+        @keyframes slideInBar {
+            0% { transform: translateX(-10px); opacity: 0; }
+            10% { transform: translateX(0); opacity: 0.2; }
+            90% { opacity: 0.2; }
+            100% { opacity: 0; }
+        }
+        @keyframes growTotal {
+            0% { transform: scaleX(0); }
+            10% { transform: scaleX(1); }
+            90% { transform: scaleX(1); opacity: 1; }
+            100% { opacity: 0; }
         }
 
-        /* 説明文 */
-        .link-desc {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            margin: 0;
+        /* Mockup: Car */
+        .m-car-wrap { padding: 6px; display: flex; flex-direction: column; gap: 6px; height: 100%; }
+        .m-car-box {
+            border: 1px solid var(--mock-border);
+            background-color: var(--card-bg); /* 白抜き */
+            border-radius: 6px;
+            padding: 3px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            min-height: 24px;
+        }
+        .m-dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            transform: scale(0);
+            animation: popDot 3s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .d-blue { background-color: #5AC8FA; }
+        .d-red { background-color: #FF2D55; }
+        
+        .m-car-box:nth-child(1) .m-dot:nth-child(1) { animation-delay: 0.1s; }
+        .m-car-box:nth-child(1) .m-dot:nth-child(2) { animation-delay: 0.2s; }
+        .m-car-box:nth-child(1) .m-dot:nth-child(3) { animation-delay: 0.3s; }
+        .m-car-box:nth-child(2) .m-dot:nth-child(1) { animation-delay: 0.8s; }
+        .m-car-box:nth-child(2) .m-dot:nth-child(2) { animation-delay: 0.9s; }
+
+        @keyframes popDot {
+            0% { transform: scale(0); }
+            10% { transform: scale(1); }
+            90% { transform: scale(1); opacity: 1; }
+            100% { opacity: 0; transform: scale(0.5); }
+        }
+
+        /* --- Text Area --- */
+        .text-area {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
             line-height: 1.5;
-            display: block;
+            font-weight: 400;
         }
 
-        /* 右矢印 */
-        .arrow {
-            color: var(--arrow-color);
-            font-weight: bold;
-            font-size: 18px;
-            margin-left: 16px;
-            transition: transform 0.2s;
+        /* --- Action Button (The Arrow) --- */
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .action-btn {
+            background-color: var(--accent);
+            color: #fff;
+            transform: rotate(-45deg); /* 斜め上に飛ぶような演出 */
         }
         
-        .link-card:hover .arrow {
-            color: var(--accent-color);
-            transform: translateX(3px);
+        /* スマホ向け調整: 常時少し目立たせる */
+        @media (hover: none) {
+            .action-btn {
+                background-color: transparent;
+                color: var(--text-secondary);
+            }
         }
 
+        /* --- Footer --- */
         footer {
             margin-top: auto;
-            padding: 30px;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            opacity: 0.8;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            opacity: 0.6;
+            font-family: 'Inter', sans-serif;
             letter-spacing: 0.05em;
         }
+
+        /* Entrance Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .card:nth-of-type(1) { animation-delay: 0.1s; }
+        .card:nth-of-type(2) { animation-delay: 0.2s; }
+
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="profile-img">⛰️</div>
-
-        <h1>山歩会tools</h1>
-
-        <a href="https://mutoshiki.github.io/sanpo-seisan/" class="link-card" target="_blank">
-            <div class="card-icon">💰</div>
-            <div class="link-text">
-                <span class="link-title">精算ツール</span>
-                <span class="link-desc">ガソリン代や諸経費などから、徴収額やドライバーへの支払い額を計算できます</span>
-    
+        <header>
+            <div class="brand-icon">
+                <i class="fas fa-mountain"></i>
             </div>
-            <span class="arrow">&gt;</span>
+            <h1>Sanpokai<br>Tools</h1>
+            <div class="subtitle">Digital Utilities for Hikers</div>
+        </header>
+
+        <a href="https://mutoshiki.github.io/sanpo-seisan/" class="card" target="_blank">
+            <div class="mockup">
+                <div class="m-gas">
+                    <div class="m-bar"></div>
+                    <div class="m-bar"></div>
+                    <div class="m-bar"></div>
+                    <div class="m-total"></div>
+                </div>
+            </div>
+            <div class="text-area">
+                <span class="card-title">精算ツール</span>
+                <span class="card-desc">ガソリン代や諸経費を入力。1人当たりの集金額やドライバー支払額を自動計算。</span>
+            </div>
+            <div class="action-btn">
+                <i class="fas fa-arrow-right"></i>
+            </div>
         </a>
 
-        <a href="https://mutoshiki.github.io/sya-wari-maker" class="link-card" target="_blank">
-            <div class="card-icon">🚗</div>
-            <div class="link-text">
-                <span class="link-title">車割メーカー</span>
-                <span class="link-desc">「誰がどの車に乗るか」の配車組み合わせを、効率的に作成できます。</span>
+        <a href="https://mutoshiki.github.io/sya-wari-maker" class="card" target="_blank">
+            <div class="mockup">
+                <div class="m-car-wrap">
+                    <div class="m-car-box">
+                        <div class="m-dot d-blue"></div>
+                        <div class="m-dot d-red"></div>
+                        <div class="m-dot d-blue"></div>
+                    </div>
+                    <div class="m-car-box">
+                        <div class="m-dot d-blue"></div>
+                        <div class="m-dot d-red"></div>
+                    </div>
+                </div>
             </div>
-            <span class="arrow">&gt;</span>
+            <div class="text-area">
+                <span class="card-title">車割メーカー</span>
+                <span class="card-desc">ドラッグ&ドロップで配車・自動作成。共有リンクでリアルタイム編集も可能。</span>
+            </div>
+            <div class="action-btn">
+                <i class="fas fa-arrow-right"></i>
+            </div>
         </a>
     </div>
 
     <footer>
-        &copy; 山歩会tools
+        &copy; 2026 山歩会 Tools
     </footer>
 
 </body>
