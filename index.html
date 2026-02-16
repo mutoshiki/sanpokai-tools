@@ -2,310 +2,211 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>山歩会 Tools</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* --- Modern Japanese Palette --- */
-            /* Light Mode */
-            --bg-color: #F9FAFB;
-            --text-primary: #1F2937;
-            --text-secondary: #9CA3AF;
+            /* Win98 Colors */
+            --win-teal: #008080;
+            --win-gray: #c0c0c0;
+            --win-blue: #000080;
+            --win-white: #ffffff;
+            --win-dark: #000000;
             
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(255, 255, 255, 0.8);
-            --card-hover-bg: #FFFFFF;
-            
-            --accent: #D94625;
-            
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.06), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            
-            --radius: 20px;
-
-            /* Mockup Colors */
-            --mock-bg: #F3F4F6;
-            --mock-border: #E5E7EB;
-            --mock-bar: #9CA3AF;
-            --mock-active: #D94625;
-
-            /* Icon Pattern */
-            --pattern-color: #374151;
-            --pattern-opacity: 0.03;
+            /* 3D Borders */
+            --border-light: #ffffff;
+            --border-shadow: #808080;
+            --border-dark: #000000;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                /* Dark Mode */
-                --bg-color: #111827;
-                --text-primary: #F3F4F6;
-                --text-secondary: #6B7280;
-                
-                --card-bg: rgba(31, 41, 55, 0.6);
-                --card-border: rgba(255, 255, 255, 0.05);
-                --card-hover-bg: #374151;
-                
-                --accent: #F87171;
-                
-                --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-                --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-
-                --mock-bg: #1F2937;
-                --mock-border: #374151;
-                --pattern-color: #FFFFFF;
-            }
-        }
-
-        /* --- Reset & Base --- */
-        * { box-sizing: border-box; }
-        
         body {
-            font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--win-teal);
+            font-family: "MS UI Gothic", "Tahoma", sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            /* 走査線風の細かいドット */
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 4px 4px;
+            background-color: var(--win-teal); 
         }
 
-        /* --- Subtle Background Pattern --- */
-        .wallpaper {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            z-index: -1;
+        /* --- Main Window --- */
+        .window {
+            width: 320px;
+            background-color: var(--win-gray);
+            border: 2px solid;
+            border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-content: center;
-            gap: 100px;
-            transform: rotate(-12deg);
-            pointer-events: none;
+            flex-direction: column;
         }
 
-        .wallpaper i {
-            font-size: 20px;
-            color: var(--pattern-color);
-            opacity: var(--pattern-opacity);
-            width: 60px;
+        /* --- Title Bar --- */
+        .title-bar {
+            background: linear-gradient(90deg, var(--win-blue), #1084d0);
+            padding: 3px 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-text {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .title-buttons {
+            display: flex;
+            gap: 2px;
+        }
+
+        .btn-win {
+            width: 16px;
+            height: 14px;
+            background: var(--win-gray);
+            border: 1px solid;
+            border-color: var(--border-light) var(--border-shadow) var(--border-shadow) var(--border-light);
+            font-size: 10px;
+            line-height: 10px;
             text-align: center;
+            font-weight: bold;
+            cursor: default;
         }
 
-        .container {
-            width: 88%;
-            max-width: 440px;
-            padding-top: 100px;
-            padding-bottom: 60px;
-            position: relative;
-            z-index: 1;
+        /* --- Menu Bar --- */
+        .menu-bar {
+            padding: 4px 8px;
+            font-size: 12px;
+            border-bottom: 1px solid var(--border-shadow);
+        }
+        .menu-bar span { margin-right: 12px; }
+        .menu-bar span u { text-decoration: underline; }
+
+        /* --- Content Area (White Box) --- */
+        .content {
+            margin: 10px;
+            background: var(--win-white);
+            border: 2px solid;
+            border-color: var(--border-shadow) var(--border-light) var(--border-light) var(--border-shadow);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2列配置 */
+            gap: 20px;
+            min-height: 180px;
         }
 
-        /* --- Header (Minimalist) --- */
-        header {
-            margin-bottom: 48px;
-            text-align: center; /* 中央揃えに変更 */
-        }
-
-        .brand-area {
-            display: inline-flex;
+        /* --- Icons --- */
+        .shortcut {
+            display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-        }
-
-        .main-logo {
-            font-size: 42px;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            /* アイコンの装飾を削除し、シンプルに配置 */
-        }
-
-        h1 {
-            font-family: 'Montserrat', sans-serif; /* 英語フォントを使用 */
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin: 0;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-        }
-
-        .sub-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-top: 8px;
-            opacity: 0.9;
-        }
-
-        /* --- Cards (Clean) --- */
-        .card {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            align-items: center;
-            background-color: var(--card-bg);
-            padding: 20px 24px;
-            border-radius: var(--radius);
             text-decoration: none;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            gap: 20px;
+            color: var(--win-dark);
+            padding: 10px 5px;
+            text-align: center;
+            transition: 0.1s;
         }
 
-        .card:active {
-            transform: scale(0.98);
+        .shortcut:hover {
+            outline: 1px dotted var(--win-dark);
+            background-color: rgba(0, 0, 128, 0.1);
         }
 
-        @media (hover: hover) {
-            .card:hover {
-                transform: translateY(-4px);
-                box-shadow: var(--shadow-lg);
-                border-color: rgba(255,255,255,0.1);
-            }
+        .shortcut:active .icon-box {
+            filter: invert(1) hue-rotate(180deg); /* クリック時の反転演出 */
         }
 
-        /* --- Mockup (Refined) --- */
-        .mockup {
-            width: 48px;
-            height: 48px; /* 正方形に近いアイコン風に変更 */
-            background-color: var(--mock-bg);
-            border: 1px solid var(--mock-border);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
+        .icon-box {
+            font-size: 32px;
+            margin-bottom: 8px;
+            /* Win98アイコン風の色味 */
+            color: #000; 
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+        
+        /* アイコンごとの色調整 */
+        .fa-calculator { color: #808080; } /* 電卓: グレー */
+        .fa-car { color: #000080; }       /* 車: 紺 */
+
+        .label {
+            font-size: 13px;
+            line-height: 1.2;
+        }
+
+        /* --- Status Bar --- */
+        .status-bar {
+            border-top: 1px solid var(--border-shadow);
+            padding: 4px 8px;
+            font-size: 11px;
+            color: #444;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            gap: 10px;
         }
-
-        /* アイコン化: シンプルなFontAwesomeを使用 */
-        .mockup i {
-            font-size: 20px;
-            color: var(--text-secondary);
-            transition: color 0.3s ease;
+        .status-panel {
+            border: 1px solid;
+            border-color: var(--border-shadow) var(--border-light) var(--border-light) var(--border-shadow);
+            padding: 2px 5px;
+            min-width: 60px;
         }
-        
-        .card:hover .mockup i {
-            color: var(--accent);
-        }
-
-
-        /* --- Text & Actions --- */
-        .text-area { display: flex; flex-direction: column; gap: 4px; }
-        
-        .card-title { 
-            font-size: 1rem; 
-            font-weight: 700; 
-            color: var(--text-primary); 
-        }
-        
-        .card-desc { 
-            font-size: 0.75rem; 
-            color: var(--text-secondary); 
-            line-height: 1.4; 
-            font-weight: 500;
-        }
-        
-        .action-icon {
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            opacity: 0.3;
-        }
-        .card:hover .action-icon {
-            opacity: 1;
-            transform: translateX(2px);
-            color: var(--accent);
-        }
-
-        footer { 
-            margin-top: auto; 
-            text-align: center; 
-            color: var(--text-secondary); 
-            font-size: 0.7rem; 
-            font-weight: 500;
-            padding: 40px 20px;
-            font-family: 'Montserrat', sans-serif;
-            opacity: 0.5;
-        }
-
-        /* Animation */
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .card { animation: fadeUp 0.6s ease-out forwards; opacity: 0; }
-        .card:nth-of-type(1) { animation-delay: 0.1s; }
-        .card:nth-of-type(2) { animation-delay: 0.2s; }
 
     </style>
 </head>
 <body>
 
-    <div class="wallpaper">
-        <i class="fas fa-mountain"></i><i class="fas fa-tree"></i>
-        <i class="fas fa-campground"></i><i class="fas fa-compass"></i>
-        <i class="fas fa-mountain"></i><i class="fas fa-tree"></i>
-        <i class="fas fa-campground"></i><i class="fas fa-compass"></i>
-        <i class="fas fa-mountain"></i><i class="fas fa-tree"></i>
-        <i class="fas fa-campground"></i><i class="fas fa-compass"></i>
-        <i class="fas fa-mountain"></i><i class="fas fa-tree"></i>
-        <i class="fas fa-campground"></i><i class="fas fa-compass"></i>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-text">
+                <i class="fas fa-folder-open" style="font-size: 12px; margin-right: 5px;"></i>
+                山歩会 Tools
+            </div>
+            <div class="title-buttons">
+                <div class="btn-win">_</div>
+                <div class="btn-win">□</div>
+                <div class="btn-win">×</div>
+            </div>
+        </div>
+
+        <div class="menu-bar">
+            <span><u>F</u>ile</span>
+            <span><u>E</u>dit</span>
+            <span><u>V</u>iew</span>
+            <span><u>H</u>elp</span>
+        </div>
+
+        <div class="content">
+            
+            <a href="https://mutoshiki.github.io/sanpo-seisan/" class="shortcut" target="_blank">
+                <div class="icon-box">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <span class="label">精算ツール</span>
+            </a>
+
+            <a href="https://mutoshiki.github.io/sya-wari-maker" class="shortcut" target="_blank">
+                <div class="icon-box">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <span class="label">車割メーカー</span>
+            </a>
+
+        </div>
+
+        <div class="status-bar">
+            <div class="status-panel" style="flex-grow: 1;">2 object(s)</div>
+            <div class="status-panel">0KB</div>
+        </div>
     </div>
-
-    <div class="container">
-        <header>
-            <div class="brand-area">
-                <h1>SANPOKAI</h1>
-                <div class="sub-label">DIGITAL TOOLS</div>
-            </div>
-        </header>
-
-        <a href="https://mutoshiki.github.io/sanpo-seisan/" class="card" target="_blank">
-            <div class="mockup">
-                <i class="fas fa-calculator"></i>
-            </div>
-            <div class="text-area">
-                <span class="card-title">精算ツール</span>
-                <span class="card-desc">ガソリン代・諸経費の割り勘計算</span>
-            </div>
-            <i class="fas fa-chevron-right action-icon"></i>
-        </a>
-
-        <a href="https://mutoshiki.github.io/sya-wari-maker" class="card" target="_blank">
-            <div class="mockup">
-                <i class="fas fa-car"></i>
-            </div>
-            <div class="text-area">
-                <span class="card-title">車割メーカー</span>
-                <span class="card-desc">ドラッグ＆ドロップで簡単配車</span>
-            </div>
-            <i class="fas fa-chevron-right action-icon"></i>
-        </a>
-    </div>
-
-    <footer>
-        &copy; 2026 SANPOKAI
-    </footer>
 
 </body>
 </html>
