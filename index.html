@@ -4,209 +4,445 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>山歩会 Tools</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
         :root {
-            /* Win98 Colors */
-            --win-teal: #008080;
-            --win-gray: #c0c0c0;
-            --win-blue: #000080;
-            --win-white: #ffffff;
-            --win-dark: #000000;
-            
-            /* 3D Borders */
-            --border-light: #ffffff;
-            --border-shadow: #808080;
-            --border-dark: #000000;
+            --sky-top: #9ed7ff;
+            --sky-mid: #e9f6ff;
+            --ground: #d8eed5;
+            --ink: #17313a;
+            --muted: #60777d;
+            --white: #ffffff;
+            --green: #1f8f66;
+            --blue: #2473c7;
+            --amber: #f5b848;
+            --shadow: rgba(23, 49, 58, 0.18);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+            color: var(--ink);
+            background:
+                linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 52%, var(--ground) 100%);
         }
 
         body {
-            background-color: var(--win-teal);
-            font-family: "MS UI Gothic", "Tahoma", sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            /* 走査線風の細かいドット */
-            background-image: radial-gradient(#000 1px, transparent 1px);
-            background-size: 4px 4px;
-            background-color: var(--win-teal); 
+            overflow-x: hidden;
         }
 
-        /* --- Main Window --- */
-        .window {
-            width: 320px;
-            background-color: var(--win-gray);
-            border: 2px solid;
-            border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* --- Title Bar --- */
-        .title-bar {
-            background: linear-gradient(90deg, var(--win-blue), #1084d0);
-            padding: 3px 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .title-text {
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .title-buttons {
-            display: flex;
-            gap: 2px;
-        }
-
-        .btn-win {
-            width: 16px;
-            height: 14px;
-            background: var(--win-gray);
-            border: 1px solid;
-            border-color: var(--border-light) var(--border-shadow) var(--border-shadow) var(--border-light);
-            font-size: 10px;
-            line-height: 10px;
-            text-align: center;
-            font-weight: bold;
-            cursor: default;
-        }
-
-        /* --- Menu Bar --- */
-        .menu-bar {
-            padding: 4px 8px;
-            font-size: 12px;
-            border-bottom: 1px solid var(--border-shadow);
-        }
-        .menu-bar span { margin-right: 12px; }
-        .menu-bar span u { text-decoration: underline; }
-
-        /* --- Content Area (White Box) --- */
-        .content {
-            margin: 10px;
-            background: var(--win-white);
-            border: 2px solid;
-            border-color: var(--border-shadow) var(--border-light) var(--border-light) var(--border-shadow);
-            padding: 20px;
+        .app {
+            position: relative;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2列配置 */
-            gap: 20px;
-            min-height: 180px;
+            grid-template-rows: minmax(350px, 58vh) auto;
+            min-height: 100vh;
+            isolation: isolate;
         }
 
-        /* --- Icons --- */
-        .shortcut {
-            display: flex;
-            flex-direction: column;
+        .scene {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mountain-map {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            touch-action: pan-y;
+        }
+
+        .sun {
+            position: absolute;
+            top: 34px;
+            right: 26px;
+            width: 78px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff7b2 0 34%, #ffd36b 35% 68%, rgba(255, 211, 107, 0) 69%);
+            filter: drop-shadow(0 0 18px rgba(255, 195, 84, 0.55));
+            animation: sunFloat 6s ease-in-out infinite;
+        }
+
+        .hero-copy {
+            position: absolute;
+            left: clamp(18px, 6vw, 54px);
+            top: 28px;
+            max-width: 320px;
+            text-shadow: 0 2px 18px rgba(255, 255, 255, 0.65);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(30px, 8vw, 58px);
+            line-height: 1.02;
+            letter-spacing: 0;
+        }
+
+        .hero-copy p {
+            margin: 12px 0 0;
+            max-width: 13em;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 700;
+        }
+
+        .trail-panel {
+            position: relative;
+            z-index: 2;
+            width: min(100%, 560px);
+            margin: -52px auto 0;
+            padding: 0 18px 24px;
+        }
+
+        .destination-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .destination {
+            position: relative;
+            display: grid;
+            grid-template-columns: 58px 1fr 34px;
             align-items: center;
+            gap: 14px;
+            min-height: 92px;
+            padding: 15px 16px;
+            color: var(--ink);
             text-decoration: none;
-            color: var(--win-dark);
-            padding: 10px 5px;
-            text-align: center;
-            transition: 0.1s;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 24px;
+            box-shadow: 0 18px 38px var(--shadow);
+            -webkit-tap-highlight-color: transparent;
+            backdrop-filter: blur(14px);
+            transform: translateY(18px);
+            opacity: 0;
+            animation: cardIn 680ms cubic-bezier(.2, .8, .2, 1) forwards;
         }
 
-        .shortcut:hover {
-            outline: 1px dotted var(--win-dark);
-            background-color: rgba(0, 0, 128, 0.1);
+        .destination:nth-child(2) {
+            animation-delay: 120ms;
         }
 
-        .shortcut:active .icon-box {
-            filter: invert(1) hue-rotate(180deg); /* クリック時の反転演出 */
+        .destination:active {
+            transform: scale(0.98);
         }
 
-        .icon-box {
-            font-size: 32px;
-            margin-bottom: 8px;
-            /* Win98アイコン風の色味 */
-            color: #000; 
-            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        .destination:focus-visible {
+            outline: 4px solid rgba(31, 143, 102, 0.28);
+            outline-offset: 3px;
         }
-        
-        /* アイコンごとの色調整 */
-        .fa-calculator { color: #808080; } /* 電卓: グレー */
-        .fa-car { color: #000080; }       /* 車: 紺 */
 
-        .label {
+        .destination-icon {
+            display: grid;
+            place-items: center;
+            width: 58px;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            color: var(--white);
+            font-size: 28px;
+            font-weight: 900;
+            box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .destination.settlement .destination-icon {
+            background: linear-gradient(145deg, var(--green), #63bd83);
+        }
+
+        .destination.car .destination-icon {
+            background: linear-gradient(145deg, var(--blue), #61a4ee);
+        }
+
+        .destination-title {
+            display: block;
+            font-size: 21px;
+            line-height: 1.25;
+            font-weight: 900;
+        }
+
+        .destination-note {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
             font-size: 13px;
-            line-height: 1.2;
+            line-height: 1.45;
+            font-weight: 700;
         }
 
-        /* --- Status Bar --- */
-        .status-bar {
-            border-top: 1px solid var(--border-shadow);
-            padding: 4px 8px;
-            font-size: 11px;
-            color: #444;
-            display: flex;
-            gap: 10px;
-        }
-        .status-panel {
-            border: 1px solid;
-            border-color: var(--border-shadow) var(--border-light) var(--border-light) var(--border-shadow);
-            padding: 2px 5px;
-            min-width: 60px;
+        .arrow {
+            display: grid;
+            place-items: center;
+            width: 34px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            color: var(--white);
+            background: var(--ink);
+            font-size: 22px;
+            line-height: 1;
         }
 
+        .caption {
+            margin: 16px 0 0;
+            text-align: center;
+            color: rgba(23, 49, 58, 0.72);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        @keyframes cardIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes sunFloat {
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        @media (min-width: 720px) {
+            .app {
+                grid-template-rows: minmax(430px, 66vh) auto;
+            }
+
+            .trail-panel {
+                margin-top: -72px;
+            }
+
+            .destination-list {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .sun,
+            .destination {
+                animation: none;
+            }
+
+            .destination {
+                transform: none;
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="window">
-        <div class="title-bar">
-            <div class="title-text">
-                <i class="fas fa-folder-open" style="font-size: 12px; margin-right: 5px;"></i>
-                山歩会 Tools
+    <main class="app">
+        <section class="scene" aria-label="山歩会 Tools">
+            <canvas id="mountain-map"></canvas>
+            <div class="sun" aria-hidden="true"></div>
+            <div class="hero-copy">
+                <h1>山歩会<br>Tools</h1>
+                <p>使う道具を選んで、すぐ出発。</p>
             </div>
-            <div class="title-buttons">
-                <div class="btn-win">_</div>
-                <div class="btn-win">□</div>
-                <div class="btn-win">×</div>
+        </section>
+
+        <section class="trail-panel" aria-label="ツール一覧">
+            <div class="destination-list">
+                <a class="destination settlement" href="https://mutoshiki.github.io/sanpo-seisan/" target="_blank" rel="noopener">
+                    <span class="destination-icon" aria-hidden="true">¥</span>
+                    <span>
+                        <span class="destination-title">精算ツール</span>
+                        <span class="destination-note">集金・支払いを整理する</span>
+                    </span>
+                    <span class="arrow" aria-hidden="true">›</span>
+                </a>
+
+                <a class="destination car" href="https://mutoshiki.github.io/sya-wari-maker" target="_blank" rel="noopener">
+                    <span class="destination-icon" aria-hidden="true">🚗</span>
+                    <span>
+                        <span class="destination-title">車割メーカー</span>
+                        <span class="destination-note">配車とメンバーを決める</span>
+                    </span>
+                    <span class="arrow" aria-hidden="true">›</span>
+                </a>
             </div>
-        </div>
+            <p class="caption">3Dマップのピンと下のカードは同じ行き先です</p>
+        </section>
+    </main>
 
-        <div class="menu-bar">
-            <span><u>F</u>ile</span>
-            <span><u>E</u>dit</span>
-            <span><u>V</u>iew</span>
-            <span><u>H</u>elp</span>
-        </div>
+    <script type="module">
+        import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js";
 
-        <div class="content">
-            
-            <a href="https://mutoshiki.github.io/sanpo-seisan/" class="shortcut" target="_blank">
-                <div class="icon-box">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <span class="label">精算ツール</span>
-            </a>
+        const canvas = document.querySelector("#mountain-map");
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            <a href="https://mutoshiki.github.io/sya-wari-maker" class="shortcut" target="_blank">
-                <div class="icon-box">
-                    <i class="fas fa-car-side"></i>
-                </div>
-                <span class="label">車割メーカー</span>
-            </a>
+        const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+        camera.position.set(0, 5.6, 11);
+        camera.lookAt(0, 0.4, 0);
 
-        </div>
+        const hemiLight = new THREE.HemisphereLight(0xf7fbff, 0x8aa86e, 3.2);
+        scene.add(hemiLight);
 
-        <div class="status-bar">
-            <div class="status-panel" style="flex-grow: 1;">2 object(s)</div>
-            <div class="status-panel">0KB</div>
-        </div>
-    </div>
+        const sunLight = new THREE.DirectionalLight(0xffffff, 2.8);
+        sunLight.position.set(3, 7, 5);
+        scene.add(sunLight);
 
+        const map = new THREE.Group();
+        scene.add(map);
+
+        const mountainMaterial = new THREE.MeshStandardMaterial({
+            color: 0x6bbf78,
+            roughness: 0.82,
+            metalness: 0.02,
+            flatShading: true
+        });
+        const snowMaterial = new THREE.MeshStandardMaterial({
+            color: 0xf7fbff,
+            roughness: 0.74,
+            flatShading: true
+        });
+        const trailMaterial = new THREE.MeshStandardMaterial({
+            color: 0xd9aa55,
+            roughness: 0.9
+        });
+        const groundMaterial = new THREE.MeshStandardMaterial({
+            color: 0xb9dfa6,
+            roughness: 0.95
+        });
+
+        const ground = new THREE.Mesh(
+            new THREE.CylinderGeometry(5.1, 5.8, 0.42, 7),
+            groundMaterial
+        );
+        ground.position.y = -0.32;
+        ground.rotation.y = Math.PI / 7;
+        map.add(ground);
+
+        function makeMountain(x, z, radius, height) {
+            const mountain = new THREE.Mesh(
+                new THREE.ConeGeometry(radius, height, 5),
+                mountainMaterial
+            );
+            mountain.position.set(x, height / 2 - 0.12, z);
+            mountain.rotation.y = Math.random() * Math.PI;
+            map.add(mountain);
+
+            const snow = new THREE.Mesh(
+                new THREE.ConeGeometry(radius * 0.45, height * 0.3, 5),
+                snowMaterial
+            );
+            snow.position.set(x, height * 0.86, z);
+            snow.rotation.y = mountain.rotation.y;
+            map.add(snow);
+        }
+
+        makeMountain(-1.4, -0.7, 1.65, 3.35);
+        makeMountain(1.2, -0.42, 1.42, 2.75);
+        makeMountain(0.15, 1.05, 1.08, 2.1);
+
+        const trail = new THREE.Mesh(
+            new THREE.TorusGeometry(2.52, 0.045, 10, 96, Math.PI * 1.24),
+            trailMaterial
+        );
+        trail.rotation.x = Math.PI / 2;
+        trail.rotation.z = -0.42;
+        trail.position.set(0.38, 0.03, 0.35);
+        map.add(trail);
+
+        const pinGroup = new THREE.Group();
+        map.add(pinGroup);
+
+        function makePin(x, z, color, label) {
+            const group = new THREE.Group();
+            const pole = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.035, 0.035, 0.7, 12),
+                new THREE.MeshStandardMaterial({ color: 0x5a3b22, roughness: 0.78 })
+            );
+            pole.position.y = 0.45;
+
+            const marker = new THREE.Mesh(
+                new THREE.SphereGeometry(0.22, 24, 16),
+                new THREE.MeshStandardMaterial({ color, roughness: 0.52 })
+            );
+            marker.position.y = 0.88;
+
+            const sign = new THREE.Mesh(
+                new THREE.BoxGeometry(0.72, 0.22, 0.08),
+                new THREE.MeshStandardMaterial({ color, roughness: 0.62 })
+            );
+            sign.position.set(0.28, 0.62, 0);
+
+            group.add(pole, marker, sign);
+            group.position.set(x, 0.08, z);
+            group.userData.label = label;
+            pinGroup.add(group);
+            return group;
+        }
+
+        const settlementPin = makePin(-1.95, 1.2, 0x1f8f66, "settlement");
+        const carPin = makePin(2.2, 0.92, 0x2473c7, "car");
+
+        const links = {
+            settlement: "https://mutoshiki.github.io/sanpo-seisan/",
+            car: "https://mutoshiki.github.io/sya-wari-maker"
+        };
+
+        const raycaster = new THREE.Raycaster();
+        const pointer = new THREE.Vector2();
+        let activePin = null;
+
+        function resize() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            renderer.setSize(rect.width, rect.height, false);
+            camera.aspect = rect.width / rect.height;
+            camera.position.z = rect.width < 520 ? 11.8 : 10.2;
+            camera.updateProjectionMatrix();
+        }
+
+        function setPointer(event) {
+            const rect = canvas.getBoundingClientRect();
+            pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        }
+
+        function pick(event) {
+            setPointer(event);
+            raycaster.setFromCamera(pointer, camera);
+            const hits = raycaster.intersectObjects(pinGroup.children, true);
+            activePin = hits[0]?.object?.parent || null;
+            canvas.style.cursor = activePin ? "pointer" : "default";
+        }
+
+        canvas.addEventListener("pointermove", pick);
+        canvas.addEventListener("pointerdown", pick);
+        canvas.addEventListener("click", () => {
+            if (activePin && links[activePin.userData.label]) {
+                window.open(links[activePin.userData.label], "_blank", "noopener");
+            }
+        });
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let frame = 0;
+
+        function animate() {
+            frame += 0.012;
+            if (!reducedMotion) {
+                map.rotation.y = Math.sin(frame) * 0.12;
+                settlementPin.position.y = 0.08 + Math.sin(frame * 2.4) * 0.06;
+                carPin.position.y = 0.08 + Math.cos(frame * 2.2) * 0.06;
+            }
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        animate();
+    </script>
 </body>
 </html>
