@@ -2424,6 +2424,1160 @@ html, body {
     }
 }
 
+
+
+/* --- v15 mobile UI polish --- */
+@media (max-width: 640px) {
+    html, body {
+        font-size: 14px;
+        background: var(--bg-body);
+    }
+
+    #app-header {
+        padding: 6px 8px 5px !important;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.06) !important;
+    }
+
+    .app-header-main {
+        min-height: 0 !important;
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+        padding: 8px 9px 9px !important;
+        border-radius: 11px !important;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    .app-header-main::before {
+        background-size: 100% 100%, cover !important;
+        background-position: center, center right !important;
+        filter: saturate(1.08) contrast(1.02) brightness(1.01) !important;
+    }
+
+    .app-room-field {
+        gap: 1px !important;
+    }
+
+    .app-room-field label {
+        font-size: 0.68rem !important;
+        line-height: 1.1 !important;
+        font-weight: 750 !important;
+        color: var(--text-sub) !important;
+    }
+
+    .app-room-input {
+        font-size: 1.18rem !important;
+        line-height: 1.18 !important;
+        font-weight: 850 !important;
+        padding: 0 0 2px !important;
+        letter-spacing: -0.035em !important;
+    }
+
+    .header-actions {
+        width: 100% !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 5px !important;
+        margin-top: 4px !important;
+    }
+
+    .header-action {
+        min-height: 40px !important;
+        padding: 4px 3px !important;
+        border-radius: 8px !important;
+        flex-direction: row !important;
+        gap: 4px !important;
+        background: rgba(255,255,255,0.86) !important;
+        backdrop-filter: blur(8px) !important;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .header-action i {
+        font-size: 0.96rem !important;
+        line-height: 1 !important;
+        flex: 0 0 auto !important;
+    }
+
+    .header-action span {
+        font-size: 0.72rem !important;
+        line-height: 1 !important;
+        font-weight: 850 !important;
+        letter-spacing: -0.02em !important;
+    }
+
+    #view-toggle-bar {
+        margin: 6px 8px 7px !important;
+        padding: 4px !important;
+        gap: 4px !important;
+        border-radius: 11px !important;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+    }
+
+    .view-tab,
+    #tab-list,
+    #tab-sheet,
+    #tab-seisan {
+        min-height: 38px !important;
+        padding: 7px 3px !important;
+        font-size: 0.72rem !important;
+        line-height: 1.08 !important;
+        font-weight: 850 !important;
+        letter-spacing: -0.055em !important;
+        gap: 3px !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+
+    .view-tab i {
+        font-size: 0.78rem !important;
+        margin: 0 !important;
+    }
+
+    #tab-list i::after,
+    #tab-sheet i::after,
+    #tab-seisan i::after {
+        content: "" !important;
+    }
+
+    #top-area {
+        padding: 8px 10px 16px !important;
+    }
+
+    .edit-header-tools-only {
+        margin-bottom: 9px !important;
+    }
+
+    .edit-header-tools-only .edit-tools {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+    }
+
+    .edit-tools .tool-btn,
+    .edit-tools .tool-help-btn {
+        min-height: 48px !important;
+        padding: 8px 10px !important;
+        border-radius: 9px !important;
+        flex-direction: row !important;
+        gap: 8px !important;
+    }
+
+    .edit-tools .tool-btn i,
+    .edit-tools .tool-help-btn i {
+        font-size: 1.05rem !important;
+        margin: 0 !important;
+    }
+
+    .edit-tools .tool-btn span,
+    .edit-tools .tool-help-btn span {
+        font-size: 0.82rem !important;
+        line-height: 1.1 !important;
+        font-weight: 850 !important;
+    }
+
+    .car-box {
+        padding: 10px !important;
+        margin-bottom: 11px !important;
+        border-radius: 10px !important;
+    }
+
+    .car-header {
+        margin-bottom: 8px !important;
+        padding-bottom: 8px !important;
+        font-size: 0.98rem !important;
+    }
+
+    .car-layout-grid {
+        gap: 7px !important;
+    }
+
+    .driver-seat,
+    .seat-slot {
+        min-height: 41px !important;
+        border-radius: 8px !important;
+    }
+
+    .member-name-text,
+    .driver-name-disp {
+        font-size: 0.88rem !important;
+        font-weight: 780 !important;
+    }
+
+    .member-inline-actions {
+        gap: 5px !important;
+    }
+
+    .action-btn {
+        padding: 3px !important;
+    }
+
+    #bottom-tray {
+        height: 30% !important;
+        min-height: 154px !important;
+        border-radius: 16px 16px 0 0 !important;
+    }
+
+    #tray-handle {
+        height: 18px !important;
+    }
+
+    .handle-bar {
+        width: 42px !important;
+        height: 4px !important;
+    }
+
+    #bottom-tray-header {
+        padding: 4px 10px 8px !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr) !important;
+        gap: 8px !important;
+    }
+
+    .tray-status small {
+        font-size: 0.82rem !important;
+    }
+
+    .tray-actions {
+        grid-template-columns: 58px minmax(0, 1fr) 70px !important;
+        gap: 5px !important;
+    }
+
+    .tray-actions .btn {
+        min-height: 34px !important;
+        padding: 6px 5px !important;
+        font-size: 0.74rem !important;
+        border-radius: 8px !important;
+        white-space: nowrap !important;
+    }
+
+    #waiting-list-container {
+        padding: 8px 10px 12px !important;
+    }
+
+    #waiting-list {
+        grid-template-columns: repeat(auto-fill, minmax(122px, 1fr)) !important;
+        gap: 8px !important;
+        min-height: 72px !important;
+    }
+
+    #sheet-title-bar {
+        min-height: 44px !important;
+        padding: 6px 10px !important;
+        gap: 7px !important;
+    }
+
+    .sheet-title-icon {
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 9px !important;
+        font-size: 0.95rem !important;
+    }
+
+    #sheet-summary {
+        gap: 5px !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+    }
+    #sheet-summary::-webkit-scrollbar { display: none; }
+
+    .sheet-summary-pill {
+        flex: 0 0 auto !important;
+        padding: 4px 8px !important;
+        font-size: 0.72rem !important;
+        border-radius: 999px !important;
+        background: rgba(255,255,255,0.72) !important;
+    }
+
+    .sheet-summary-pill strong {
+        font-size: 0.78rem !important;
+    }
+
+    #sheet-view-area.active::after {
+        top: 44px !important;
+        width: 16px !important;
+    }
+
+    #sheet-canvas {
+        top: 44px !important;
+        padding: 10px 8px 76px !important;
+        gap: 0 !important;
+    }
+
+    .sheet-car-col {
+        min-width: 112px !important;
+    }
+
+    #sheet-canvas > .sheet-car-col:first-child {
+        min-width: 44px !important;
+        max-width: 44px !important;
+    }
+
+    .sheet-wait-block {
+        flex-basis: 104px !important;
+        width: 104px !important;
+    }
+
+    .sheet-car-header {
+        padding: 6px 7px !important;
+        font-size: 0.74rem !important;
+    }
+
+    .sheet-driver-row,
+    .sheet-seat-row,
+    .sheet-wait-item {
+        min-height: 34px !important;
+        padding: 5px 6px !important;
+        font-size: 0.74rem !important;
+    }
+
+    .sheet-chip {
+        padding: 3px 5px !important;
+        font-size: 0.72rem !important;
+        border-radius: 6px !important;
+    }
+
+    .sheet-capacity-badge,
+    .grade-badge {
+        font-size: 0.62rem !important;
+        padding: 1px 4px !important;
+    }
+
+    #sheet-bottom-controls {
+        bottom: 10px !important;
+        gap: 5px !important;
+        padding: 5px !important;
+        border-radius: 12px !important;
+    }
+
+    #zoom-controls {
+        gap: 3px !important;
+    }
+
+    #zoom-controls button {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 0.88rem !important;
+    }
+
+    #sheet-quick-edit-btn {
+        min-height: 34px !important;
+        padding: 6px 9px !important;
+        border-radius: 10px !important;
+        font-size: 0.74rem !important;
+        writing-mode: horizontal-tb !important;
+        white-space: nowrap !important;
+    }
+
+    #sheet-hint {
+        bottom: 58px !important;
+        font-size: 0.66rem !important;
+        padding: 5px 9px !important;
+    }
+
+    #seisan-view-area {
+        padding: 8px 9px 20px !important;
+    }
+
+    .seisan-wrap {
+        max-width: none !important;
+    }
+
+    .seisan-card {
+        padding: 10px !important;
+        margin-bottom: 10px !important;
+        border-radius: 11px !important;
+    }
+
+    .seisan-head-tools-only {
+        margin-bottom: 8px !important;
+    }
+
+    .seisan-head-actions {
+        width: 100% !important;
+        justify-content: flex-end !important;
+        gap: 6px !important;
+    }
+
+    .seisan-head-actions .seisan-btn {
+        min-height: 38px !important;
+        padding: 7px 10px !important;
+        border-radius: 9px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .seisan-head-actions .tool-help-btn {
+        flex: 0 0 auto !important;
+        min-width: 92px !important;
+    }
+
+    .seisan-top-flow {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .seisan-summary-card {
+        min-height: 74px !important;
+        padding: 10px 11px !important;
+        border-radius: 10px !important;
+    }
+
+    .seisan-summary-label {
+        font-size: 0.76rem !important;
+    }
+
+    .seisan-summary-value {
+        font-size: 1.62rem !important;
+        letter-spacing: -0.035em !important;
+    }
+
+    .seisan-summary-sub {
+        font-size: 0.72rem !important;
+    }
+
+    .seisan-title {
+        font-size: 1rem !important;
+        margin-bottom: 9px !important;
+    }
+
+    .seisan-settings {
+        grid-template-columns: 1fr !important;
+        gap: 9px !important;
+    }
+
+    .seisan-field label,
+    .seisan-mini-label {
+        font-size: 0.74rem !important;
+    }
+
+    .seisan-field input,
+    .seisan-field select,
+    .seisan-extra-row input,
+    .seisan-extra-row select {
+        min-height: 42px !important;
+        font-size: 0.92rem !important;
+        border-radius: 9px !important;
+    }
+
+    .seisan-toggle {
+        min-height: 42px !important;
+        border-radius: 9px !important;
+    }
+
+    .seisan-car-row {
+        padding: 10px !important;
+        border-radius: 10px !important;
+    }
+
+    .seisan-car-title strong {
+        font-size: 0.95rem !important;
+    }
+
+    .seisan-car-inputs {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 6px !important;
+    }
+
+    .seisan-car-inputs input {
+        min-height: 40px !important;
+        padding: 7px 5px !important;
+        font-size: 0.86rem !important;
+    }
+
+    .seisan-extra-row {
+        grid-template-columns: minmax(0, 1fr) 86px 72px 32px !important;
+        gap: 5px !important;
+    }
+
+    .seisan-check-list {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+    }
+
+    .seisan-driver-pay-row {
+        grid-template-columns: minmax(0, 1fr) auto auto !important;
+        gap: 6px !important;
+    }
+
+    .seisan-driver-detail {
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .app-room-input { font-size: 1.08rem !important; }
+    .header-action span { font-size: 0.66rem !important; }
+    .header-action i { font-size: 0.9rem !important; }
+    .view-tab,
+    #tab-list,
+    #tab-sheet,
+    #tab-seisan { font-size: 0.66rem !important; }
+    .view-tab i { font-size: 0.7rem !important; }
+    .tray-actions { grid-template-columns: 52px minmax(0, 1fr) 62px !important; }
+    .tray-actions .btn { font-size: 0.68rem !important; }
+    .seisan-car-inputs { gap: 4px !important; }
+    .seisan-mini-label { font-size: 0.66rem !important; letter-spacing: -0.04em !important; }
+    .seisan-extra-row { grid-template-columns: minmax(0, 1fr) 78px 66px 30px !important; }
+}
+
+
+
+/* --- v15 mobile UI tune --- */
+@media (max-width: 640px) {
+    #app-header {
+        padding: 6px 8px 4px;
+    }
+    .app-header-main {
+        padding: 6px;
+        border-radius: 16px;
+    }
+    .header-actions {
+        gap: 4px;
+    }
+    .header-action {
+        min-height: 40px;
+        padding: 7px 6px;
+        border-radius: 12px;
+    }
+    .header-action span {
+        font-size: 0.74rem;
+        letter-spacing: -0.01em;
+    }
+    #view-toggle-bar {
+        margin: 6px 8px 0;
+        padding: 4px;
+        border-radius: 16px;
+    }
+    .view-tab {
+        min-height: 44px;
+        padding: 9px 6px !important;
+        gap: 5px !important;
+        font-size: 0.8rem !important;
+        border-radius: 12px;
+    }
+    .view-tab i {
+        font-size: 0.84rem;
+    }
+
+    .edit-header-tools-only {
+        margin: 0 0 6px;
+    }
+    .edit-header-tools-only .edit-tools {
+        gap: 8px;
+    }
+    .edit-tools .tool-btn {
+        min-height: 46px;
+        padding: 9px 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        border-radius: 14px;
+    }
+    .edit-tools .tool-btn i {
+        margin-bottom: 0;
+        font-size: 0.92rem;
+    }
+    .edit-tools .tool-btn span {
+        font-size: 0.8rem;
+        line-height: 1;
+    }
+
+    .car-box {
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 16px;
+    }
+    .car-header {
+        margin-bottom: 7px;
+        padding-bottom: 6px;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .car-header > div:first-child {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+    .car-layout-grid {
+        gap: 6px;
+    }
+    .driver-seat,
+    .seat-slot,
+    .member-card {
+        min-height: 36px;
+    }
+    .driver-seat {
+        padding: 7px 8px;
+    }
+    .member-card {
+        padding: 7px 28px 7px 8px;
+    }
+    .member-name-text,
+    .driver-name-disp {
+        font-size: 0.84rem;
+    }
+    .member-inline-actions {
+        gap: 3px;
+    }
+
+    #bottom-tray {
+        height: 32%;
+        min-height: 180px;
+        border-radius: 20px 20px 0 0;
+    }
+    #bottom-tray-header {
+        padding: 10px 12px;
+    }
+    #waiting-list-container {
+        padding: 10px 8px 12px;
+    }
+    #waiting-list {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 8px;
+        min-height: 72px;
+    }
+
+    #sheet-view-area {
+        overflow: hidden;
+    }
+    #sheet-title-bar {
+        min-height: 46px;
+        padding: 8px 10px;
+        gap: 8px;
+    }
+    .sheet-title-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        font-size: 0.84rem;
+    }
+    #sheet-summary {
+        gap: 5px;
+    }
+    .sheet-summary-pill {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    .sheet-summary-pill strong {
+        font-size: 0.74rem;
+    }
+    #sheet-canvas {
+        top: 46px;
+        padding: 8px 8px 80px;
+    }
+    .sheet-car-col {
+        min-width: 122px;
+    }
+    .sheet-car-header {
+        padding: 7px 8px;
+        font-size: 0.76rem;
+    }
+    .sheet-driver-row,
+    .sheet-seat-row,
+    .sheet-wait-item {
+        min-height: 34px;
+        font-size: 0.76rem;
+    }
+    #sheet-hint {
+        bottom: 68px;
+        font-size: 0.64rem;
+        padding: 5px 9px;
+    }
+    #sheet-bottom-controls {
+        left: 8px;
+        right: 8px;
+        bottom: 10px;
+        transform: none;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 6px;
+        border-radius: 16px;
+    }
+    #zoom-controls {
+        gap: 4px;
+        flex: 0 0 auto;
+    }
+    #zoom-controls button {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        border-color: var(--border-color);
+        background: var(--bg-card);
+    }
+    #sheet-quick-edit-btn {
+        flex: 1 1 auto;
+        min-width: 96px;
+        min-height: 34px;
+        justify-content: center;
+        white-space: nowrap;
+        padding: 8px 12px;
+        font-size: 0.78rem;
+    }
+
+    .seisan-wrap {
+        max-width: 100%;
+    }
+    .seisan-card {
+        padding: 10px;
+        margin-bottom: 8px;
+        border-radius: 16px;
+    }
+    .seisan-head-tools-only {
+        margin-bottom: 10px;
+    }
+    .seisan-head-actions {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+    .seisan-head-actions .seisan-btn {
+        min-height: 42px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+    .seisan-top-flow {
+        gap: 8px;
+    }
+    .seisan-summary-card {
+        min-height: 72px;
+        padding: 10px;
+    }
+    .seisan-summary-value {
+        font-size: 1.28rem;
+    }
+    .seisan-summary-sub {
+        font-size: 0.72rem;
+    }
+    .seisan-settings {
+        gap: 10px;
+    }
+    .seisan-field input,
+    .seisan-field select,
+    .seisan-extra-row input,
+    .seisan-extra-row select,
+    .seisan-btn,
+    .seisan-toggle {
+        min-height: 40px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .header-action span {
+        font-size: 0.7rem;
+    }
+    .view-tab {
+        font-size: 0.76rem !important;
+    }
+    .edit-tools .tool-btn span {
+        font-size: 0.76rem;
+    }
+    .sheet-car-col {
+        min-width: 116px;
+    }
+    .sheet-summary-pill {
+        padding: 4px 7px;
+        font-size: 0.68rem;
+    }
+    .sheet-summary-pill strong {
+        font-size: 0.72rem;
+    }
+}
+
+
+
+/* --- v16 seisan mobile overflow fix --- */
+.seisan-car-inputs > label {
+    min-width: 0;
+    width: 100%;
+}
+.seisan-car-inputs input {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 640px) {
+    .seisan-car-inputs {
+        align-items: start;
+    }
+    .seisan-car-inputs > label {
+        display: block;
+        min-width: 0;
+    }
+    .seisan-mini-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+@media (max-width: 380px) {
+    .seisan-car-inputs {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 3px !important;
+    }
+    .seisan-car-inputs input {
+        padding: 7px 4px !important;
+        font-size: 0.8rem !important;
+    }
+    .seisan-mini-label {
+        font-size: 0.6rem !important;
+        letter-spacing: -0.05em !important;
+    }
+}
+
+
+
+/* --- v17 UI unify --- */
+:root {
+    --ui-radius-card: 18px;
+    --ui-radius-btn: 14px;
+    --ui-radius-input: 14px;
+    --ui-space-card: 12px;
+    --ui-space-block: 10px;
+    --ui-shadow-soft: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+[data-theme="dark"] {
+    --ui-shadow-soft: 0 1px 4px rgba(0, 0, 0, 0.22);
+}
+
+/* cards */
+.app-header-main,
+#view-toggle-bar,
+.edit-header-tools-only,
+.car-box,
+#bottom-tray,
+#sheet-title-bar,
+#sheet-bottom-controls,
+.seisan-card,
+.seisan-summary-card,
+.seisan-car-row,
+.seisan-guide,
+.seisan-result-box,
+.sheet-empty,
+.empty-card,
+.modal-content {
+    border-radius: var(--ui-radius-card) !important;
+    box-shadow: var(--ui-shadow-soft) !important;
+}
+
+/* buttons */
+.header-action,
+.view-tab,
+.edit-tools .tool-btn,
+.seisan-btn,
+.seisan-toggle,
+.seisan-icon-btn,
+#sheet-quick-edit-btn,
+#zoom-controls button,
+.btn,
+button {
+    border-radius: var(--ui-radius-btn);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.header-action,
+.view-tab,
+.edit-tools .tool-btn,
+.seisan-btn,
+.seisan-toggle,
+#sheet-quick-edit-btn {
+    min-height: 44px;
+}
+.header-action i,
+.view-tab i,
+.edit-tools .tool-btn i,
+.seisan-btn i,
+.seisan-toggle i,
+#sheet-quick-edit-btn i {
+    font-size: 0.95rem;
+}
+.header-action span,
+.view-tab,
+.edit-tools .tool-btn span,
+.seisan-btn,
+.seisan-toggle,
+#sheet-quick-edit-btn {
+    font-size: 0.92rem;
+}
+
+/* input system */
+input,
+select,
+textarea,
+.form-control,
+.form-select,
+.seisan-field input,
+.seisan-field select,
+.seisan-extra-row input,
+.seisan-extra-row select,
+.seisan-car-inputs input {
+    border-radius: var(--ui-radius-input) !important;
+    min-height: 42px;
+    box-sizing: border-box;
+}
+label,
+.seisan-mini-label,
+.seisan-field label,
+.form-label {
+    letter-spacing: -0.01em;
+}
+.seisan-mini-label,
+.sheet-summary-pill,
+.seisan-summary-sub,
+.seisan-driver-detail,
+.memo-popup,
+.seisan-alert,
+.helper-text {
+    font-size: 0.72rem;
+    line-height: 1.4;
+}
+
+/* tabs and top controls */
+#view-toggle-bar {
+    padding: 6px !important;
+}
+.view-tab {
+    gap: 7px !important;
+    padding: 10px 12px !important;
+}
+.header-actions {
+    gap: 8px !important;
+}
+.header-action {
+    padding: 10px 12px;
+}
+.edit-header-tools-only {
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: 0 !important;
+}
+.edit-header-tools-only .edit-tools {
+    gap: 10px;
+}
+.edit-tools .tool-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--ui-shadow-soft);
+}
+
+/* maker area */
+.car-box {
+    padding: 12px !important;
+    margin-bottom: 14px !important;
+}
+.car-header {
+    padding-bottom: 8px;
+    margin-bottom: 10px !important;
+}
+.car-header h3,
+.car-header strong,
+.seisan-section-title,
+.seisan-title,
+.section-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+.driver-seat,
+.member-card,
+.seat-slot {
+    border-radius: 14px !important;
+}
+.member-name-text,
+.driver-name-disp {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+}
+
+/* chips and pills */
+.sheet-summary-pill,
+.grade-badge,
+.capacity-badge,
+.member-badge,
+.status-pill,
+.badge,
+.seisan-chip {
+    border-radius: 999px !important;
+    font-weight: 700;
+}
+
+/* sheet */
+#sheet-title-bar {
+    padding: 10px 12px !important;
+}
+#sheet-summary {
+    gap: 6px;
+}
+.sheet-car-header,
+.sheet-driver-row,
+.sheet-seat-row,
+.sheet-wait-item {
+    font-weight: 700;
+}
+#sheet-bottom-controls {
+    padding: 8px !important;
+    gap: 10px !important;
+}
+#zoom-controls {
+    gap: 6px !important;
+}
+#zoom-controls button {
+    width: 36px;
+    height: 36px;
+}
+
+/* settlement */
+.seisan-card {
+    padding: 12px !important;
+    margin-bottom: 12px !important;
+}
+.seisan-head-actions {
+    align-items: stretch;
+}
+.seisan-head-actions .seisan-btn,
+.seisan-head-actions .seisan-toggle {
+    min-height: 44px;
+}
+.seisan-top-flow {
+    gap: 10px !important;
+}
+.seisan-summary-card {
+    padding: 12px !important;
+}
+.seisan-summary-title,
+.seisan-section-head strong {
+    font-weight: 800;
+}
+.seisan-summary-value {
+    letter-spacing: -0.03em;
+}
+.seisan-car-row {
+    padding: 12px !important;
+}
+.seisan-car-title {
+    margin-bottom: 10px !important;
+}
+.seisan-car-inputs {
+    gap: 8px !important;
+}
+.seisan-subhead {
+    margin: 12px 0 8px !important;
+    padding-top: 10px !important;
+}
+.seisan-extra-row {
+    gap: 6px !important;
+}
+.seisan-driver-pay-row {
+    align-items: center;
+}
+
+/* mobile tuning */
+@media (max-width: 640px) {
+    #app-header {
+        padding: 8px !important;
+    }
+    .app-header-main {
+        padding: 8px !important;
+        border-radius: 18px !important;
+    }
+    .header-actions,
+    .edit-header-tools-only .edit-tools,
+    .seisan-head-actions {
+        gap: 8px !important;
+    }
+    .header-action,
+    .view-tab,
+    .edit-tools .tool-btn,
+    .seisan-btn,
+    .seisan-toggle,
+    #sheet-quick-edit-btn {
+        min-height: 42px !important;
+        padding: 8px 10px !important;
+    }
+    .header-action span,
+    .view-tab,
+    .edit-tools .tool-btn span,
+    .seisan-btn,
+    .seisan-toggle,
+    #sheet-quick-edit-btn {
+        font-size: 0.84rem !important;
+    }
+    .car-box,
+    .seisan-card,
+    .seisan-summary-card,
+    .seisan-car-row {
+        padding: 10px !important;
+        border-radius: 16px !important;
+    }
+    .car-header {
+        gap: 8px !important;
+    }
+    .member-card,
+    .driver-seat,
+    .seat-slot {
+        border-radius: 12px !important;
+    }
+    .member-name-text,
+    .driver-name-disp,
+    .sheet-driver-row,
+    .sheet-seat-row,
+    .sheet-car-header {
+        font-size: 0.82rem !important;
+    }
+    #bottom-tray {
+        border-radius: 20px 20px 0 0 !important;
+    }
+    #sheet-title-bar,
+    #sheet-bottom-controls {
+        border-radius: 16px !important;
+    }
+    .sheet-summary-pill {
+        font-size: 0.7rem !important;
+        padding: 5px 9px !important;
+    }
+    .seisan-summary-value {
+        font-size: 1.22rem !important;
+    }
+    .seisan-mini-label,
+    .seisan-summary-sub,
+    .seisan-driver-detail,
+    .seisan-alert {
+        font-size: 0.7rem !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .header-action span,
+    .view-tab,
+    .edit-tools .tool-btn span,
+    .seisan-btn,
+    .seisan-toggle,
+    #sheet-quick-edit-btn {
+        font-size: 0.78rem !important;
+    }
+    .car-box,
+    .seisan-card,
+    .seisan-summary-card,
+    .seisan-car-row {
+        padding: 9px !important;
+    }
+    .member-name-text,
+    .driver-name-disp,
+    .sheet-driver-row,
+    .sheet-seat-row,
+    .sheet-car-header {
+        font-size: 0.78rem !important;
+    }
+    .seisan-car-inputs {
+        gap: 4px !important;
+    }
+    .seisan-extra-row {
+        gap: 4px !important;
+    }
+}
+
 </style>
   </head>
   <body data-theme="light" class="sheet-mode">
@@ -4560,6 +5714,7 @@ function switchView(view) {
         tabSheet.classList.add('active');
         updateQuickEditButton();
         renderSheetView();
+        requestAnimationFrame(() => resetSheetMobilePosition());
         showSheetHint();
     } else {
         document.body.classList.remove('sheet-mode');
@@ -4572,6 +5727,13 @@ function switchView(view) {
     }
 }
 window.switchView = switchView;
+
+
+window.addEventListener('resize', () => {
+    if (currentView === 'sheet') {
+        requestAnimationFrame(() => resetSheetMobilePosition());
+    }
+});
 
 function showSheetHint() {
     const hint = document.getElementById('sheet-hint');
@@ -4981,6 +6143,15 @@ function zoomIn() { sheetScale = Math.min(sheetScale * 1.25, 4); applySheetTrans
 function zoomOut() { sheetScale = Math.max(sheetScale / 1.25, 0.3); applySheetTransform(); }
 function resetZoom() { sheetScale=1; sheetX=0; sheetY=0; applySheetTransform(); }
 window.zoomIn = zoomIn; window.zoomOut = zoomOut; window.resetZoom = resetZoom;
+
+function resetSheetMobilePosition() {
+    if (!window.matchMedia('(max-width: 640px)').matches) return;
+    sheetScale = 1;
+    sheetX = 0;
+    sheetY = 0;
+    applySheetTransform();
+}
+
 
 D.addEventListener('DOMContentLoaded', () => {
     const area = document.getElementById('sheet-view-area');
@@ -5760,6 +6931,36 @@ function applyRandomHeaderArtwork() {
 }
 
 applyRandomHeaderArtwork();
+
+
+/* --- v15 mobile sheet initial fit --- */
+function fitSheetForMobile() {
+  if (window.innerWidth > 640) return;
+  const canvas = document.getElementById('sheet-canvas');
+  const area = document.getElementById('sheet-view-area');
+  if (!canvas || !area || !canvas.children.length) return;
+  const canvasWidth = Array.from(canvas.children).reduce((sum, el) => sum + (el.offsetWidth || 0), 0) + 16;
+  const usableWidth = Math.max(280, area.clientWidth - 12);
+  const fitScale = Math.min(0.92, Math.max(0.76, usableWidth / Math.max(canvasWidth, 1)));
+  sheetScale = fitScale;
+  sheetX = 0;
+  sheetY = 0;
+  applySheetTransform();
+}
+
+const originalSwitchViewForMobilePolish = window.switchView;
+window.switchView = function(view) {
+  originalSwitchViewForMobilePolish(view);
+  if (view === 'sheet') {
+    setTimeout(fitSheetForMobile, 40);
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('sheet-view-area')?.classList.contains('active')) {
+    setTimeout(fitSheetForMobile, 120);
+  }
+});
 
 </script>
   </body>
