@@ -3578,6 +3578,147 @@ label,
     }
 }
 
+
+
+/* --- v18 dark mode polish --- */
+[data-theme="dark"] .app-header-main,
+[data-theme="dark"] #view-toggle-bar,
+[data-theme="dark"] #sheet-title-bar,
+[data-theme="dark"] #sheet-bottom-controls,
+[data-theme="dark"] #bottom-tray,
+[data-theme="dark"] .seisan-card,
+[data-theme="dark"] .seisan-summary-card,
+[data-theme="dark"] .seisan-car-row,
+[data-theme="dark"] .car-box,
+[data-theme="dark"] .modal-content {
+    border-color: rgba(148, 163, 184, 0.18) !important;
+}
+
+[data-theme="dark"] .header-action,
+[data-theme="dark"] .edit-tools .tool-btn,
+[data-theme="dark"] #zoom-controls button,
+[data-theme="dark"] #sheet-quick-edit-btn {
+    background: rgba(15, 23, 42, 0.68) !important;
+    border-color: rgba(148, 163, 184, 0.24) !important;
+    color: var(--text-main) !important;
+}
+[data-theme="dark"] .header-action i,
+[data-theme="dark"] .header-action span,
+[data-theme="dark"] .edit-tools .tool-btn i,
+[data-theme="dark"] .edit-tools .tool-btn span,
+[data-theme="dark"] #zoom-controls button i,
+[data-theme="dark"] #sheet-quick-edit-btn i,
+[data-theme="dark"] #sheet-quick-edit-btn {
+    color: var(--text-main) !important;
+    opacity: 1 !important;
+}
+[data-theme="dark"] .header-action:hover,
+[data-theme="dark"] .edit-tools .tool-btn:hover,
+[data-theme="dark"] #zoom-controls button:hover,
+[data-theme="dark"] #sheet-quick-edit-btn:hover {
+    background: rgba(51, 65, 85, 0.92) !important;
+    color: #fff !important;
+}
+[data-theme="dark"] .header-action.is-locked {
+    background: rgba(245, 158, 11, 0.18) !important;
+    border-color: rgba(245, 158, 11, 0.42) !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .view-tab {
+    background: transparent !important;
+    color: #cbd5e1 !important;
+    border-color: transparent !important;
+}
+[data-theme="dark"] .view-tab:not(.active):hover {
+    background: rgba(51, 65, 85, 0.75) !important;
+    color: #f8fafc !important;
+}
+[data-theme="dark"] .view-tab.active {
+    background: var(--accent-color) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-color) !important;
+}
+[data-theme="dark"] .view-tab i {
+    color: inherit !important;
+}
+
+[data-theme="dark"] #sheet-summary {
+    gap: 8px !important;
+}
+[data-theme="dark"] .sheet-summary-pill {
+    background: rgba(15, 23, 42, 0.72) !important;
+    border-color: rgba(148, 163, 184, 0.24) !important;
+    color: #cbd5e1 !important;
+}
+[data-theme="dark"] .sheet-summary-pill strong {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .sheet-chip,
+[data-theme="dark"] .sheet-wait-item,
+[data-theme="dark"] .sheet-driver-row,
+[data-theme="dark"] .sheet-seat-row,
+[data-theme="dark"] .sheet-car-header {
+    border-color: rgba(148, 163, 184, 0.18) !important;
+}
+
+[data-theme="dark"] .seisan-btn,
+[data-theme="dark"] .seisan-toggle,
+[data-theme="dark"] .seisan-icon-btn {
+    border-color: rgba(148, 163, 184, 0.24) !important;
+}
+[data-theme="dark"] .seisan-btn:not(.primary):not(.active),
+[data-theme="dark"] .seisan-toggle:not(.active),
+[data-theme="dark"] .seisan-icon-btn {
+    background: rgba(15, 23, 42, 0.68) !important;
+    color: var(--text-main) !important;
+}
+[data-theme="dark"] .seisan-btn:not(.primary):not(.active):hover,
+[data-theme="dark"] .seisan-toggle:not(.active):hover,
+[data-theme="dark"] .seisan-icon-btn:hover {
+    background: rgba(51, 65, 85, 0.92) !important;
+    color: #fff !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+    background-color: rgba(15, 23, 42, 0.78);
+    color: var(--text-main);
+    border-color: rgba(148, 163, 184, 0.24);
+}
+[data-theme="dark"] .form-control::placeholder,
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .guide-demo-box,
+[data-theme="dark"] .guide-step-card,
+[data-theme="dark"] .guide-mini-flow,
+[data-theme="dark"] .guide-feature-card,
+[data-theme="dark"] .app-guide-box {
+    border-color: rgba(148, 163, 184, 0.18) !important;
+}
+
+@media (max-width: 640px) {
+    [data-theme="dark"] .header-action,
+    [data-theme="dark"] .edit-tools .tool-btn,
+    [data-theme="dark"] .view-tab,
+    [data-theme="dark"] .seisan-btn,
+    [data-theme="dark"] .seisan-toggle,
+    [data-theme="dark"] #sheet-quick-edit-btn {
+        box-shadow: none !important;
+    }
+    [data-theme="dark"] .sheet-summary-pill {
+        min-height: 30px;
+        padding: 6px 10px !important;
+    }
+}
+
 </style>
   </head>
   <body data-theme="light" class="sheet-mode">
