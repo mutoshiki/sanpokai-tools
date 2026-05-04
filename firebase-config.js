@@ -1,5 +1,3 @@
-// firebase-config.js
-
 window.SANPO_FIREBASE_CONFIG = {
   apiKey: "AIzaSyBdgDzo6C7CG739XvqlD9RtKmiQvHuIXbY",
   authDomain: "sanpokai-tool.firebaseapp.com",
