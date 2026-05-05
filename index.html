@@ -3341,6 +3341,671 @@ html, body {
     }
 }
 
+
+/* --- v29 selected UI fixes / cleanup overrides --- */
+.header-actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+.header-more { min-width: 0; }
+.header-more .header-action { width: 100%; }
+.header-action.share-action {
+    background: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: #fff !important;
+}
+.header-action.share-action i,
+.header-action.share-action span { color: #fff !important; }
+.header-action.share-action:hover { filter: brightness(0.95); }
+.edit-quick-hint {
+    margin-top: 8px;
+    color: var(--text-sub);
+    font-size: 0.74rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.color-legend {
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.legend-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 3px 8px;
+    font-size: 0.68rem;
+    font-weight: 800;
+}
+.legend-chip.male { background: var(--bg-male); color: var(--text-male); border-color: var(--border-male); }
+.legend-chip.female { background: var(--bg-female); color: var(--text-female); border-color: var(--border-female); }
+.legend-chip.unknown { background: var(--bg-unknown); color: var(--text-unknown); border-color: var(--border-unknown); }
+.legend-chip.locked { background: rgba(245, 158, 11, 0.14); border-color: rgba(245,158,11,0.55); color: var(--text-main); }
+.batch-field-note {
+    color: var(--text-sub);
+    font-size: 0.68rem;
+    font-weight: 700;
+    margin: -2px 0 4px;
+}
+.batch-warning {
+    margin-top: 10px;
+    border: 1px solid #ef4444;
+    color: #b91c1c;
+    background: rgba(239,68,68,0.08);
+    border-radius: var(--radius-main);
+    padding: 9px 10px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+[data-theme="dark"] .batch-warning { color: #fecaca; }
+.capacity-badge {
+    min-height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 8px !important;
+    font-size: 0.7rem;
+}
+.sheet-empty-card,
+.empty-card {
+    width: min(520px, calc(100vw - 40px));
+    margin: 32px auto;
+    text-align: center;
+    padding: 26px 18px;
+    color: var(--text-sub);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-main);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-card);
+}
+.sheet-empty-title,
+.empty-card strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 850;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+.sheet-empty-text,
+.empty-card span {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+}
+.empty-card i {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-soft);
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    font-size: 1.15rem;
+}
+.seisan-head-actions {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 8px;
+}
+.seisan-head-actions .seisan-btn {
+    width: 100% !important;
+    min-height: 40px;
+    padding: 8px 8px;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.seisan-head-actions .seisan-btn span {
+    font-size: 0.76rem;
+    line-height: 1;
+}
+.seisan-check-item.paid {
+    background: rgba(15, 118, 110, 0.12) !important;
+    border-color: rgba(15, 118, 110, 0.55) !important;
+}
+.seisan-driver-pay-row.done {
+    background: rgba(59, 130, 246, 0.12) !important;
+    border-color: rgba(59, 130, 246, 0.55) !important;
+}
+[data-theme="dark"] .seisan-driver-pay-row.done {
+    background: rgba(96, 165, 250, 0.16) !important;
+    border-color: rgba(96, 165, 250, 0.52) !important;
+}
+.route-stop-row { cursor: default; }
+.route-stop-num { cursor: grab; }
+.route-stop-num:active { cursor: grabbing; }
+.mini-status-toast {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 10050;
+    max-width: min(360px, calc(100vw - 28px));
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(30, 41, 59, 0.94);
+    color: #fff;
+    font-size: 0.76rem;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(15,23,42,0.18);
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.mini-status-toast.visible { opacity: 1; transform: translateY(0); }
+.mini-status-toast.error { background: rgba(185, 28, 28, 0.94); }
+.mini-status-toast.saving { background: rgba(15, 118, 110, 0.94); }
+.app-guide-flow.simple-flow .app-guide-box { min-height: 74px; }
+@media (max-width: 640px) {
+    .header-actions { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .seisan-head-actions { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+    .seisan-head-actions .seisan-btn { min-height: 38px; padding: 7px 4px; }
+    .seisan-head-actions .seisan-btn span { font-size: 0.66rem; }
+}
+
+
+/* --- v30 guide simplification / header actions / tray fix --- */
+.global-guide-body { display: grid; gap: 12px; }
+.global-flow-screen { margin-top: 0; }
+.global-five-step {
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 7px;
+}
+.global-five-step .app-guide-box { min-height: 72px; padding: 9px 6px; }
+.global-guide-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+.global-guide-card { padding: 12px; }
+.global-mini-lock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+}
+.global-mini-lock span {
+    min-height: 44px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--bg-body);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+.guide-important-note {
+    margin-top: 0;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: var(--text-main);
+    background: var(--accent-soft);
+}
+.compact-guide-grid { gap: 10px; }
+.mock-sheet-table {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr 0.8fr;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    overflow: hidden;
+    font-size: 0.68rem;
+}
+.mock-sheet-table > div {
+    padding: 6px;
+    border-right: 1px solid #dadce0;
+    border-bottom: 1px solid #dadce0;
+}
+.mock-sheet-table > div:nth-child(3n) { border-right: 0; }
+.mock-sheet-table .head { background: #f8fafd; font-weight: 800; }
+.app-guide-mini-tools.two-col { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.app-guide-mini-tools.two-col small { color: var(--text-sub); font-weight: 700; }
+.guide-mini-toolbar.compact-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.guide-mini-toolbar.compact-actions .guide-mini-tool { min-height: 48px; }
+.tray-actions {
+    grid-template-columns: minmax(104px, 1fr) minmax(104px, 1fr) 42px !important;
+}
+.tray-actions .btn {
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: clip !important;
+    font-size: 0.75rem !important;
+    letter-spacing: -0.03em;
+}
+.tray-actions .dropdown .btn,
+.tray-actions .settings-btn {
+    width: 42px !important;
+    min-width: 42px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+@media (max-width: 640px) {
+    .global-five-step,
+    .app-guide-flow.compact {
+        grid-template-columns: 1fr;
+    }
+    .global-five-step .app-guide-arrow,
+    .app-guide-flow.compact .app-guide-arrow {
+        transform: rotate(90deg);
+        min-height: 14px;
+    }
+    .global-guide-mini-grid,
+    .compact-guide-grid {
+        grid-template-columns: 1fr;
+    }
+    .tray-actions {
+        grid-template-columns: minmax(98px, 1fr) minmax(98px, 1fr) 40px !important;
+        gap: 5px !important;
+    }
+    .tray-actions .btn { font-size: 0.7rem !important; padding: 6px 3px !important; }
+}
+@media (max-width: 360px) {
+    .tray-actions {
+        grid-template-columns: minmax(90px, 1fr) minmax(90px, 1fr) 38px !important;
+    }
+    .tray-actions .btn { font-size: 0.66rem !important; letter-spacing: -0.06em; }
+}
+
+
+
+/* --- v31 unified guide style --- */
+.guide-step-nav {
+    display: flex;
+    gap: 8px;
+    padding: 12px 14px;
+    overflow-x: auto;
+    background: var(--bg-body);
+    border-bottom: 1px solid var(--border-color);
+    -webkit-overflow-scrolling: touch;
+}
+.unified-guide-body .guide-step-panel {
+    min-height: 330px;
+}
+.guide-card-grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+.unified-flow {
+    margin-bottom: 12px;
+}
+.compact-flow .app-guide-box {
+    min-height: 78px;
+}
+.two-step-flow {
+    grid-template-columns: 1fr auto 1fr !important;
+}
+.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+.compact-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+.compact-actions .guide-mini-tool {
+    min-width: 0;
+    overflow: hidden;
+    line-height: 1.2;
+}
+.guide-important-card {
+    margin: 8px 0 12px;
+}
+.guide-important-note {
+    background: var(--accent-soft);
+    border-color: rgba(15, 118, 110, 0.25);
+    color: var(--text-main);
+    font-weight: 650;
+}
+.guide-sheet-preview {
+    margin-top: 10px;
+}
+.guide-copy-mock {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-body);
+    color: var(--text-main);
+    padding: 10px;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    font-weight: 700;
+}
+.route-guide-mock {
+    display: grid;
+    gap: 7px;
+}
+.route-guide-mock div {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    padding: 8px 9px;
+    color: var(--text-main);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+.route-guide-mock i {
+    color: var(--accent-color);
+    margin-right: 4px;
+}
+.route-guide-mock button {
+    border: 1px solid var(--accent-color);
+    border-radius: var(--radius-sm);
+    background: var(--accent-color);
+    color: #fff;
+    padding: 9px;
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+.seisan-guide-summary-screen {
+    margin-bottom: 12px;
+}
+.guide-footer .btn {
+    min-height: 34px;
+    font-weight: 800;
+}
+@media (max-width: 640px) {
+    .guide-step-nav {
+        gap: 6px;
+        padding: 10px 12px;
+    }
+    .guide-step-btn {
+        flex: 1 0 auto;
+        min-width: 74px;
+        text-align: center;
+    }
+    .guide-card-grid-two {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .compact-flow,
+    .two-step-flow {
+        grid-template-columns: 1fr !important;
+    }
+    .compact-flow .app-guide-arrow,
+    .two-step-flow .app-guide-arrow {
+        transform: rotate(90deg);
+        min-height: 16px;
+    }
+    .unified-guide-body .guide-step-panel {
+        min-height: 0;
+        padding: 14px !important;
+    }
+}
+
+
+/* --- v33 header dropdown + modal stacking fix --- */
+#app-header,
+.app-header-main,
+.header-actions,
+.header-more {
+    overflow: visible !important;
+}
+#app-header {
+    z-index: 1040 !important;
+}
+.app-header-main {
+    z-index: 1041 !important;
+}
+.header-more {
+    position: relative;
+    z-index: 1042;
+}
+.header-more .dropdown-menu {
+    z-index: 1049 !important;
+    margin-top: 6px !important;
+    min-width: 172px;
+}
+.header-more .dropdown-item {
+    white-space: nowrap;
+}
+.modal-backdrop {
+    z-index: 1050 !important;
+}
+.modal {
+    z-index: 1055 !important;
+}
+.modal.show {
+    display: block;
+}
+@media (max-width: 640px) {
+    .header-more .dropdown-menu {
+        min-width: 190px;
+    }
+}
+
+
+
+/* --- v34 guide redesign: unified card style --- */
+.unified-guide-body .guide-step-panel {
+    padding: 16px !important;
+}
+.guide-step-title {
+    margin-bottom: 12px;
+}
+.guide-page-lead {
+    margin: -4px 0 12px;
+    color: var(--text-sub);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    font-weight: 650;
+}
+.guide-card-grid-three {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+.guide-card-grid-two {
+    gap: 10px;
+}
+.guide-feature-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.guide-feature-title {
+    margin-bottom: 0;
+}
+.guide-feature-title i {
+    color: var(--accent-color);
+}
+.guide-short-text {
+    color: var(--text-sub);
+    font-size: 0.76rem;
+    line-height: 1.55;
+    margin: 0;
+}
+.guide-mini-screen {
+    margin-top: 0;
+}
+.guide-list-compact {
+    display: grid;
+    gap: 6px;
+}
+.guide-list-compact div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-body);
+    color: var(--text-main);
+    padding: 7px 8px;
+    font-size: 0.74rem;
+    font-weight: 750;
+}
+.guide-list-compact i {
+    color: var(--accent-color);
+    width: 16px;
+    text-align: center;
+}
+.guide-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.guide-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--bg-body);
+    color: var(--text-main);
+    padding: 5px 8px;
+    font-size: 0.7rem;
+    font-weight: 750;
+}
+.guide-chip i { color: var(--accent-color); }
+.guide-phone-frame {
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: var(--bg-card);
+    padding: 8px;
+    box-shadow: inset 0 0 0 1px rgba(148,163,184,0.06);
+}
+.guide-phone-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:6px 7px;
+    border-radius: var(--radius-sm);
+    background: var(--sheet-header);
+    font-size:0.72rem;
+    font-weight:850;
+    color:var(--text-main);
+    margin-bottom:7px;
+}
+.guide-phone-btn {
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-color);
+    color:#fff;
+    padding:4px 6px;
+    font-size:0.66rem;
+    font-weight:850;
+}
+.guide-mini-form {
+    display:grid;
+    gap:6px;
+}
+.guide-mini-form .field {
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-sm);
+    background:var(--bg-card);
+    min-height:36px;
+    padding:7px 8px;
+    color:var(--text-sub);
+    font-size:0.72rem;
+    font-weight:750;
+}
+.guide-mini-form .field.primary {
+    background: var(--accent-soft);
+    color: var(--text-main);
+    border-color: rgba(15,118,110,0.28);
+}
+.guide-action-row {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+}
+.guide-action-box {
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-sm);
+    background:var(--bg-card);
+    padding:8px 6px;
+    text-align:center;
+    font-size:0.7rem;
+    font-weight:850;
+    color:var(--text-main);
+    min-height:52px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+}
+.guide-action-box.primary {
+    background:var(--accent-color);
+    color:#fff;
+    border-color:var(--accent-color);
+}
+.guide-action-box i { font-size:0.95rem; }
+.guide-color-legend {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+}
+.guide-color-legend span {
+    border:1px solid var(--border-color);
+    border-radius:var(--radius-sm);
+    padding:7px 8px;
+    font-size:0.7rem;
+    font-weight:800;
+    text-align:center;
+}
+.guide-color-legend .male { background:var(--bg-male); color:var(--text-male); border-color:var(--border-male); }
+.guide-color-legend .female { background:var(--bg-female); color:var(--text-female); border-color:var(--border-female); }
+.guide-color-legend .g1 { background:var(--grade1-bg); color:var(--grade1-text); border-color:var(--grade1-border); }
+.guide-color-legend .g2 { background:var(--grade2-bg); color:var(--grade2-text); border-color:var(--grade2-border); }
+.guide-lock-mock {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    border:1px solid rgba(245,158,11,0.42);
+    background:rgba(245,158,11,0.12);
+    border-radius:var(--radius-main);
+    padding:9px 10px;
+    color:var(--text-main);
+    font-size:0.75rem;
+    font-weight:850;
+}
+.guide-lock-mock i { color:#f59e0b; }
+.seisan-guide-summary-screen { margin-bottom: 10px; }
+@media (max-width: 760px) {
+    .guide-card-grid-three,
+    .guide-card-grid-two {
+        grid-template-columns:1fr;
+    }
+    .unified-guide-body .guide-step-panel {
+        padding: 14px !important;
+    }
+}
+
+
+
+/* --- v35 guide wording and route button polish --- */
+.seisan-head-actions .seisan-btn span {
+    white-space: normal;
+    line-height: 1.1;
+    text-align: center;
+}
+.seisan-head-actions .seisan-btn {
+    min-width: 0;
+}
+@media (max-width: 640px) {
+    .seisan-head-actions .seisan-btn {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+    .seisan-head-actions .seisan-btn span {
+        font-size: 0.68rem;
+    }
+}
 </style>
   </head>
   <body data-theme="light" class="sheet-mode">
@@ -3354,18 +4019,25 @@ html, body {
             </div>
           </div>
           <div class="header-actions">
-            <button class="header-action" type="button" onclick="modals.globalGuide.show()" title="全体の使い方">
-              <i class="fas fa-book-open"></i><span>使い方</span>
+            <button class="header-action" type="button" onclick="modals.globalGuide.show()" title="使い方">
+              <i class="fas fa-map-signs"></i><span>使い方</span>
             </button>
-            <button class="header-action" type="button" onclick="copyUrl()" title="共有リンクをコピー">
+            <button class="header-action share-action" type="button" onclick="copyUrl()" title="共有リンクをコピー">
               <i class="fas fa-link"></i><span>共有</span>
             </button>
-            <button class="header-action" type="button" onclick="showHistory()" title="履歴を見る">
-              <i class="fas fa-history"></i><span>履歴</span>
+            <button class="header-action" id="editLockBtn" type="button" onclick="toggleEditProtection()" title="車割メーカーと精算ツールをロック">
+              <i class="fas fa-unlock"></i><span>ロック</span>
             </button>
-            <button class="header-action" id="editLockBtn" type="button" onclick="toggleEditProtection()" title="車割発表ビュー以外をロック">
-              <i class="fas fa-unlock"></i><span>保護</span>
-            </button>
+            <div class="header-more dropdown">
+              <button class="header-action dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="その他">
+                <i class="fas fa-ellipsis"></i><span>その他</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow">
+                <li><button class="dropdown-item" type="button" onclick="showHistory()"><i class="fas fa-history me-2"></i>この端末の履歴</button></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item text-danger fw-bold" type="button" onclick="window.resetData()"><i class="fas fa-trash-alt me-2"></i>全てリセット</button></li>
+              </ul>
+            </div>
           </div>
         </div>
         <div id="view-toggle-bar">
@@ -3383,14 +4055,21 @@ html, body {
       <div id="top-area" style="display: none;">
         <div class="edit-header edit-header-tools-only">
           <div class="edit-tools">
-            <button class="btn tool-btn tool-help-btn" data-priority="high" onclick="modals.guide.show()" title="使い方">
+            <button class="btn tool-btn tool-help-btn" data-priority="high" onclick="modals.guide.show()" title="車割の作り方">
               <i class="fas fa-book-open"></i>
-              <span>使い方</span>
+              <span>車割の作り方</span>
             </button>
             <button class="btn tool-btn" data-priority="high" onclick="openBatchModal()" title="登録">
               <i class="fas fa-paste"></i>
               <span>登録</span>
             </button>
+          </div>
+          <div class="edit-quick-hint"><i class="fas fa-hand-pointer"></i>カードは長押し・ドラッグで移動できます。</div>
+          <div class="color-legend" aria-label="色の説明">
+            <span class="legend-chip male">男性</span>
+            <span class="legend-chip female">女性</span>
+            <span class="legend-chip unknown">不明</span>
+            <span class="legend-chip locked"><i class="fas fa-lock"></i>固定</span>
           </div>
         </div>
         <div id="cars-container" class="row g-3 pb-5"></div>
@@ -3420,9 +4099,9 @@ html, body {
           <div class="seisan-card">
             <div class="seisan-head seisan-head-tools-only">
               <div class="seisan-head-actions">
-                <button class="seisan-btn tool-help-btn" type="button" onclick="modals.seisanGuide.show()" style="width:auto;" title="使い方"><i class="fas fa-book-open"></i><span>使い方</span></button>
-                <button class="seisan-btn" type="button" onclick="openRouteDistanceHelper()" style="width:auto;" title="移動距離をGoogleマップで確認"><i class="fas fa-route"></i><span>距離</span></button>
-                <button class="seisan-btn" type="button" onclick="renderSettlementView()" style="width:auto; min-width:42px;" title="再計算"><i class="fas fa-rotate"></i></button>
+                <button class="seisan-btn tool-help-btn" type="button" onclick="modals.seisanGuide.show()" title="精算の使い方"><i class="fas fa-book-open"></i><span>精算の使い方</span></button>
+                <button class="seisan-btn" type="button" onclick="openRouteDistanceHelper()" title="移動距離をGoogleマップで確認"><i class="fas fa-route"></i><span>移動距離計算</span></button>
+                <button class="seisan-btn" type="button" onclick="renderSettlementView()" title="再計算"><i class="fas fa-rotate"></i><span>再計算</span></button>
               </div>
             </div>
             <div id="seisan-summary" class="seisan-top-flow"></div>
@@ -3478,7 +4157,7 @@ html, body {
           <div class="seisan-card">
             <div class="seisan-head">
               <div>
-                <div class="seisan-title"><i class="fas fa-hand-holding-yen"></i>ドライバーへ渡す</div>
+                <div class="seisan-title"><i class="fas fa-hand-holding-yen"></i>支払済チェック</div>
               </div>
             </div>
             <div id="seisan-driver-pay-list" class="seisan-driver-pay-list"></div>
@@ -3498,7 +4177,7 @@ html, body {
             <span id="waiting-count" class="badge bg-secondary rounded-pill">0</span>
           </div>
           <div class="tray-actions">
-            <button class="btn btn-sm btn-outline-secondary" onclick="autoAssign('fill')">埋める</button>
+            <button class="btn btn-sm btn-outline-secondary" onclick="autoAssign('fill')" title="今の配置をなるべく残して空席だけ埋めます">空席を埋める</button>
             <button class="btn btn-sm btn-outline-primary auto-assign-btn" onclick="autoAssign('shuffle')">
               <i class="fas fa-random"></i> 自動割当 </button>
             <div class="dropdown">
@@ -3506,19 +4185,19 @@ html, body {
                 <i class="fas fa-cog"></i> 設定 </button>
               <ul class="dropdown-menu dropdown-menu-end shadow">
                 <li>
-                  <h6 class="dropdown-header">自動割当の優先順位</h6>
+                  <h6 class="dropdown-header">自動割当の優先順位</h6><li><div id="autoAssignSummary" class="dropdown-item-text small text-muted-dark-friendly">現在：ランダム</div></li>
                 </li>
                 <li>
                   <label class="dropdown-item">
-                    <input type="checkbox" id="optFemale" class="form-check-input me-2">女子をまとめる </label>
+                    <input type="checkbox" id="optFemale" class="form-check-input me-2" onchange="updateAutoAssignSummary()">女子をまとめる </label>
                 </li>
                 <li>
                   <label class="dropdown-item">
-                    <input type="checkbox" id="optMale" class="form-check-input me-2">男子をまとめる </label>
+                    <input type="checkbox" id="optMale" class="form-check-input me-2" onchange="updateAutoAssignSummary()">男子をまとめる </label>
                 </li>
                 <li>
                   <label class="dropdown-item">
-                    <input type="checkbox" id="optGrade" class="form-check-input me-2">学年をまとめる </label>
+                    <input type="checkbox" id="optGrade" class="form-check-input me-2" onchange="updateAutoAssignSummary()">学年をまとめる </label>
                 </li>
                 <li>
                   <hr class="dropdown-divider">
@@ -3526,12 +4205,6 @@ html, body {
                 <li>
                   <button class="dropdown-item text-danger" onclick="window.clearAll()">
                     <i class="fas fa-broom me-2"></i>全員を待機に戻す </button>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                  <button class="dropdown-item text-danger fw-bold" onclick="window.resetData()">
-                    <i class="fas fa-trash-alt me-2"></i>全てリセット
-                  </button>
                 </li>
 
               </ul>
@@ -3571,7 +4244,7 @@ html, body {
               <div class="col-12">
                 <div class="guide-feature-card mb-2" style="padding:10px;">
                   <div class="guide-feature-title mb-1"><i class="fas fa-table me-2" style="color:var(--accent-color);"></i>Googleフォームの回答から入れるとき</div>
-                  <div style="font-size:0.78rem; color:var(--text-sub); line-height:1.55;">回答スプレッドシートを開き、学年や車出しの列で並び替えてから名前をコピーすると楽です。学年ごとの名前は各学年欄へ。車出しの人は「運転手」に貼ります。</div>
+                  <div style="font-size:0.78rem; color:var(--text-sub); line-height:1.55;">回答スプレッドシートで学年や車出しの列を並び替え、名前をコピーします。車を出す人は「運転手」に貼ると、その人の車ができます。</div>
                 </div>
                 </div>
               <div class="col-6 col-md-3">
@@ -3595,10 +4268,12 @@ html, body {
                 <textarea id="batchGrade4" class="form-control" style="height:150px; font-size:0.9rem;"></textarea>
               </div>
               <div class="col-6 col-md-3">
-                <label class="form-label fw-bold small text-secondary" style="color: var(--text-sub) !important;">運転手 (改行区切り)</label>
+                <label class="form-label fw-bold small text-secondary" style="color: var(--text-sub) !important;">運転手 / 車出し (改行区切り)</label>
+                <div class="batch-field-note">ここに入れた人ごとに車が作られます。</div>
                 <textarea id="batchDrivers" class="form-control" style="height:150px; font-size:0.9rem;"></textarea>
               </div>
             </div>
+            <div id="batchDuplicateWarning" class="batch-warning" style="display:none;"></div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
@@ -3612,42 +4287,98 @@ html, body {
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-map-signs me-2"></i>全体の使い方</h5>
+            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-map-signs me-2"></i>使い方</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-          <div class="modal-body">
-            <div style="display:grid; gap:12px;">
-              <div class="guide-feature-card">
-                <h6 class="guide-step-title">① 企画前〜車割発表</h6>
-                <div class="guide-mini-screen">
-                  <div class="app-guide-flow five-step">
-                    <div class="app-guide-box"><i class="fab fa-google"></i><strong>フォーム名簿</strong><span>参加応募</span></div>
-                    <div class="app-guide-box"><i class="fas fa-paste"></i><strong>登録</strong><span>名簿を貼る</span></div>
-                    <div class="app-guide-box"><i class="fas fa-car-side"></i><strong>車割</strong><span>車を組む</span></div>
-                    <div class="app-guide-box"><i class="fab fa-line"></i><strong>LINE共有</strong><span>リンクを送る</span></div>
-                    <div class="app-guide-box"><i class="fas fa-table"></i><strong>発表</strong><span>自動で発表ビュー</span></div>
-                  </div>
-                </div>
-                <div class="guide-tip">Googleフォームの参加応募フォームから名簿を登録し、車割メーカーで車割を組みます。共有リンクを企画のグループLINEに貼ると、参加者は車割発表ビューで確認できます。</div>
-                <div class="guide-tip">発表時に合言葉を設定すると、車割メーカーと精算ツールにロックをかけられます。</div>
-              </div>
+          <div class="modal-body p-0 unified-guide-body" data-guide-root="global">
+            <div class="guide-step-nav">
+              <button class="guide-step-btn active" data-guide="global" data-step="0" onclick="showGuideStep('global', 0)">準備</button>
+              <button class="guide-step-btn" data-guide="global" data-step="1" onclick="showGuideStep('global', 1)">発表</button>
+              <button class="guide-step-btn" data-guide="global" data-step="2" onclick="showGuideStep('global', 2)">精算</button>
+            </div>
 
-              <div class="guide-feature-card">
-                <h6 class="guide-step-title">② 精算</h6>
-                <div class="guide-mini-screen">
-                  <div class="app-guide-flow four-step">
-                    <div class="app-guide-box"><i class="fas fa-gas-pump"></i><strong>費用入力</strong><span>ガソリン代・諸経費</span></div>
-                    <div class="app-guide-box"><i class="fas fa-yen-sign"></i><strong>徴収額</strong><span>自動計算</span></div>
-                    <div class="app-guide-box"><i class="fas fa-list-check"></i><strong>集金記録</strong><span>誰が払ったか</span></div>
-                    <div class="app-guide-box"><i class="fas fa-hand-holding-yen"></i><strong>支払い</strong><span>ドライバーへ</span></div>
+            <div class="guide-step-panel" data-guide="global" data-panel="0" style="display:none;">
+              <h6 class="guide-step-title">① 企画前に準備する</h6>
+              <div class="guide-card-grid-three">
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fab fa-google me-2"></i>参加名簿を用意</div>
+                  <div class="guide-mini-screen">
+                    <div class="mock-sheet-table">
+                      <div class="head">名前</div><div class="head">学年</div><div class="head">車出し</div>
+                      <div>田中 太郎</div><div>1年</div><div>なし</div>
+                      <div>高橋 健介</div><div>3年</div><div>あり</div>
+                    </div>
                   </div>
+                  <p class="guide-short-text">Googleフォームの参加者一覧を見ながら、車割を作る準備をします。</p>
                 </div>
-                <div class="guide-tip">精算前にドライバーがガソリン代や諸経費を入力し、精算ツールで徴収額を出します。当日は支払った人をチェックし、ドライバーへの支払いも記録します。</div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-car-side me-2"></i>車割を作成</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-mini-car">
+                      <div class="guide-mini-car-head"><span>高橋車</span><span>2/3</span></div>
+                      <div class="guide-mini-grid"><div class="driver-seat"><span class="driver-name-disp">高橋</span></div><div class="guide-mini-card person-male">田中</div><div class="guide-mini-card person-female">山本</div><div class="seat-slot"></div></div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">詳しい作り方は「車割の作り方」で確認できます。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="guide-step-panel" data-guide="global" data-panel="1" style="display:none;">
+              <h6 class="guide-step-title">② LINEで発表する</h6>
+              <div class="guide-card-grid-three">
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-link me-2"></i>共有リンク</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-phone-frame">
+                      <div class="guide-phone-header"><span>山歩会 企画</span><span class="guide-phone-btn"><i class="fas fa-link"></i>共有</span></div>
+                      <div class="guide-copy-mock">車割はこちらです<br>https://...</div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">共有リンクを送ると、参加者は車割発表ビューで開きます。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-lock me-2"></i>ロック</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-lock-mock"><span><i class="fas fa-lock me-1"></i>ロック中</span><span>閲覧制限</span></div>
+                  </div>
+                  <p class="guide-short-text">発表時にロックをかけると、個人情報のある車割メーカーと精算ツールを参加者から見えない状態にできます。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="guide-step-panel" data-guide="global" data-panel="2" style="display:none;">
+              <h6 class="guide-step-title">③ 当日に精算する</h6>
+              <div class="guide-card-grid-three">
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-gas-pump me-2"></i>費用を入力</div>
+                  <div class="guide-mini-screen">
+                    <div class="seisan-mock-car-inputs">
+                      <div class="seisan-mock-row"><small>距離</small><strong>180km</strong></div>
+                      <div class="seisan-mock-row"><small>燃費</small><strong>15km/L</strong></div>
+                      <div class="seisan-mock-row"><small>単価</small><strong>180円/L</strong></div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">ドライバーがガソリン代や諸経費を入力します。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-list-check me-2"></i>集金を記録</div>
+                  <div class="guide-mini-screen">
+                    <div class="seisan-mock-checks">
+                      <div class="seisan-mock-check done"><span class="seisan-mock-box-check"><i class="fas fa-check"></i></span><span class="seisan-mock-check-name">田中</span><span class="seisan-mock-amount">集金済み</span></div>
+                      <div class="seisan-mock-driver-pay done"><span class="seisan-mock-box-check"><i class="fas fa-check"></i></span><span class="seisan-mock-driver-name">佐藤へ</span><span class="seisan-mock-amount">支払済み</span></div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">詳しい使い方は「精算の使い方」で確認できます。</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-sm w-100" style="background:var(--accent-color);border:none;" data-bs-dismiss="modal">閉じる</button>
+
+          <div class="modal-footer guide-footer" style="padding:10px 16px; gap:8px;">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="globalGuidePrevBtn" onclick="guideNavStep('global', -1)" style="display:none;"><i class="fas fa-chevron-left me-1"></i>前へ</button>
+            <button type="button" class="btn btn-primary btn-sm flex-grow-1" id="globalGuideNextBtn" onclick="guideNavStep('global', 1)" style="background-color:var(--accent-color);border:none;">次へ <i class="fas fa-chevron-right ms-1"></i></button>
+            <button type="button" class="btn btn-success btn-sm flex-grow-1" id="globalGuideCloseBtn" style="display:none;" data-bs-dismiss="modal"><i class="fas fa-check me-1"></i>閉じる</button>
           </div>
         </div>
       </div>
@@ -3657,307 +4388,219 @@ html, body {
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <div>
-              <h5 class="modal-title fw-bold mb-0" style="font-size: 1.05rem;">
-                <i class="fas fa-car-side me-2"></i>車割メーカーの使い方
-              </h5>
-            </div>
+            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-car-side me-2"></i>車割の作り方</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-
-          <div style="background: var(--bg-body); border-bottom: 1px solid var(--border-color); padding: 10px 16px; display:flex; gap:6px; overflow-x:auto; flex-shrink:0;">
-            <button class="guide-step-btn active" data-step="0" onclick="showGuideStep(0)">登録</button>
-            <button class="guide-step-btn" data-step="1" onclick="showGuideStep(1)">車</button>
-            <button class="guide-step-btn" data-step="2" onclick="showGuideStep(2)">割り当て</button>
-            <button class="guide-step-btn" data-step="3" onclick="showGuideStep(3)">調整</button>
-            <button class="guide-step-btn" data-step="4" onclick="showGuideStep(4)">共有</button>
-          </div>
-
-          <div class="modal-body p-0" style="overflow-y: auto;">
-<div class="guide-step-panel" data-panel="0" style="display:none; padding: 20px;">
-              <h6 class="guide-step-title">① 登録</h6>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fab fa-google me-2" style="color:#4285f4;"></i>フォーム回答から入れる</div>
-                <div class="guide-mini-screen" style="background:#fff; color:#202124; border-color:#dadce0; text-align:left;">
-                  <div style="height:7px; background:#673ab7; border-radius:6px 6px 0 0; margin:-10px -10px 10px;"></div>
-                  <div style="font-size:0.86rem; font-weight:700; margin-bottom:8px;">参加フォーム（回答）</div>
-                  <div style="display:grid; grid-template-columns:1.3fr 0.7fr 0.7fr; border:1px solid #dadce0; border-radius:4px; overflow:hidden; font-size:0.68rem;">
-                    <div style="background:#f8fafd; padding:6px; border-right:1px solid #dadce0; font-weight:700;">名前</div>
-                    <div style="background:#f8fafd; padding:6px; border-right:1px solid #dadce0; font-weight:700;">学年</div>
-                    <div style="background:#f8fafd; padding:6px; font-weight:700;">車出し</div>
-                    <div style="padding:6px; border-top:1px solid #dadce0; border-right:1px solid #dadce0;">田中 太郎</div>
-                    <div style="padding:6px; border-top:1px solid #dadce0; border-right:1px solid #dadce0;">1年</div>
-                    <div style="padding:6px; border-top:1px solid #dadce0;">いいえ</div>
-                    <div style="padding:6px; border-top:1px solid #dadce0; border-right:1px solid #dadce0;">高橋 健介</div>
-                    <div style="padding:6px; border-top:1px solid #dadce0; border-right:1px solid #dadce0;">3年</div>
-                    <div style="padding:6px; border-top:1px solid #dadce0;">はい</div>
-                  </div>
-                </div>
-                <div class="guide-tip">回答スプレッドシートを開き、学年や車出しで並び替えてから、名前だけコピーします。</div>
-              </div>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-paste me-2" style="color:var(--accent-color);"></i>登録で学年ごとに貼り付け</div>
-                <div class="guide-mini-screen">
-                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                    <div>
-                      <div class="guide-mini-pill guide-mini-primary">1年生</div>
-                      <div class="guide-mini-card mt-1">渡辺 大地<br>佐藤 花</div>
-                    </div>
-                    <div>
-                      <div class="guide-mini-pill">運転手</div>
-                      <div class="guide-mini-card mt-1">高橋 健介<br>中村 美咲</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="guide-tip">「登録」を開き、1年生、2年生、運転手などの欄に名前を貼ります。</div>
-              </div>
-
-              <div class="guide-feature-card">
-                <div class="guide-feature-title"><i class="fas fa-rotate me-2" style="color:#f59e0b;"></i>名簿の調整</div>
-                <div class="guide-tip">登録画面で名簿はあとから削除・追加できます。車割を組んだ後でも、必要な人だけ増減できます。</div>
-              </div>
+          <div class="modal-body p-0 unified-guide-body" data-guide-root="car">
+            <div class="guide-step-nav">
+              <button class="guide-step-btn active" data-guide="car" data-step="0" onclick="showGuideStep('car', 0)">登録</button>
+              <button class="guide-step-btn" data-guide="car" data-step="1" onclick="showGuideStep('car', 1)">割当</button>
+              <button class="guide-step-btn" data-guide="car" data-step="2" onclick="showGuideStep('car', 2)">発表</button>
             </div>
 
-            <div class="guide-step-panel" data-panel="1" style="display:none; padding: 20px;">
-              <h6 class="guide-step-title">② 車の登録</h6>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-car me-2" style="color:var(--accent-color);"></i>運転手欄から車ができます</div>
-                <div class="guide-mini-screen">
-                  <div class="guide-mini-car">
-                    <div class="guide-mini-car-head"><span>高橋 健介車</span><span>0/3 ✎</span></div>
-                    <div class="guide-mini-grid">
-                      <div class="driver-seat" data-gender="male"><div class="driver-name-disp">高橋 健介</div></div>
-                      <div class="seat-slot"></div>
-                      <div class="seat-slot"></div>
-                      <div class="seat-slot"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="guide-tip">運転手に名前を入れると、その人の車ができます。</div>
-              </div>
-
-              <div class="guide-feature-card">
-                <div class="guide-feature-title"><i class="fas fa-pen me-2" style="color:#8b5cf6;"></i>定員はあとで変えられます</div>
-                <div class="guide-mini-screen">
-                  <div class="guide-mini-car-head"><span>中村 美咲車</span><span class="guide-mini-primary guide-mini-pill">3/3 ✎</span></div>
-                </div>
-                <div class="guide-tip">人数バッジを押すと、定員を変えられます。</div>
-              </div>
-            </div>
-
-            <div class="guide-step-panel" data-panel="2" style="display:none; padding: 20px;">
-              <h6 class="guide-step-title">③ 自動割当</h6>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-random me-2" style="color:var(--accent-color);"></i>自動割当で待機メンバーを入れる</div>
-                <div class="guide-mini-screen">
-                  <div style="display:grid; grid-template-columns:58px 1fr 78px; gap:5px;">
-                    <div class="guide-mini-tool">埋める</div>
-                    <div class="guide-mini-tool guide-mini-primary"><i class="fas fa-random me-1"></i>自動割当</div>
-                    <div class="guide-mini-tool"><i class="fas fa-cog me-1"></i>設定</div>
-                  </div>
-                </div>
-                <div class="guide-tip">待機メンバーを各車に入れます。空の車が出にくいように割り当てます。</div>
-              </div>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-sliders-h me-2" style="color:#f59e0b;"></i>自動割当の設定</div>
-                <div class="guide-mini-screen">
-                  <div style="display:grid; grid-template-columns:1fr; gap:5px;">
-                    <div class="guide-mini-pill">□ 女子をまとめる</div>
-                    <div class="guide-mini-pill">□ 男子をまとめる</div>
-                    <div class="guide-mini-pill">□ 学年をまとめる</div>
-                  </div>
-                </div>
-                <div class="guide-tip">性別や学年を同じ車に寄せたいときだけチェックします。何も選ばなければランダムです。</div>
-              </div>
-
-              <div class="guide-feature-card">
-                <div class="guide-feature-title"><i class="fas fa-lock me-2" style="color:#f59e0b;"></i>動かしたくない人はロック</div>
-                <div class="guide-tip">ロックした人は、自動割当や「全員を待機に戻す」でも動きません。</div>
-              </div>
-            </div>
-
-            <div class="guide-step-panel" data-panel="3" style="display:none; padding: 20px;">
-              <h6 class="guide-step-title">④ 手直し</h6>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-hand-paper me-2" style="color:#f59e0b;"></i>長押しして動かす</div>
-                <div class="guide-mini-screen">
-                  <div class="guide-mini-car">
-                    <div class="guide-mini-car-head"><span>高橋 健介車</span><span>2/3</span></div>
-                    <div class="guide-mini-grid">
-                      <div class="guide-mini-card person-male">高橋 健介</div>
-                      <div class="guide-mini-card person-female">佐藤 花 <i class="fas fa-reply ms-1"></i></div>
-                      <div class="seat-slot"></div>
-                      <div class="guide-mini-card person-male">田中 太郎</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="guide-tip">カードを長押しして、席を入れ替えます。</div>
-              </div>
-
-              <div class="guide-feature-card">
-                <div class="guide-feature-title"><i class="fas fa-reply me-2" style="color:var(--accent-color);"></i>待機へ戻す</div>
-                <div class="guide-tip">車内の矢印で待機リストへ戻します。</div>
-              </div>
-            </div>
-
-            <div class="guide-step-panel" data-panel="4" style="display:none; padding: 20px;">
-              <h6 class="guide-step-title">⑤ 共有</h6>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-table me-2" style="color:var(--accent-color);"></i>車割発表ビューで共有する</div>
-                <div class="guide-mini-screen">
-                  <div class="guide-mini-sheet">
-                    <div class="head"></div><div class="head">高橋車 3/3</div><div class="head">中村車 2/3</div>
-                    <div class="head">運転手</div><div class="person-male">高橋 健介</div><div class="person-female">中村 美咲</div>
-                    <div class="head">席1</div><div class="person-male">石井 拓海</div><div class="person-female">佐藤 花</div>
-                    <div class="head">席2</div><div class="person-female">渡辺 大地</div><div>空き</div>
-                  </div>
-                </div>
-                <div class="guide-tip">共有ボタンでリンクをコピー。</div>
-              </div>
-
-              <div class="guide-feature-card mb-3">
-                <div class="guide-feature-title"><i class="fas fa-link me-2" style="color:var(--accent-color);"></i>リンクを送る</div>
-                <div class="guide-mini-screen">
-                  <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center;">
-                    <div class="guide-mini-tool"><i class="fas fa-link d-block mb-1"></i>リンク</div>
-                    <div style="color:var(--accent-color);">→</div>
-                    <div class="guide-mini-tool">LINEなど</div>
-                  </div>
-                </div>
-              </div>
-
-              <div style="display:grid; grid-template-columns:1fr; gap:10px; margin-bottom:10px;">
+            <div class="guide-step-panel" data-guide="car" data-panel="0" style="display:none;">
+              <h6 class="guide-step-title">① 名簿を登録する</h6>
+              <p class="guide-page-lead">フォームの名簿を貼るだけで、参加者と車を出す人をまとめて登録できます。</p>
+              <div class="guide-card-grid-three">
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-shield-alt me-2" style="color:var(--accent-color);"></i>合言葉をかける</div>
-                  <div class="guide-tip">個人情報を守りたいときは、車割メーカーと精算ツールに合言葉をかけます。一度入力した端末では、次回から省略されます。</div>
+                  <div class="guide-feature-title"><i class="fab fa-google me-2"></i>フォーム名簿</div>
+                  <div class="guide-mini-screen" style="background:#fff; color:#202124; border-color:#dadce0; text-align:left;">
+                    <div style="height:6px; background:#673ab7; border-radius:6px 6px 0 0; margin:-10px -10px 10px;"></div>
+                    <div class="mock-sheet-table">
+                      <div class="head">名前</div><div class="head">学年</div><div class="head">車出し</div>
+                      <div>田中 太郎</div><div>1年</div><div>なし</div>
+                      <div>高橋 健介</div><div>3年</div><div>あり</div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">Googleフォームの回答を、学年ごとにコピーして使います。</p>
                 </div>
-              </div>
-
-              <div class="guide-feature-card">
-                <div class="guide-feature-title"><i class="fas fa-cog me-2" style="color:var(--text-sub);"></i>履歴と設定</div>
-                <div class="guide-tip">履歴から前の状態に戻せます。リセット系は設定の中です。</div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-user-plus me-2"></i>登録画面</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-mini-form">
+                      <div class="field">1年生：田中 太郎</div>
+                      <div class="field">2年生：山本 花子</div>
+                      <div class="field">3年生：高橋 健介</div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">登録後も、名前・学年・運転手を直せます。参加者の追加や削除も登録画面からできます。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-car me-2"></i>運転手欄</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-mini-form"><div class="field primary">運転手 / 車出し：高橋 健介</div><div class="field primary">運転手 / 車出し：中村 彩</div></div>
+                  </div>
+                  <p class="guide-short-text">ここに入れた人ごとに車カードができます。</p>
+                </div>
               </div>
             </div>
 
-          </div>
+            <div class="guide-step-panel" data-guide="car" data-panel="1" style="display:none;">
+              <h6 class="guide-step-title">② 車割を組む</h6>
+              <p class="guide-page-lead">自動で入れてから、必要なところだけ手で直すのが早いです。</p>
+              <div class="guide-card-grid-three">
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-random me-2"></i>自動割当</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-action-row">
+                      <div class="guide-action-box"><i class="fas fa-fill-drip"></i>空席を埋める</div>
+                      <div class="guide-action-box primary"><i class="fas fa-random"></i>自動割当</div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">空席を埋める＝今の配置を残す。自動割当＝全体を組み直す。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-hand-paper me-2"></i>ドラッグ調整</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-mini-car">
+                      <div class="guide-mini-car-head"><span>高橋車</span><span>2/3</span></div>
+                      <div class="guide-mini-grid"><div class="driver-seat"><span class="driver-name-disp">高橋</span></div><div class="guide-mini-card person-male">田中</div><div class="guide-mini-card person-female">山本</div><div class="seat-slot"></div></div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">カードを長押し・ドラッグして入れ替えます。固定した人は自動割当で位置が変わらないようにできます。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-sliders me-2"></i>自動割当の設定</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-mini-form">
+                      <div class="field">女子をまとめる：ON</div>
+                      <div class="field">男子をまとめる：OFF</div>
+                      <div class="field">学年をまとめる：ON</div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">女子・男子・学年をまとめるなど、自動割当の方針を選べます。</p>
+                </div>
+              </div>
+            </div>
 
-          <div class="modal-footer" style="padding: 10px 16px; gap:8px;">
-            <button type="button" class="btn btn-outline-secondary btn-sm" id="guidePrevBtn" onclick="guideNavStep(-1)" style="display:none;"><i class="fas fa-chevron-left me-1"></i>前へ</button>
-            <button type="button" class="btn btn-primary btn-sm flex-grow-1" id="guideNextBtn" onclick="guideNavStep(1)" style="background-color:var(--accent-color);border:none;">次へ <i class="fas fa-chevron-right ms-1"></i></button>
-            <button type="button" class="btn btn-success btn-sm flex-grow-1" id="guideCloseBtn" style="display:none;" data-bs-dismiss="modal"><i class="fas fa-check me-1"></i>閉じる</button>
+            <div class="guide-step-panel" data-guide="car" data-panel="2" style="display:none;">
+              <h6 class="guide-step-title">③ 確認して発表する</h6>
+              <p class="guide-page-lead">発表ビューで見え方を確認してから、共有リンクを送ります。</p>
+              <div class="guide-card-grid-three">
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-table me-2"></i>発表ビュー</div>
+                  <div class="guide-mini-screen">
+                    <div class="guide-mini-sheet">
+                      <div class="head">車</div><div class="head">運転手</div><div class="head">同乗者</div>
+                      <div>高橋車</div><div class="person-male">高橋</div><div>田中・山本</div>
+                      <div>中村車</div><div class="person-female">中村</div><div>佐藤・鈴木</div>
+                    </div>
+                  </div>
+                  <p class="guide-short-text">参加者が見る画面です。未配置や定員超過がないか確認します。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-link me-2"></i>共有リンク</div>
+                  <div class="guide-mini-screen"><div class="guide-copy-mock">共有リンクをコピー<br>LINEへ貼り付け</div></div>
+                  <p class="guide-short-text">共有リンクは発表ビューで開きます。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-lock me-2"></i>ロック</div>
+                  <div class="guide-mini-screen"><div class="guide-lock-mock"><span><i class="fas fa-lock me-1"></i>ロック中</span><span>閲覧制限</span></div></div>
+                  <p class="guide-short-text">個人情報や精算情報を参加者に見せないため、車割メーカーと精算ツールを閲覧できない状態にできます。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer guide-footer" style="padding:10px 16px; gap:8px;">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="carGuidePrevBtn" onclick="guideNavStep('car', -1)" style="display:none;"><i class="fas fa-chevron-left me-1"></i>前へ</button>
+            <button type="button" class="btn btn-primary btn-sm flex-grow-1" id="carGuideNextBtn" onclick="guideNavStep('car', 1)" style="background-color:var(--accent-color);border:none;">次へ <i class="fas fa-chevron-right ms-1"></i></button>
+            <button type="button" class="btn btn-success btn-sm flex-grow-1" id="carGuideCloseBtn" style="display:none;" data-bs-dismiss="modal"><i class="fas fa-check me-1"></i>閉じる</button>
           </div>
         </div>
       </div>
     </div>
+
     <div class="modal fade" id="seisanGuideModal" tabindex="-1">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-book-open me-2"></i>精算ツールの使い方</h5>
+            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-book-open me-2"></i>精算の使い方</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
-          <div class="modal-body">
-            <div style="display:grid; gap:12px;">
-              <div class="guide-step-title" style="margin-bottom:0;">① 金額を見る</div>
+          <div class="modal-body p-0 unified-guide-body" data-guide-root="seisan">
+            <div class="guide-step-nav">
+              <button class="guide-step-btn active" data-guide="seisan" data-step="0" onclick="showGuideStep('seisan', 0)">入力</button>
+              <button class="guide-step-btn" data-guide="seisan" data-step="1" onclick="showGuideStep('seisan', 1)">計算</button>
+              <button class="guide-step-btn" data-guide="seisan" data-step="2" onclick="showGuideStep('seisan', 2)">記録</button>
+            </div>
 
-              <div class="app-guide-grid">
+            <div class="guide-step-panel" data-guide="seisan" data-panel="0" style="display:none;">
+              <h6 class="guide-step-title">① 距離・車ごとの費用</h6>
+              <p class="guide-page-lead">移動距離を確認し、各車のガソリン代を出すための数字を入れます。</p>
+              <div class="guide-card-grid-three">
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-gauge-high me-2" style="color:var(--accent-color);"></i>サマリー</div>
+                  <div class="guide-feature-title"><i class="fas fa-route me-2"></i>移動距離計算</div>
                   <div class="guide-mini-screen">
-                    <div class="seisan-mock-flow">
-                      <div class="seisan-mock-summary collect">
-                        <div class="seisan-mock-label"><i class="fas fa-users"></i>集める</div>
-                        <div class="seisan-mock-value">¥2,400</div>
-                      </div>
-                      <div class="seisan-mock-summary account">
-                        <div class="seisan-mock-label"><i class="fas fa-wallet"></i>会計</div>
-                        <div class="seisan-mock-value">¥3,200</div>
-                      </div>
-                      <div class="seisan-mock-summary pay">
-                        <div class="seisan-mock-label"><i class="fas fa-car-side"></i>渡す</div>
-                        <div class="seisan-mock-value">3人</div>
-                      </div>
+                    <div class="route-guide-mock">
+                      <div><i class="fas fa-house"></i> 出発地：保存済み</div>
+                      <div><i class="fas fa-location-dot"></i> 妙高山 登山口</div>
+                      <button type="button"><i class="fas fa-map-location-dot"></i> Googleマップで開く</button>
                     </div>
                   </div>
-                  <div class="guide-tip">集金・部費・ドライバー支払いを分けて確認。</div>
+                  <p class="guide-short-text">自分用の出発地は端末だけに保存。行った場所は共有されます。</p>
                 </div>
-
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-sliders me-2" style="color:var(--accent-color);"></i>調整</div>
-                  <div class="guide-mini-screen">
-                    <div class="seisan-mock-settings">
-                      <div class="seisan-mock-field"><small>端数</small><strong>100円切り上げ</strong></div>
-                      <div class="seisan-mock-field"><small>協力代</small><strong>1台 ¥1,000</strong></div>
-                      <div class="seisan-mock-toggle"><span><i class="fas fa-user-shield me-1"></i>企画者を除外</span><span class="seisan-mock-switch"></span></div>
-                      <div class="seisan-mock-toggle"><span><i class="fas fa-check me-1"></i>車割を反映</span><span class="seisan-mock-switch"></span></div>
-                    </div>
-                  </div>
-                  <div class="guide-tip">端数・謝礼・企画者の扱いをまとめて設定。</div>
-                </div>
-              </div>
-
-              <div class="guide-step-title" style="margin-bottom:0; margin-top:4px;">② 入力して確認</div>
-
-              <div class="app-guide-grid">
-                <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-gas-pump me-2" style="color:var(--accent-color);"></i>車ごとの費用</div>
+                  <div class="guide-feature-title"><i class="fas fa-car-side me-2"></i>車ごとの入力</div>
                   <div class="guide-mini-screen">
                     <div class="seisan-mock-car">
-                      <div class="seisan-mock-car-head"><span>佐藤車</span><span class="seisan-mock-car-total">¥4,560</span></div>
-                      <div class="seisan-mock-car-inputs">
-                        <div class="seisan-mock-row"><small>距離</small><strong>180km</strong></div>
-                        <div class="seisan-mock-row"><small>燃費</small><strong>15</strong></div>
-                        <div class="seisan-mock-row"><small>単価</small><strong>180円</strong></div>
-                      </div>
+                      <div class="seisan-mock-car-head"><span>佐藤車</span><span class="seisan-mock-car-total">支払い ¥5,560</span></div>
+                      <div class="seisan-mock-car-inputs"><div class="seisan-mock-row"><small>移動距離</small><strong>180km</strong></div><div class="seisan-mock-row"><small>燃費</small><strong>15km/L</strong></div><div class="seisan-mock-row"><small>単価</small><strong>180円/L</strong></div></div>
                     </div>
                   </div>
-                  <div class="guide-tip">距離・燃費・単価からガソリン代を計算。</div>
+                  <p class="guide-short-text">距離・燃費・ガソリン単価から、車ごとの支払い額を計算します。</p>
                 </div>
-
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-receipt me-2" style="color:var(--accent-color);"></i>諸経費</div>
+                  <div class="guide-feature-title"><i class="fas fa-receipt me-2"></i>諸経費</div>
                   <div class="guide-mini-screen">
-                    <div class="seisan-mock-expenses">
-                      <div class="seisan-mock-expense"><span>高速代</span><span class="seisan-mock-chip split">割勘</span><span class="seisan-mock-amount">¥2,800</span></div>
-                      <div class="seisan-mock-expense"><span>備品</span><span class="seisan-mock-chip club">部費</span><span class="seisan-mock-amount">¥900</span></div>
-                    </div>
+                    <div class="seisan-mock-expenses"><div class="seisan-mock-expense"><span>高速代</span><strong>¥2,000</strong><span class="seisan-mock-chip split">割勘</span></div><div class="seisan-mock-expense"><span>駐車場</span><strong>¥500</strong><span class="seisan-mock-chip club">部費</span></div></div>
                   </div>
-                  <div class="guide-tip">割り勘に入れる費用と、部費で扱う費用を分離。</div>
+                  <p class="guide-short-text">高速代・駐車場代などを、割勘または部費扱いで追加できます。</p>
                 </div>
+              </div>
+            </div>
 
+            <div class="guide-step-panel" data-guide="seisan" data-panel="1" style="display:none;">
+              <h6 class="guide-step-title">② 集める金額を確認する</h6>
+              <p class="guide-page-lead">端数処理や企画者の扱いを含めて、1人あたりの徴収額を出します。</p>
+              <div class="guide-card-grid-three">
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-list-check me-2" style="color:var(--accent-color);"></i>当日のチェック</div>
+                  <div class="guide-feature-title"><i class="fas fa-sliders me-2"></i>精算設定</div>
                   <div class="guide-mini-screen">
-                    <div class="seisan-mock-checks">
-                      <div class="seisan-mock-check done"><span class="seisan-mock-box-check"><i class="fas fa-check"></i></span><span class="seisan-mock-check-name">田中</span><span class="seisan-mock-amount">集金済み</span></div>
-                      <div class="seisan-mock-check"><span class="seisan-mock-box-check"></span><span class="seisan-mock-check-name">山本</span><span class="seisan-mock-amount">未回収</span></div>
-                    </div>
+                    <div class="seisan-mock-settings"><div class="seisan-mock-field"><small>端数処理</small><strong>100円</strong></div><div class="seisan-mock-field"><small>運転協力代</small><strong>¥1,000/台</strong></div><div class="seisan-mock-toggle"><span>企画者を外す</span><span class="seisan-mock-switch"></span></div></div>
                   </div>
-                  <div class="guide-tip">集金忘れをその場で確認。</div>
+                  <p class="guide-short-text">端数処理、運転協力代、企画者を集金対象にするかを設定できます。</p>
                 </div>
-
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-hand-holding-yen me-2" style="color:var(--accent-color);"></i>ドライバー支払い</div>
-                  <div class="guide-mini-screen">
-                    <div class="seisan-mock-driver-list">
-                      <div class="seisan-mock-driver-pay done"><span class="seisan-mock-box-check"><i class="fas fa-check"></i></span><span class="seisan-mock-driver-name">佐藤へ渡す</span><span class="seisan-mock-amount">¥5,560</span></div>
-                      <div class="seisan-mock-driver-pay"><span class="seisan-mock-box-check"></span><span class="seisan-mock-driver-name">鈴木へ渡す</span><span class="seisan-mock-amount">¥4,980</span></div>
-                    </div>
+                  <div class="guide-feature-title"><i class="fas fa-yen-sign me-2"></i>サマリー</div>
+                  <div class="guide-mini-screen seisan-guide-summary-screen">
+                    <div class="seisan-mock-flow"><div class="seisan-mock-summary collect"><div class="seisan-mock-label">集める</div><div class="seisan-mock-value">¥2,400</div></div><div class="seisan-mock-summary account"><div class="seisan-mock-label">部費負担</div><div class="seisan-mock-value">¥300</div></div><div class="seisan-mock-summary pay"><div class="seisan-mock-label">支払い</div><div class="seisan-mock-value">¥9,800</div></div></div>
                   </div>
-                  <div class="guide-tip">誰にいくら渡すかをチェック。</div>
+                  <p class="guide-short-text">1人あたりの徴収額、部費の不足・余り、ドライバーへの支払い合計を確認できます。</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="guide-step-panel" data-guide="seisan" data-panel="2" style="display:none;">
+              <h6 class="guide-step-title">③ 集金と支払いを記録する</h6>
+              <p class="guide-page-lead">集金済みの人と、ドライバーへの支払い済みを記録します。</p>
+              <div class="guide-card-grid-three">
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-clipboard-check me-2"></i>集金チェック</div>
+                  <div class="guide-mini-screen"><div class="seisan-mock-checks"><div class="seisan-mock-check done"><span class="seisan-mock-box-check"><i class="fas fa-check"></i></span><span class="seisan-mock-check-name">田中</span><span class="seisan-mock-amount">集金済み</span></div><div class="seisan-mock-check"><span class="seisan-mock-box-check"></span><span class="seisan-mock-check-name">山本</span><span class="seisan-mock-amount">未回収</span></div></div></div>
+                  <p class="guide-short-text">誰から集金したかをチェックできます。</p>
+                </div>
+                <div class="guide-feature-card">
+                  <div class="guide-feature-title"><i class="fas fa-hand-holding-yen me-2"></i>支払済チェック</div>
+                  <div class="guide-mini-screen"><div class="seisan-mock-driver-list"><div class="seisan-mock-driver-pay done"><span class="seisan-mock-box-check"><i class="fas fa-check"></i></span><span class="seisan-mock-driver-name">佐藤へ</span><span class="seisan-mock-amount">¥5,560</span></div><div class="seisan-mock-driver-pay"><span class="seisan-mock-box-check"></span><span class="seisan-mock-driver-name">鈴木へ</span><span class="seisan-mock-amount">¥4,980</span></div></div></div>
+                  <p class="guide-short-text">ドライバーごとに、支払いが済んだかをチェックできます。</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary btn-sm w-100" style="background:var(--accent-color);border:none;" data-bs-dismiss="modal">閉じる</button>
+          <div class="modal-footer guide-footer" style="padding:10px 16px; gap:8px;">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="seisanGuidePrevBtn" onclick="guideNavStep('seisan', -1)" style="display:none;"><i class="fas fa-chevron-left me-1"></i>前へ</button>
+            <button type="button" class="btn btn-primary btn-sm flex-grow-1" id="seisanGuideNextBtn" onclick="guideNavStep('seisan', 1)" style="background-color:var(--accent-color);border:none;">次へ <i class="fas fa-chevron-right ms-1"></i></button>
+            <button type="button" class="btn btn-success btn-sm flex-grow-1" id="seisanGuideCloseBtn" style="display:none;" data-bs-dismiss="modal"><i class="fas fa-check me-1"></i>閉じる</button>
           </div>
         </div>
       </div>
@@ -3966,7 +4609,7 @@ html, body {
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-route me-2"></i>移動距離ツール</h5>
+            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-route me-2"></i>移動距離計算</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
@@ -3974,7 +4617,7 @@ html, body {
               <div class="route-private-panel">
                 <div class="seisan-title route-helper-title"><i class="fas fa-house-user"></i>自分用の出発地</div>
                 <div id="routePrivateOriginBox"></div>
-                <div class="route-helper-note mt-2">この端末だけに保存されます。共有リンクには入りません。</div>
+                <div class="route-helper-note mt-2">この端末だけに保存されます。編集すると確認できます。Googleマップを開くときだけGoogleに送信されます。</div>
               </div>
 
               <div class="route-stop-panel">
@@ -3987,7 +4630,7 @@ html, body {
                 <button class="seisan-btn primary" type="button" onclick="window.openGoogleRoute()"><i class="fab fa-google"></i>Googleマップで開く</button>
               </div>
 
-              <div class="route-helper-note">行った場所はこの企画の共有データとして保存されます。自分用の出発地を保存している場合は、出発地 → 行った場所 → 出発地 のルートで開きます。</div>
+              <div class="route-helper-note">行った場所は全員に共有されます。並び替えは番号をドラッグ、または上下ボタンで変更できます。Googleマップで総移動距離を確認したら、車ごとの移動距離に入力してください。</div>
               <div id="routeHelperStatus" class="seisan-small"></div>
             </div>
           </div>
@@ -4103,6 +4746,7 @@ let activeSheetSortable = [];
 let quickEditMode = false;
 let settlementState = null;
 let settlementRenderTimer = null;
+let lastUpdatedAt = 0;
 
 const CFG = { KEY:'6974b918d0998f075852411e', STORE:'sampokai_v10_split' };
 const D = document, L = localStorage, J = JSON;
@@ -4118,7 +4762,25 @@ if (!roomId) {
 
 localStorage.setItem('syawari_last_room_id', roomId);
 
-const updateStatus = () => {};
+function showMiniToast(message, tone = 'neutral') {
+    if (!message) return;
+    let toast = document.getElementById('mini-status-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'mini-status-toast';
+        document.body.appendChild(toast);
+    }
+    toast.className = `mini-status-toast ${tone}`;
+    toast.textContent = message;
+    toast.classList.add('visible');
+    clearTimeout(showMiniToast.timer);
+    showMiniToast.timer = setTimeout(() => toast.classList.remove('visible'), 1800);
+}
+function updateStatus(kind = 'neutral', message = '') {
+    if (!message) return;
+    const tone = kind === 'error' ? 'error' : (kind === 'saving' ? 'saving' : 'neutral');
+    showMiniToast(message, tone);
+}
 
 D.addEventListener('DOMContentLoaded', async () => {
     modals.edit = new bootstrap.Modal($('#commonEditModal'));
@@ -4231,15 +4893,15 @@ D.addEventListener('DOMContentLoaded', async () => {
 });
 
 window.resetData = () => { 
-    if(confirm('データを全消去してリセットしますか？\n(注意: 全員の画面で消えます)')) { 
-        L.removeItem(CFG.STORE + '_' + roomId);
-        L.removeItem('syawari_history_' + roomId);
-        L.removeItem(getTrustedDeviceKey());
-        if (dbRef) {
-            set(dbRef, null).then(() => { location.reload(); }).catch(err => { console.error(err); alert('リセットに失敗しました。'); });
-        } else {
-            location.reload();
-        }
+    const input = window.prompt('共有データを全消去します。実行するには「リセット」と入力してください。');
+    if (input !== 'リセット') return;
+    L.removeItem(CFG.STORE + '_' + roomId);
+    L.removeItem('syawari_history_' + roomId);
+    L.removeItem(getTrustedDeviceKey());
+    if (dbRef) {
+        set(dbRef, null).then(() => { location.reload(); }).catch(err => { console.error(err); alert('リセットに失敗しました。'); });
+    } else {
+        location.reload();
     }
 };
 
@@ -4249,6 +4911,13 @@ function refreshRoomTitle() {
     const name = ($('#roomNameInput')?.value || '').trim();
     titleEl.textContent = name || '企画名未設定';
     titleEl.classList.toggle('is-placeholder', !name);
+}
+
+function formatUpdatedAt(ts) {
+    if (!ts) return '';
+    const d = new Date(ts);
+    if (Number.isNaN(d.getTime())) return '';
+    return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 }
 
 function updateSheetSummary(data = getData()) {
@@ -4264,6 +4933,7 @@ function updateSheetSummary(data = getData()) {
         <span class="sheet-summary-pill">同乗者 <strong>${riderCount}</strong></span>
         <span class="sheet-summary-pill">全員 <strong>${totalCount}</strong></span>
         <span class="sheet-summary-pill">待機 <strong>${waitingCount}</strong></span>
+        ${formatUpdatedAt(data.lastUpdatedAt) ? `<span class="sheet-summary-pill">最終更新 <strong>${formatUpdatedAt(data.lastUpdatedAt)}</strong></span>` : ''}
     `;
 }
 
@@ -4294,9 +4964,9 @@ function updateEditLockButton() {
     const icon = btn.querySelector('i');
     const label = btn.querySelector('span');
     icon.className = `fas ${editLockEnabled ? 'fa-lock' : 'fa-unlock'}`;
-    label.textContent = editLockEnabled ? '保護中' : '保護';
+    label.textContent = editLockEnabled ? 'ロック中' : 'ロック';
     btn.classList.toggle('is-locked', editLockEnabled);
-    btn.title = editLockEnabled ? '車割発表ビュー以外のロックを解除' : '車割発表ビュー以外をロック';
+    btn.title = editLockEnabled ? '車割メーカーと精算ツールのロックを解除' : '車割メーカーと精算ツールをロック';
     updateQuickEditButton();
 }
 
@@ -4342,7 +5012,7 @@ function verifyEditPassphrase(message) {
 
 function toggleEditProtection() {
     if (!editLockEnabled) {
-        const first = requestPassphrase('車割発表ビュー以外をロックする合言葉を設定してください');
+        const first = requestPassphrase('車割メーカーと精算ツールをロックする合言葉を設定してください');
         if (first === null) return;
         if (!first) {
             alert('合言葉を入力してください。');
@@ -4362,7 +5032,7 @@ function toggleEditProtection() {
         return;
     }
 
-    if (!verifyEditPassphrase('保護を解除する合言葉を入力してください')) return;
+    if (!verifyEditPassphrase('ロックを解除する合言葉を入力してください')) return;
     editLockEnabled = false;
     editLockPassphrase = '';
     rememberTrustedDevice('');
@@ -4375,8 +5045,10 @@ window.copyUrl = copyUrl;
 function save() {
     updateStatus('saving', '保存中...');
 
+    lastUpdatedAt = Date.now();
     const d = getData();
     d.lastUpdatedBy = myClientId;
+    d.lastUpdatedAt = lastUpdatedAt;
 
     L.setItem(CFG.STORE + '_' + roomId, J.stringify(d));
     
@@ -4391,7 +5063,8 @@ function save() {
                 editLockEnabled: d.editLockEnabled,
                 editLockPassphrase: d.editLockPassphrase,
                 settlement: d.settlement,
-                lastUpdatedBy: d.lastUpdatedBy
+                lastUpdatedBy: d.lastUpdatedBy,
+                lastUpdatedAt: d.lastUpdatedAt
             }).then(() => {
                 updateStatus('connected', '保存完了');
             }).catch(e => {
@@ -4440,6 +5113,7 @@ function load() {
             isRemoteUpdate = true; 
             restore(val); 
             isRemoteUpdate = false;
+            showMiniToast('他の人が更新しました', 'neutral');
             L.setItem(CFG.STORE + '_' + roomId, J.stringify(val));
         } else {
             const localDataStr = L.getItem(CFG.STORE + '_' + roomId);
@@ -4533,7 +5207,7 @@ function addCar(n, cap, mems=[], dm='', dg='unknown') {
                 <span>${name}車</span>
                 <div>
                   <span class="badge bg-secondary capacity-badge me-2" style="cursor:pointer" onclick="window.editCapacity(this)" title="クリックで定員変更">
-                    ${0}/${c} <i class="fas fa-pen ms-1" style="font-size:0.8em"></i>
+定員 ${0}/${c} 変更
                   </span>
                   <i class="fas fa-trash-alt action-btn delete-btn"></i>
                 </div>
@@ -5017,11 +5691,13 @@ function updateUI() {
         const c = getInt(b.dataset.capacity);
         const n = Array.from($$('.seat-slot', b)).reduce((sum, slot) => sum + getRealSeatCards(slot).length, 0);
         const badge = $('.capacity-badge', b);
-        badge.innerHTML = `${n}/${c} <i class="fas fa-pen ms-1" style="font-size:0.8em"></i>`;
+        badge.innerHTML = `定員 ${n}/${c} 変更`;
         badge.className = `badge capacity-badge me-2 bg-${n>c?'danger':(n===c?'success':'secondary')}`;
         b.classList.toggle('over-capacity', n>c);
     });
     $('#waiting-count').textContent = $$('#waiting-list .member-card').length;
+    renderListEmptyHint();
+    updateAutoAssignSummary();
     updateTrayMenuDirection();
     if (typeof currentView !== 'undefined' && currentView === 'sheet') {
         renderSheetView();
@@ -5030,6 +5706,31 @@ function updateUI() {
         renderSettlementView();
     }
 }
+
+function renderListEmptyHint() {
+    const container = document.getElementById('cars-container');
+    if (!container) return;
+    const hasCar = !!container.querySelector('.car-box');
+    const existing = document.getElementById('list-empty-hint');
+    if (hasCar) {
+        existing?.remove();
+        return;
+    }
+    if (!existing) {
+        container.insertAdjacentHTML('afterbegin', `<div class="col-12" id="list-empty-hint"><div class="empty-card"><i class="fas fa-paste"></i><strong>登録から始めます</strong><span>Googleフォームの名簿を貼ると、運転手ごとに車が作られます。</span><button class="seisan-btn primary" type="button" onclick="openBatchModal()">登録を開く</button></div></div>`);
+    }
+}
+
+function updateAutoAssignSummary() {
+    const el = document.getElementById('autoAssignSummary');
+    if (!el) return;
+    const items = [];
+    if (document.getElementById('optFemale')?.checked) items.push('女子');
+    if (document.getElementById('optMale')?.checked) items.push('男子');
+    if (document.getElementById('optGrade')?.checked) items.push('学年');
+    el.textContent = items.length ? `現在：${items.join('・')}をまとめる` : '現在：ランダム';
+}
+window.updateAutoAssignSummary = updateAutoAssignSummary;
 
 function getData() {
     return {
@@ -5047,7 +5748,8 @@ function getData() {
             driverGender: $('.driver-seat', c).dataset.gender,
             members: Array.from($$('.seat-slot', c)).flatMap(s => getRealSeatCards(s).map(getMemData))
         })),
-        settlement: getSettlementSnapshot()
+        settlement: getSettlementSnapshot(),
+        lastUpdatedAt
     };
 }
 function getMemData(el) {
@@ -5058,6 +5760,7 @@ function getMemData(el) {
 }
 
 function restore(d) {
+    lastUpdatedAt = Number(d.lastUpdatedAt || 0) || lastUpdatedAt;
     settlementState = normalizeSettlementState(d.settlement || settlementState || {});
     $('#roomNameInput').value = d.roomName || '';
     editLockEnabled = !!d.editLockEnabled;
@@ -5084,7 +5787,7 @@ function restore(d) {
 }
 
 function clearAll() {
-    if(!confirm('ロックされていないメンバーを全員待機リストに戻しますか？')) return;
+    if(!confirm('配置済みのメンバーを待機リストに戻します。固定済みの人は残します。実行しますか？')) return;
     $$('.seat-slot').forEach(slot => getRealSeatCards(slot).filter(m => m.dataset.locked !== 'true').forEach(m => $('#waiting-list').appendChild(m)));
     updateUI(); save();
 }
@@ -5339,13 +6042,41 @@ window.openBatchModal = () => {
 }
 
 function executeBatch() {
-    const v = id => $(id).value.split(/\n/).map(s=>s.trim()).filter(Boolean);
+    const cleanName = value => String(value || '').replace(/　/g, ' ').replace(/\s+/g, ' ').trim();
+    const v = id => $(id).value.split(/\n/).map(cleanName).filter(Boolean);
     const m = v('#batchMembers');
     const g1 = v('#batchGrade1');
     const g2 = v('#batchGrade2');
     const g3 = v('#batchGrade3');
     const g4 = v('#batchGrade4');
     const d = v('#batchDrivers');
+    const allEntries = [
+        ...m.map(name => ({name, group:'同乗者'})),
+        ...g1.map(name => ({name, group:'1年生'})),
+        ...g2.map(name => ({name, group:'2年生'})),
+        ...g3.map(name => ({name, group:'3年生'})),
+        ...g4.map(name => ({name, group:'4年生'})),
+        ...d.map(name => ({name, group:'運転手'}))
+    ];
+    const grouped = allEntries.reduce((acc, item) => {
+        acc[item.name] = acc[item.name] || [];
+        acc[item.name].push(item.group);
+        return acc;
+    }, {});
+    const duplicates = Object.entries(grouped).filter(([, groups]) => groups.length > 1);
+    const warning = document.getElementById('batchDuplicateWarning');
+    if (duplicates.length) {
+        const message = '同じ名前があります：' + duplicates.map(([name, groups]) => `${name}（${groups.join('・')}）`).join('、');
+        if (warning) {
+            warning.style.display = 'block';
+            warning.textContent = message;
+        }
+        alert(message + '\n重複を直してから登録してください。');
+        return;
+    } else if (warning) {
+        warning.style.display = 'none';
+        warning.textContent = '';
+    }
     
     const currentData = getData();
     
@@ -5442,7 +6173,7 @@ function copyUrl() {
             toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:9px 16px;border-radius:18px;font-size:0.78rem;font-weight:700;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.25);opacity:0;transition:opacity 0.3s;white-space:normal;max-width:min(92vw,520px);text-align:center;pointer-events:none;';
             document.body.appendChild(toast);
         }
-        toast.textContent = '✓ 共有リンクをコピーしました。リンクを開いた人は車割発表ビューから表示されます';
+        toast.textContent = '✓ 共有リンクをコピーしました。参加者は車割発表ビューで開きます';
         toast.style.opacity = '1';
         setTimeout(() => { toast.style.opacity = '0'; }, 2000);
     });
@@ -5830,10 +6561,11 @@ function renderSheetView() {
 
     if (!data.cars.length) {
         canvas.innerHTML = `
-            <div style="text-align:center; padding: 40px 20px; color:var(--text-sub);">
+            <div class="sheet-empty-card">
                 <div class="sheet-empty-icon"><i class="fas fa-car-side" aria-hidden="true"></i></div>
-                <div style="font-size:0.9rem; font-weight:600; margin-bottom:6px; color:var(--text-main);">車がまだ登録されていません</div>
-                <div style="font-size:0.8rem;">「車割メーカー」タブから運転手を追加してください</div>
+                <div class="sheet-empty-title">車割を作成します</div>
+                <div class="sheet-empty-text">まず登録から参加者と運転手を入れてください。</div>
+                <button class="seisan-btn primary" type="button" onclick="switchView('list')"><i class="fas fa-edit me-1"></i>車割メーカーへ</button>
             </div>
         `;
         return;
@@ -6328,7 +7060,7 @@ function renderSettlementView() {
 
     const summary = document.getElementById('seisan-summary');
     if (summary) {
-        const accountingLabel = result.accounting >= 0 ? '部費が用意' : '部費に残る';
+        const accountingLabel = result.accounting >= 0 ? '部費負担' : '部費へ戻す';
         summary.innerHTML = `
             <div class="seisan-summary-card collect">
               <div class="seisan-summary-label"><i class="fas fa-users"></i>集める</div>
@@ -6365,9 +7097,9 @@ function renderSettlementView() {
                     <div class="seisan-car-title"><strong>${escapeHtml(car.name)}車</strong><span class="seisan-car-total">渡す ${yen(calc.totalPay)}</span></div>
                     <div class="seisan-small" style="margin-bottom:8px;">${details}</div>
                     <div class="seisan-car-inputs">
-                      <label><span class="seisan-mini-label">移動距離</span><input type="number" inputmode="decimal" data-field="dist" class="${fieldErrorClass(issues, car.name, 'dist')}" value="${escapeHtml(cState.dist || '')}" oninput="window.onSettlementInputDelayed()" onchange="window.onSettlementInput()"></label>
-                      <label><span class="seisan-mini-label">燃費</span><input type="number" inputmode="decimal" data-field="eco" class="${fieldErrorClass(issues, car.name, 'eco')}" value="${escapeHtml(cState.eco || '')}" oninput="window.onSettlementInputDelayed()" onchange="window.onSettlementInput()"></label>
-                      <label><span class="seisan-mini-label">ガソリン価格</span><input type="number" inputmode="decimal" data-field="price" class="${fieldErrorClass(issues, car.name, 'price')}" value="${escapeHtml(cState.price || '')}" oninput="window.onSettlementInputDelayed()" onchange="window.onSettlementInput()"></label>
+                      <label><span class="seisan-mini-label">移動距離（km）</span><input type="number" inputmode="decimal" data-field="dist" class="${fieldErrorClass(issues, car.name, 'dist')}" value="${escapeHtml(cState.dist || '')}" oninput="window.onSettlementInputDelayed()" onchange="window.onSettlementInput()"></label>
+                      <label><span class="seisan-mini-label">燃費（km/L）</span><input type="number" inputmode="decimal" data-field="eco" class="${fieldErrorClass(issues, car.name, 'eco')}" value="${escapeHtml(cState.eco || '')}" oninput="window.onSettlementInputDelayed()" onchange="window.onSettlementInput()"></label>
+                      <label><span class="seisan-mini-label">ガソリン単価（円/L）</span><input type="number" inputmode="decimal" data-field="price" class="${fieldErrorClass(issues, car.name, 'price')}" value="${escapeHtml(cState.price || '')}" oninput="window.onSettlementInputDelayed()" onchange="window.onSettlementInput()"></label>
                     </div>
                     <div class="seisan-subhead"><strong>諸経費</strong></div>
                     <div class="seisan-extra-list">
@@ -6431,7 +7163,6 @@ function renderSettlementView() {
     }
 }
 
-let routeDistanceTargetCar = '';
 const ROUTE_PRIVATE_ORIGIN_KEY = 'sanpokai_route_private_origin_v1';
 
 function getRoutePrivateOrigin() {
@@ -6459,7 +7190,7 @@ function renderRoutePrivateOrigin(editing = false) {
     const saved = getRoutePrivateOrigin();
     if (saved && !editing) {
         box.innerHTML = `<div class="route-private-view">
-            <div class="route-private-saved"><i class="fas fa-lock"></i>出発地：保存済み</div>
+            <div class="route-private-saved"><i class="fas fa-lock"></i>出発地：保存済み（編集で確認）</div>
             <button class="seisan-btn" type="button" onclick="window.editRoutePrivateOrigin()">編集</button>
             <button class="seisan-btn" type="button" onclick="window.clearRoutePrivateOrigin()">削除</button>
         </div>`;
@@ -6545,12 +7276,31 @@ function setRouteStops(stops) {
     const normalized = Array.isArray(stops) && stops.length ? stops : [''];
     list.innerHTML = normalized.map((stop, index) => routeStopRowHtml(stop, index, normalized.length)).join('');
     refreshRouteStopNumbers();
+    setupRouteStopSortable();
 }
 
 function saveRouteStopsFromModal() {
     const state = ensureSettlementState();
     state.routeStops = getRouteStops();
     save();
+}
+
+let routeStopSortable = null;
+function setupRouteStopSortable() {
+    const list = document.getElementById('routeStopList');
+    if (!list || typeof Sortable === 'undefined') return;
+    if (routeStopSortable) {
+        try { routeStopSortable.destroy(); } catch (e) {}
+        routeStopSortable = null;
+    }
+    routeStopSortable = new Sortable(list, {
+        animation: 150,
+        handle: '.route-stop-num',
+        onEnd: () => {
+            refreshRouteStopNumbers();
+            saveRouteStopsFromModal();
+        }
+    });
 }
 
 let routeStopSaveTimer = null;
@@ -6568,11 +7318,8 @@ window.onRouteStopsChangedDelayed = function() {
     }, 450);
 };
 
-window.openRouteDistanceHelper = function(encodedName = '') {
+window.openRouteDistanceHelper = function() {
     syncSettlementStateFromDOM();
-    const carNames = getRouteCarNames();
-    const selectedName = encodedName ? decodeURIComponent(encodedName) : (routeDistanceTargetCar || carNames[0] || '');
-    routeDistanceTargetCar = carNames.includes(selectedName) ? selectedName : (carNames[0] || '');
     setRouteStops(getSavedRouteStops());
     renderRoutePrivateOrigin(false);
     setRouteHelperStatus('');
@@ -6703,7 +7450,7 @@ window.copySettlementSummary = function() {
     const state = ensureSettlementState();
     const r = calculateSettlement(data, state);
     const title = (data.roomName || '企画名未設定').trim();
-    const accountingLine = r.accounting >= 0 ? `部費が用意：${yen(r.accounting)}` : `部費に残る：${yen(Math.abs(r.accounting))}`;
+    const accountingLine = r.accounting >= 0 ? `部費負担：${yen(r.accounting)}` : `部費へ戻す：${yen(Math.abs(r.accounting))}`;
     const driverLines = r.cars.map(c => `・${c.name}：${yen(c.totalPay)}${state.driverPaid?.[c.name] ? ' 済' : ''}`).join('\n');
     const unpaid = r.participants.filter(p => {
         if (state.organizerFree && r.organizerSelected && p.name === r.excludedName) return false;
@@ -6719,38 +7466,61 @@ window.copySettlementSummary = function() {
 
 window.copyUrl = copyUrl;
 
-let currentGuideStep = 0;
-const GUIDE_TOTAL = 5;
+const GUIDE_KEYS = { global: 'globalGuide', car: 'carGuide', seisan: 'seisanGuide' };
+const currentGuideSteps = { global: 0, car: 0, seisan: 0 };
 
-window.showGuideStep = function(step) {
-    currentGuideStep = step;
-    document.querySelectorAll('.guide-step-panel').forEach(p => {
-        p.style.display = p.dataset.panel == step ? '' : 'none';
+function guideCount(guide) {
+    return document.querySelectorAll(`.guide-step-panel[data-guide="${guide}"]`).length || 1;
+}
+
+window.showGuideStep = function(guide, step) {
+    if (typeof guide === 'number') {
+        step = guide;
+        guide = 'car';
+    }
+    guide = guide || 'car';
+    const total = guideCount(guide);
+    const safeStep = Math.max(0, Math.min(total - 1, Number(step) || 0));
+    currentGuideSteps[guide] = safeStep;
+
+    document.querySelectorAll(`.guide-step-panel[data-guide="${guide}"]`).forEach(p => {
+        p.style.display = Number(p.dataset.panel) === safeStep ? '' : 'none';
     });
-    document.querySelectorAll('.guide-step-btn').forEach(b => {
-        b.classList.toggle('active', parseInt(b.dataset.step) === step);
+    document.querySelectorAll(`.guide-step-btn[data-guide="${guide}"]`).forEach(b => {
+        b.classList.toggle('active', Number(b.dataset.step) === safeStep);
     });
-    const prevBtn = document.getElementById('guidePrevBtn');
-    const nextBtn = document.getElementById('guideNextBtn');
-    const closeBtn = document.getElementById('guideCloseBtn');
-    prevBtn.style.display = step > 0 ? '' : 'none';
-    const isLast = step >= GUIDE_TOTAL - 1;
-    nextBtn.style.display = isLast ? 'none' : '';
-    closeBtn.style.display = isLast ? '' : 'none';
+
+    const prefix = GUIDE_KEYS[guide] || 'carGuide';
+    const prevBtn = document.getElementById(`${prefix}PrevBtn`);
+    const nextBtn = document.getElementById(`${prefix}NextBtn`);
+    const closeBtn = document.getElementById(`${prefix}CloseBtn`);
+    if (prevBtn) prevBtn.style.display = safeStep > 0 ? '' : 'none';
+    const isLast = safeStep >= total - 1;
+    if (nextBtn) nextBtn.style.display = isLast ? 'none' : '';
+    if (closeBtn) closeBtn.style.display = isLast ? '' : 'none';
 };
 
-window.guideNavStep = function(dir) {
-    const next = Math.max(0, Math.min(GUIDE_TOTAL - 1, currentGuideStep + dir));
-    showGuideStep(next);
+window.guideNavStep = function(guide, dir) {
+    if (typeof guide === 'number') {
+        dir = guide;
+        guide = 'car';
+    }
+    guide = guide || 'car';
+    const total = guideCount(guide);
+    const current = currentGuideSteps[guide] || 0;
+    const next = Math.max(0, Math.min(total - 1, current + dir));
+    showGuideStep(guide, next);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const guideModalEl = document.getElementById('guideModal');
-    if (guideModalEl) {
-        guideModalEl.addEventListener('show.bs.modal', () => {
-            showGuideStep(0);
-        });
-    }
+    [
+        ['globalGuideModal', 'global'],
+        ['guideModal', 'car'],
+        ['seisanGuideModal', 'seisan']
+    ].forEach(([modalId, guide]) => {
+        const el = document.getElementById(modalId);
+        if (el) el.addEventListener('show.bs.modal', () => showGuideStep(guide, 0));
+    });
 });
 
 window.openDebugModal = function() {
