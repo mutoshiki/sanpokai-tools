@@ -3167,7 +3167,14 @@ html, body {
 }
 
 
-/* --- v25 settlement route helper --- */
+/* --- v26 settlement route helper --- */
+.seisan-head-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
 .seisan-head-actions .seisan-btn {
     display: inline-flex;
     align-items: center;
@@ -3180,12 +3187,66 @@ html, body {
     margin: 0 !important;
     flex: 0 0 auto;
 }
+.seisan-head-actions .seisan-btn span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .route-helper-panel {
     display: grid;
     gap: 10px;
 }
 .route-helper-title {
     margin-bottom: 8px;
+}
+.route-private-panel,
+.route-stop-panel {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-main);
+    background: var(--bg-card);
+    padding: 10px;
+}
+.route-private-view {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 6px;
+    align-items: center;
+}
+.route-private-saved {
+    min-height: 37px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 9px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+.route-private-edit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 6px;
+    align-items: center;
+}
+.route-private-input,
+.route-stop-input {
+    width: 100%;
+    min-height: 38px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-main);
+    padding: 7px 8px;
+    font-size: 0.86rem;
+}
+.route-private-input:focus,
+.route-stop-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.13);
 }
 .route-stop-list {
     display: grid;
@@ -3209,21 +3270,6 @@ html, body {
     justify-content: center;
     font-size: 0.74rem;
     font-weight: 900;
-}
-.route-stop-input {
-    width: 100%;
-    min-height: 38px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    background: var(--bg-card);
-    color: var(--text-main);
-    padding: 7px 8px;
-    font-size: 0.86rem;
-}
-.route-stop-input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(15, 118, 110, 0.13);
 }
 .route-stop-move-btn[disabled] {
     opacity: 0.35;
@@ -3249,6 +3295,10 @@ html, body {
     margin: 0 !important;
 }
 @media (max-width: 640px) {
+    .route-private-view,
+    .route-private-edit {
+        grid-template-columns: 1fr;
+    }
     .route-stop-row {
         grid-template-columns: 24px minmax(0, 1fr) 30px 30px 30px;
         gap: 5px;
@@ -3258,6 +3308,7 @@ html, body {
         height: 24px;
         font-size: 0.68rem;
     }
+    .route-private-input,
     .route-stop-input {
         min-height: 36px;
         font-size: 0.82rem;
@@ -3369,8 +3420,8 @@ html, body {
           <div class="seisan-card">
             <div class="seisan-head seisan-head-tools-only">
               <div class="seisan-head-actions">
-                <button class="seisan-btn tool-help-btn" type="button" onclick="modals.seisanGuide.show()" style="width:auto;" title="使い方"><i class="fas fa-book-open"></i>使い方</button>
-                <button class="seisan-btn" type="button" onclick="openRouteDistanceHelper()" style="width:auto;" title="移動距離をGoogleマップで確認"><i class="fas fa-route"></i>距離</button>
+                <button class="seisan-btn tool-help-btn" type="button" onclick="modals.seisanGuide.show()" style="width:auto;" title="使い方"><i class="fas fa-book-open"></i><span>使い方</span></button>
+                <button class="seisan-btn" type="button" onclick="openRouteDistanceHelper()" style="width:auto;" title="移動距離をGoogleマップで確認"><i class="fas fa-route"></i><span>距離</span></button>
                 <button class="seisan-btn" type="button" onclick="renderSettlementView()" style="width:auto; min-width:42px;" title="再計算"><i class="fas fa-rotate"></i></button>
               </div>
             </div>
@@ -3920,7 +3971,13 @@ html, body {
           </div>
           <div class="modal-body">
             <div class="route-helper-panel">
-              <div>
+              <div class="route-private-panel">
+                <div class="seisan-title route-helper-title"><i class="fas fa-house-user"></i>自分用の出発地</div>
+                <div id="routePrivateOriginBox"></div>
+                <div class="route-helper-note mt-2">この端末だけに保存されます。共有リンクには入りません。</div>
+              </div>
+
+              <div class="route-stop-panel">
                 <div class="seisan-title route-helper-title"><i class="fas fa-map-location-dot"></i>行った場所</div>
                 <div id="routeStopList" class="route-stop-list"></div>
                 <button class="seisan-btn" type="button" onclick="window.addRouteStop()" style="margin-top:8px;"><i class="fas fa-plus me-1"></i>場所を追加</button>
@@ -3930,7 +3987,7 @@ html, body {
                 <button class="seisan-btn primary" type="button" onclick="window.openGoogleRoute()"><i class="fab fa-google"></i>Googleマップで開く</button>
               </div>
 
-              <div class="route-helper-note">自宅などの個人情報は保存しません。必要な出発地・帰着地は、Googleマップ側で追加してください。</div>
+              <div class="route-helper-note">行った場所はこの企画の共有データとして保存されます。自分用の出発地を保存している場合は、出発地 → 行った場所 → 出発地 のルートで開きます。</div>
               <div id="routeHelperStatus" class="seisan-small"></div>
             </div>
           </div>
@@ -6375,6 +6432,68 @@ function renderSettlementView() {
 }
 
 let routeDistanceTargetCar = '';
+const ROUTE_PRIVATE_ORIGIN_KEY = 'sanpokai_route_private_origin_v1';
+
+function getRoutePrivateOrigin() {
+    try {
+        return String(localStorage.getItem(ROUTE_PRIVATE_ORIGIN_KEY) || '').trim();
+    } catch (e) {
+        return '';
+    }
+}
+
+function setRoutePrivateOrigin(value) {
+    try {
+        const normalized = String(value || '').trim();
+        if (normalized) {
+            localStorage.setItem(ROUTE_PRIVATE_ORIGIN_KEY, normalized);
+        } else {
+            localStorage.removeItem(ROUTE_PRIVATE_ORIGIN_KEY);
+        }
+    } catch (e) {}
+}
+
+function renderRoutePrivateOrigin(editing = false) {
+    const box = document.getElementById('routePrivateOriginBox');
+    if (!box) return;
+    const saved = getRoutePrivateOrigin();
+    if (saved && !editing) {
+        box.innerHTML = `<div class="route-private-view">
+            <div class="route-private-saved"><i class="fas fa-lock"></i>出発地：保存済み</div>
+            <button class="seisan-btn" type="button" onclick="window.editRoutePrivateOrigin()">編集</button>
+            <button class="seisan-btn" type="button" onclick="window.clearRoutePrivateOrigin()">削除</button>
+        </div>`;
+        return;
+    }
+    box.innerHTML = `<div class="route-private-edit">
+        <input id="routePrivateOriginInput" class="route-private-input" type="text" value="${escapeHtml(saved)}" placeholder="例：イエローハイツ岡里 / 自宅" autocomplete="off">
+        <button class="seisan-btn primary" type="button" onclick="window.saveRoutePrivateOrigin()">保存</button>
+        <button class="seisan-btn" type="button" onclick="window.cancelRoutePrivateOriginEdit()">戻る</button>
+    </div>`;
+}
+
+window.editRoutePrivateOrigin = function() {
+    renderRoutePrivateOrigin(true);
+    const input = document.getElementById('routePrivateOriginInput');
+    if (input) input.focus();
+};
+
+window.saveRoutePrivateOrigin = function() {
+    const input = document.getElementById('routePrivateOriginInput');
+    setRoutePrivateOrigin(input ? input.value : '');
+    renderRoutePrivateOrigin(false);
+    setRouteHelperStatus(getRoutePrivateOrigin() ? '自分用の出発地をこの端末に保存しました。' : '自分用の出発地を空にしました。');
+};
+
+window.clearRoutePrivateOrigin = function() {
+    setRoutePrivateOrigin('');
+    renderRoutePrivateOrigin(false);
+    setRouteHelperStatus('自分用の出発地をこの端末から削除しました。');
+};
+
+window.cancelRoutePrivateOriginEdit = function() {
+    renderRoutePrivateOrigin(false);
+};
 
 function getRouteCarNames() {
     return (getRoomDataOnly().cars || []).map(c => c.name).filter(Boolean);
@@ -6388,7 +6507,7 @@ function getSavedRouteStops() {
 function routeStopRowHtml(value = '', index = 0, total = 1) {
     return `<div class="route-stop-row">
         <span class="route-stop-num">${index + 1}</span>
-        <input type="text" class="route-stop-input" value="${escapeHtml(value || '')}" placeholder="例：登山口 / 温泉 / 道の駅" oninput="window.onRouteStopsChangedDelayed()" onchange="window.onRouteStopsChanged()">
+        <input type="text" class="route-stop-input" value="${escapeHtml(value || '')}" placeholder="例：妙高山 登山口" oninput="window.onRouteStopsChangedDelayed()" onchange="window.onRouteStopsChanged()">
         <button class="seisan-icon-btn route-stop-move-btn" type="button" onclick="window.moveRouteStop(this, -1)" title="上へ" ${index === 0 ? 'disabled' : ''}><i class="fas fa-chevron-up"></i></button>
         <button class="seisan-icon-btn route-stop-move-btn" type="button" onclick="window.moveRouteStop(this, 1)" title="下へ" ${index >= total - 1 ? 'disabled' : ''}><i class="fas fa-chevron-down"></i></button>
         <button class="seisan-icon-btn" type="button" onclick="window.removeRouteStop(this)" title="削除"><i class="fas fa-times"></i></button>
@@ -6455,6 +6574,7 @@ window.openRouteDistanceHelper = function(encodedName = '') {
     const selectedName = encodedName ? decodeURIComponent(encodedName) : (routeDistanceTargetCar || carNames[0] || '');
     routeDistanceTargetCar = carNames.includes(selectedName) ? selectedName : (carNames[0] || '');
     setRouteStops(getSavedRouteStops());
+    renderRoutePrivateOrigin(false);
     setRouteHelperStatus('');
     if (modals.routeDistance) modals.routeDistance.show();
 };
@@ -6504,10 +6624,15 @@ window.openGoogleRoute = function() {
         return;
     }
 
+    const privateOrigin = getRoutePrivateOrigin();
     const params = new URLSearchParams();
     params.set('api', '1');
     params.set('travelmode', 'driving');
-    if (stops.length === 1) {
+    if (privateOrigin) {
+        params.set('origin', privateOrigin);
+        params.set('destination', privateOrigin);
+        params.set('waypoints', stops.join('|'));
+    } else if (stops.length === 1) {
         params.set('destination', stops[0]);
     } else {
         params.set('origin', stops[0]);
@@ -6517,7 +6642,7 @@ window.openGoogleRoute = function() {
     }
     const url = `https://www.google.com/maps/dir/?${params.toString()}`;
     window.open(url, '_blank', 'noopener,noreferrer');
-    setRouteHelperStatus('Googleマップ側で必要なら自宅や帰着地を追加してください。');
+    setRouteHelperStatus(privateOrigin ? '自分用の出発地を含めた往復ルートを開きました。' : 'Googleマップを開きました。必要なら出発地・帰着地を追加してください。');
 };
 
 window.onSettlementInput = function() {
