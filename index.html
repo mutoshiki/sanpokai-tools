@@ -6247,6 +6247,237 @@ body[data-app-theme="monochrome"] .header-action.share-action {
     background: var(--bg-card) !important;
 }
 
+
+
+/* --- v43 requested compact card/menu and theme expansion patch --- */
+body[data-app-theme="line"][data-theme="light"] {
+    --bg-body:#f4fbf6; --text-main:#111827; --text-sub:#64748b; --bg-card:#ffffff; --border-color:#d9eadf;
+    --accent-color:#06c755; --accent-soft:#e7f8ed; --app-surface:rgba(255,255,255,0.96); --sheet-header:#f0faf3; --hover-bg:#edf8f1;
+}
+body[data-app-theme="line"][data-theme="dark"] {
+    --bg-body:#07130d; --text-main:#ecfdf5; --text-sub:#9ccfb0; --bg-card:#102218; --border-color:#214a30;
+    --accent-color:#06c755; --accent-soft:rgba(6,199,85,0.16); --app-surface:rgba(16,34,24,0.96); --sheet-header:#0c1a12; --hover-bg:#173522;
+}
+body[data-app-theme="sakura"][data-theme="light"] {
+    --bg-body:#fff1f5; --text-main:#3b0a24; --text-sub:#8a536d; --bg-card:#ffffff; --border-color:#f3c7d8;
+    --accent-color:#db2777; --accent-soft:#fce7f3; --app-surface:rgba(255,255,255,0.96); --sheet-header:#fff7fa; --hover-bg:#ffe4ef;
+}
+body[data-app-theme="sakura"][data-theme="dark"] {
+    --bg-body:#2a0617; --text-main:#fff1f7; --text-sub:#f0a7c2; --bg-card:#3b0a24; --border-color:#7a2249;
+    --accent-color:#f472b6; --accent-soft:rgba(244,114,182,0.18); --app-surface:rgba(59,10,36,0.96); --sheet-header:#30071d; --hover-bg:#551034;
+}
+body[data-app-theme="forest"][data-theme="light"] {
+    --bg-body:#f0fdf4; --text-main:#052e16; --text-sub:#4b6f58; --bg-card:#ffffff; --border-color:#bbdfc8;
+    --accent-color:#166534; --accent-soft:#dcfce7; --app-surface:rgba(255,255,255,0.96); --sheet-header:#f4fbf6; --hover-bg:#e6f6eb;
+}
+body[data-app-theme="forest"][data-theme="dark"] {
+    --bg-body:#03150a; --text-main:#dcfce7; --text-sub:#94caa6; --bg-card:#082412; --border-color:#1d4d2c;
+    --accent-color:#22c55e; --accent-soft:rgba(34,197,94,0.16); --app-surface:rgba(8,36,18,0.96); --sheet-header:#061b0e; --hover-bg:#10351d;
+}
+body[data-app-theme="mountain"][data-theme="light"] {
+    --bg-body:#eef2ff; --text-main:#1e1b4b; --text-sub:#5b5f86; --bg-card:#ffffff; --border-color:#c7d2fe;
+    --accent-color:#4f46e5; --accent-soft:#e0e7ff; --app-surface:rgba(255,255,255,0.96); --sheet-header:#f5f7ff; --hover-bg:#e6ebff;
+}
+body[data-app-theme="mountain"][data-theme="dark"] {
+    --bg-body:#11102a; --text-main:#eef2ff; --text-sub:#b7c0ef; --bg-card:#1e1b4b; --border-color:#4338ca;
+    --accent-color:#818cf8; --accent-soft:rgba(129,140,248,0.18); --app-surface:rgba(30,27,75,0.96); --sheet-header:#17143b; --hover-bg:#2c2870;
+}
+body[data-app-theme="ocean"][data-theme="light"] {
+    --bg-body:#f0f9ff; --text-main:#082f49; --text-sub:#52748a; --bg-card:#ffffff; --border-color:#bae6fd;
+    --accent-color:#0284c7; --accent-soft:#e0f2fe; --app-surface:rgba(255,255,255,0.96); --sheet-header:#f5fbff; --hover-bg:#e5f6ff;
+}
+body[data-app-theme="ocean"][data-theme="dark"] {
+    --bg-body:#061724; --text-main:#e0f2fe; --text-sub:#8fc9e8; --bg-card:#082f49; --border-color:#0e7490;
+    --accent-color:#38bdf8; --accent-soft:rgba(56,189,248,0.18); --app-surface:rgba(8,47,73,0.96); --sheet-header:#07283e; --hover-bg:#0b3d5f;
+}
+body[data-app-theme="amber"][data-theme="light"] {
+    --bg-body:#fffbeb; --text-main:#451a03; --text-sub:#786244; --bg-card:#ffffff; --border-color:#fde68a;
+    --accent-color:#d97706; --accent-soft:#fef3c7; --app-surface:rgba(255,255,255,0.96); --sheet-header:#fff8dc; --hover-bg:#fff1bf;
+}
+body[data-app-theme="amber"][data-theme="dark"] {
+    --bg-body:#1c1003; --text-main:#fffbeb; --text-sub:#e8c981; --bg-card:#2b1905; --border-color:#78530d;
+    --accent-color:#f59e0b; --accent-soft:rgba(245,158,11,0.18); --app-surface:rgba(43,25,5,0.96); --sheet-header:#241404; --hover-bg:#402406;
+}
+
+/* 囲みを減らす */
+.auto-condition-pill {
+    min-height: 24px !important;
+    padding: 0 2px !important;
+    border: 0 !important;
+    border-left: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--text-sub) !important;
+    font-size: 0.73rem !important;
+    font-weight: 800 !important;
+    box-shadow: none !important;
+}
+.auto-condition-pill i { color: var(--text-sub) !important; }
+[data-theme="dark"] .auto-condition-pill { background: transparent !important; border-color: transparent !important; }
+
+.capacity-badge.capacity-edit-btn {
+    min-width: 0 !important;
+    width: auto !important;
+    min-height: 26px !important;
+    height: 26px !important;
+    padding: 0 2px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--text-sub) !important;
+    gap: 5px !important;
+    font-size: 0.78rem !important;
+    font-weight: 900 !important;
+}
+.capacity-badge.capacity-edit-btn .capacity-count {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--text-sub) !important;
+    font-size: 0.78rem !important;
+}
+.capacity-badge.capacity-edit-btn i { color: var(--text-sub) !important; font-size: 0.72rem !important; opacity: 0.75; }
+.capacity-badge.capacity-edit-btn .capacity-label { display: none !important; }
+.capacity-badge.capacity-edit-btn.is-full,
+.capacity-badge.capacity-edit-btn.is-over { border: 0 !important; color: var(--text-sub) !important; }
+.capacity-badge.capacity-edit-btn.is-over .capacity-count { color:#b91c1c !important; }
+
+/* 1行カード */
+.car-header {
+    grid-template-columns: minmax(0, 1fr) auto 30px !important;
+    align-items: center !important;
+}
+.car-layout-grid { align-items: stretch !important; }
+.seat-slot {
+    min-height: 42px !important;
+    padding: 0 !important;
+    border-radius: var(--radius-sm) !important;
+}
+.seat-slot > .member-card {
+    width: 100% !important;
+    min-height: 42px !important;
+    height: 100% !important;
+    margin: 0 !important;
+}
+.member-card,
+.driver-seat {
+    min-height: 42px !important;
+    padding: 6px 7px !important;
+    gap: 0 !important;
+    border-radius: var(--radius-sm) !important;
+    justify-content: center !important;
+}
+.member-card.in-waiting { min-height: 42px !important; padding: 6px 7px !important; }
+.member-main-line,
+.driver-main-line {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto 28px !important;
+    align-items: center !important;
+    gap: 6px !important;
+    min-height: 28px !important;
+    padding: 0 !important;
+}
+.member-name-text,
+.driver-name-disp {
+    font-size: 0.84rem !important;
+    line-height: 1.18 !important;
+    font-weight: 850 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+.member-card.in-waiting .member-name-text { font-size: 0.84rem !important; }
+.member-action-row,
+.driver-action-row { display: none !important; }
+.member-menu-btn,
+.driver-menu-btn {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: var(--text-sub) !important;
+    opacity: 0.86 !important;
+    touch-action: manipulation !important;
+}
+.member-menu-btn:hover,
+.driver-menu-btn:hover { background: var(--hover-bg) !important; color: var(--text-main) !important; opacity: 1 !important; }
+.member-menu-btn i,
+.driver-menu-btn i { font-size: 0.86rem !important; pointer-events: none; }
+.memo-popup {
+    margin-top: 3px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: var(--text-sub) !important;
+    font-size: 0.66rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.driver-seat .memo-popup { display: block; }
+.drag-preview-card { display: none !important; }
+
+/* メニュー */
+.person-pop-menu {
+    position: fixed;
+    z-index: 10060;
+    width: min(220px, calc(100vw - 16px));
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-main);
+    background: var(--bg-card);
+    color: var(--text-main);
+    box-shadow: var(--shadow-float);
+}
+.person-pop-title {
+    padding: 7px 9px 5px;
+    color: var(--text-sub);
+    font-size: 0.72rem;
+    font-weight: 900;
+}
+.person-pop-item {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.84rem;
+    font-weight: 850;
+    text-align: left;
+}
+.person-pop-item:hover { background: var(--hover-bg); }
+.person-pop-item i { width: 18px; text-align: center; color: var(--text-sub); }
+.person-pop-item.danger { color:#dc2626; }
+.person-pop-item.danger i { color:#dc2626; }
+[data-theme="dark"] .person-pop-menu { background: var(--modal-bg); border-color: var(--border-color); }
+
+@media (max-width: 640px) {
+    .tray-actions { grid-template-columns: minmax(64px, 0.7fr) minmax(90px, 1fr) minmax(106px, 1.15fr) !important; }
+    #tray-toggle-label { font-size: 0.78rem !important; }
+    .member-card,
+    .driver-seat,
+    .seat-slot,
+    .seat-slot > .member-card { min-height: 44px !important; }
+    .member-main-line,
+    .driver-main-line { min-height: 30px !important; }
+    .member-name-text,
+    .driver-name-disp { font-size: 0.86rem !important; }
+}
+
 </style>
   </head>
   <body data-theme="light" data-app-theme="natural" class="sheet-mode">
@@ -6539,6 +6770,30 @@ body[data-app-theme="monochrome"] .header-action.share-action {
                   <button type="button" class="theme-preset-card" data-theme-palette="monochrome">
                     <span class="theme-swatch-row"><span class="theme-swatch" style="background:#262626"></span><span class="theme-swatch" style="background:#f5f5f5"></span><span class="theme-swatch" style="background:#111111"></span></span>
                     <span class="theme-preset-main"><strong>モノクロ</strong><small>色数を抑えた配色。</small></span>
+                  </button>
+                  <button type="button" class="theme-preset-card" data-theme-palette="line">
+                    <span class="theme-swatch-row"><span class="theme-swatch" style="background:#06c755"></span><span class="theme-swatch" style="background:#f4fbf6"></span><span class="theme-swatch" style="background:#111827"></span></span>
+                    <span class="theme-preset-main"><strong>LINE風</strong><small>共有向きの緑系。</small></span>
+                  </button>
+                  <button type="button" class="theme-preset-card" data-theme-palette="sakura">
+                    <span class="theme-swatch-row"><span class="theme-swatch" style="background:#db2777"></span><span class="theme-swatch" style="background:#fff1f5"></span><span class="theme-swatch" style="background:#4a044e"></span></span>
+                    <span class="theme-preset-main"><strong>さくら</strong><small>柔らかいピンク系。</small></span>
+                  </button>
+                  <button type="button" class="theme-preset-card" data-theme-palette="forest">
+                    <span class="theme-swatch-row"><span class="theme-swatch" style="background:#166534"></span><span class="theme-swatch" style="background:#f0fdf4"></span><span class="theme-swatch" style="background:#052e16"></span></span>
+                    <span class="theme-preset-main"><strong>フォレスト</strong><small>自然な深緑系。</small></span>
+                  </button>
+                  <button type="button" class="theme-preset-card" data-theme-palette="mountain">
+                    <span class="theme-swatch-row"><span class="theme-swatch" style="background:#4f46e5"></span><span class="theme-swatch" style="background:#eef2ff"></span><span class="theme-swatch" style="background:#1e1b4b"></span></span>
+                    <span class="theme-preset-main"><strong>山岳</strong><small>青紫の落ち着き。</small></span>
+                  </button>
+                  <button type="button" class="theme-preset-card" data-theme-palette="ocean">
+                    <span class="theme-swatch-row"><span class="theme-swatch" style="background:#0284c7"></span><span class="theme-swatch" style="background:#f0f9ff"></span><span class="theme-swatch" style="background:#082f49"></span></span>
+                    <span class="theme-preset-main"><strong>オーシャン</strong><small>明るい青系。</small></span>
+                  </button>
+                  <button type="button" class="theme-preset-card" data-theme-palette="amber">
+                    <span class="theme-swatch-row"><span class="theme-swatch" style="background:#d97706"></span><span class="theme-swatch" style="background:#fffbeb"></span><span class="theme-swatch" style="background:#451a03"></span></span>
+                    <span class="theme-preset-main"><strong>アンバー</strong><small>暖色で見やすい。</small></span>
                   </button>
                 </div>
               </div>
@@ -7131,7 +7386,13 @@ const APPEARANCE_PALETTE_LABELS = {
     nord: 'Nord',
     solarized: 'Solarized',
     dracula: 'Dracula',
-    monochrome: 'モノクロ'
+    monochrome: 'モノクロ',
+    line: 'LINE風',
+    sakura: 'さくら',
+    forest: 'フォレスト',
+    mountain: '山岳',
+    ocean: 'オーシャン',
+    amber: 'アンバー'
 };
 let appearanceSettings = { ...DEFAULT_APPEARANCE };
 const appearanceMql = window.matchMedia('(prefers-color-scheme: dark)');
@@ -7139,7 +7400,7 @@ const appearanceMql = window.matchMedia('(prefers-color-scheme: dark)');
 function readAppearanceSettings() {
     try {
         const parsed = JSON.parse(localStorage.getItem(APPEARANCE_KEY) || '{}');
-        const paletteAliases = { line: 'natural', minimal: 'github', autumn: 'solarized' };
+        const paletteAliases = { minimal: 'github', autumn: 'solarized' };
         const rawPalette = paletteAliases[parsed.palette] || parsed.palette;
         return {
             mode: ['light', 'dark', 'system'].includes(parsed.mode) ? parsed.mode : DEFAULT_APPEARANCE.mode,
@@ -7276,6 +7537,7 @@ D.addEventListener('DOMContentLoaded', async () => {
     updateEditLockButton();
     setupManualCardDrag();
     setupManualSheetDrag();
+    setupCompactPersonMenu();
 
     setupAppearanceControls();
     document.addEventListener('pointermove', e => {
@@ -7647,14 +7909,14 @@ function updateTrayToggleLabel() {
     if (count === 0) {
         const open = tray.classList.contains('empty-open');
         label.innerHTML = open
-            ? '<i class="fas fa-chevron-down"></i><span>待機メンバー 0</span>'
-            : '<i class="fas fa-user-clock"></i><span>待機メンバー 0</span>';
+            ? '<i class="fas fa-chevron-down"></i><span>待機メンバーを閉じる（0人）</span>'
+            : '<i class="fas fa-chevron-up"></i><span>待機メンバーを開く（0人）</span>'; 
         return;
     }
     const minimized = tray.classList.contains("minimized");
     label.innerHTML = minimized
-        ? '<i class="fas fa-chevron-up"></i><span>待機メンバーを開く</span>'
-        : '<i class="fas fa-chevron-down"></i><span>待機メンバーをしまう</span>';
+        ? `<i class="fas fa-chevron-up"></i><span>待機メンバーを開く（${count}人）</span>`
+        : `<i class="fas fa-chevron-down"></i><span>待機メンバーを閉じる（${count}人）</span>`;
 }
 
 function toggleTray() {
@@ -7681,7 +7943,7 @@ function updateTrayMenuDirection() {
 }
 
 function addMember(n, m='', g='unknown', grade=0, parent=$('#waiting-list'), locked=false) {
-    const name = n;
+    const name = String(n || '').trim();
     if(!name) return;
     
     const div = ce('div', 'member-card');
@@ -7690,18 +7952,16 @@ function addMember(n, m='', g='unknown', grade=0, parent=$('#waiting-list'), loc
     div.dataset.grade = grade;
     div.dataset.locked = locked;
     
+    const safeName = escapeHtml(name);
+    const safeMemo = escapeHtml(m || '');
     const gradeHtml = grade > 0 ? `<span class="grade-badge" data-grade="${grade}">${grade}年</span>` : '';
     div.innerHTML = `
         <div class="member-main-line">
-            <div class="member-name-text">${name}</div>
+            <div class="member-name-text">${safeName}</div>
             ${gradeHtml}
+            <button type="button" class="member-menu-btn action-btn" title="メニュー" aria-label="メンバー操作メニュー"><i class="fas fa-ellipsis-vertical" aria-hidden="true"></i></button>
         </div>
-        <div class="member-action-row">
-            <button type="button" class="member-action-btn action-btn edit-btn ${m?'text-warning':''}" title="メモ"><i class="fas fa-sticky-note"></i><span>メモ</span></button>
-            <button type="button" class="member-action-btn action-btn lock-btn ${locked?'text-warning':''}" title="固定"><i class="fas ${locked?'fa-lock':'fa-unlock'}"></i><span>${locked?'固定中':'固定'}</span></button>
-            <button type="button" class="member-action-btn delete-btn-overlay" title="待機に戻す"><i class="fas fa-reply"></i><span>戻す</span></button>
-        </div>
-        <div class="memo-popup" style="display:${m?'block':'none'}">${m}</div>
+        <div class="memo-popup" style="display:${m?'block':'none'}">${safeMemo}</div>
     `;
     parent.appendChild(div);
     updateUI();
@@ -7709,21 +7969,23 @@ function addMember(n, m='', g='unknown', grade=0, parent=$('#waiting-list'), loc
 }
 window.addMember = addMember;
 
-function addCar(n, cap, mems=[], dm='', dg='unknown') {
-    const name = n;
+function addCar(n, cap, mems=[], dm='', dg='unknown', dgrade=0) {
+    const name = String(n || '').trim();
     const c = getInt(cap);
     if(!name) return;
 
     const col = ce('div', 'col-12 col-md-6 col-lg-4');
+    const safeName = escapeHtml(name);
+    const safeMemo = escapeHtml(dm || '');
+    const driverGradeHtml = dgrade > 0 ? `<span class="grade-badge" data-grade="${dgrade}">${dgrade}年</span>` : '';
     let slotsHtml = `
-        <div class="driver-seat" data-gender="${dg}" data-name="${name}">
+        <div class="driver-seat" data-gender="${dg}" data-name="${safeName}" data-grade="${dgrade || 0}">
             <div class="member-main-line driver-main-line">
-                <div class="driver-name-disp fw-bold">${name}</div>
+                <div class="driver-name-disp fw-bold">${safeName}</div>
+                ${driverGradeHtml}
+                <button type="button" class="driver-menu-btn action-btn" title="車出しメニュー" aria-label="車出し操作メニュー"><i class="fas fa-ellipsis-vertical" aria-hidden="true"></i></button>
             </div>
-            <div class="member-action-row driver-action-row">
-                <button type="button" class="member-action-btn action-btn edit-btn ${dm?'text-warning':''}" title="車出しメモ"><i class="fas fa-sticky-note"></i><span>メモ</span></button>
-            </div>
-            <div class="memo-popup driver-memo-text" style="display:${dm?'block':'none'}">${dm}</div>
+            <div class="memo-popup driver-memo-text" style="display:${dm?'block':'none'}">${safeMemo}</div>
         </div>
     `;
     for(let i=0; i<c; i++) slotsHtml += `<div class="seat-slot"></div>`;
@@ -7731,9 +7993,9 @@ function addCar(n, cap, mems=[], dm='', dg='unknown') {
     col.innerHTML = `
         <div class="car-box" data-capacity="${c}">
             <div class="car-header">
-                <span class="car-name-label">${name}車</span>
-                <button type="button" class="capacity-badge capacity-edit-btn" onclick="window.editCapacity(this)" title="定員を変更">
-                    <i class="fas fa-users" aria-hidden="true"></i><span class="capacity-count">0/${c}</span><span class="capacity-label">定員</span>
+                <span class="car-name-label">${safeName}車</span>
+                <button type="button" class="capacity-badge capacity-edit-btn" onclick="window.editCapacity(this)" title="定員を変更" aria-label="定員を変更">
+                    <span class="capacity-count">0/${c}</span><i class="fas fa-pen" aria-hidden="true"></i>
                 </button>
                 <button type="button" class="car-delete-btn action-btn delete-btn" title="車を削除" aria-label="車を削除">
                     <i class="fas fa-trash-alt" aria-hidden="true"></i>
@@ -7832,14 +8094,9 @@ function showSeatReturnPreview(card, destination, excluded = []) {
 }
 
 function showDraggedSeatPreview(card, slot, excluded = []) {
-    if (!card || !slot || !slot.classList?.contains('seat-slot')) return;
-    if (getRealSeatCard(slot, excluded)) return;
-    const preview = card.cloneNode(true);
-    preview.classList.add('drag-preview-card');
-    preview.classList.remove('manual-drag-source', 'manual-drag-float', 'swap-preview-card', 'seat-card-will-move', 'in-waiting');
-    preview.removeAttribute('id');
-    preview.setAttribute('aria-hidden', 'true');
-    slot.appendChild(preview);
+    // ドラッグ中の本人カードをドロップ先に複製表示しない。
+    // 交換・戻り先のヒントだけを残し、画面の重なりを減らす。
+    return;
 }
 
 function enforceOneCardPerSeat() {
@@ -8012,7 +8269,7 @@ function setupManualCardDrag() {
             clientY: e.clientY,
             timer: null
         };
-        nextPending.timer = setTimeout(() => startManualCardDrag(card, nextPending), e.pointerType === 'touch' ? 260 : 90);
+        nextPending.timer = setTimeout(() => startManualCardDrag(card, nextPending), e.pointerType === 'touch' ? 520 : 150);
         pending = nextPending;
         card.setPointerCapture?.(e.pointerId);
     }, { passive: false });
@@ -8220,7 +8477,7 @@ function updateUI() {
         const c = getInt(b.dataset.capacity);
         const n = Array.from($$('.seat-slot', b)).reduce((sum, slot) => sum + getRealSeatCards(slot).length, 0);
         const badge = $('.capacity-badge', b);
-        badge.innerHTML = `<i class="fas fa-users" aria-hidden="true"></i><span class="capacity-count">${n}/${c}</span><span class="capacity-label">定員</span>`;
+        badge.innerHTML = `<span class="capacity-count">${n}/${c}</span><i class="fas fa-pen" aria-hidden="true"></i>`;
         badge.className = `capacity-badge capacity-edit-btn ${n>c?'is-over':(n===c?'is-full':'')}`;
         b.classList.toggle('over-capacity', n>c);
     });
@@ -8302,6 +8559,7 @@ function getData() {
             capacity: c.dataset.capacity,
             driverMemo: $('.driver-memo-text', c).innerText,
             driverGender: $('.driver-seat', c).dataset.gender,
+            driverGrade: parseInt($('.driver-seat', c).dataset.grade)||0,
             members: Array.from($$('.seat-slot', c)).flatMap(s => getRealSeatCards(s).map(getMemData))
         })),
         settlement: getSettlementSnapshot(),
@@ -8339,7 +8597,7 @@ function restore(d) {
     $('#waiting-list').innerHTML = '';
     $('#cars-container').innerHTML = '';
     (d.waiting||[]).forEach(m => addMember(m.name, m.memo, m.gender, m.grade||0, $('#waiting-list'), m.locked));
-    (d.cars||[]).forEach(c => addCar(c.name, c.capacity, c.members, c.driverMemo, c.driverGender));
+    (d.cars||[]).forEach(c => addCar(c.name, c.capacity, c.members, c.driverMemo, c.driverGender, c.driverGrade || 0));
     updateUI();
     if (currentView === 'seisan') renderSettlementView();
 }
@@ -8523,6 +8781,166 @@ function autoAssign(mode) {
 }
 window.autoAssign = autoAssign;
 
+
+function closePersonMenus() {
+    document.querySelectorAll('.person-pop-menu').forEach(menu => menu.remove());
+}
+
+function positionPersonMenu(menu, anchor = null) {
+    const margin = 8;
+    let left = Math.max(margin, Math.round((window.innerWidth - menu.offsetWidth) / 2));
+    let top = Math.max(margin, Math.round((window.innerHeight - menu.offsetHeight) / 2));
+    if (anchor) {
+        const rect = anchor.getBoundingClientRect();
+        left = Math.min(window.innerWidth - menu.offsetWidth - margin, Math.max(margin, rect.right - menu.offsetWidth));
+        top = Math.min(window.innerHeight - menu.offsetHeight - margin, Math.max(margin, rect.bottom + 6));
+    }
+    menu.style.left = `${left}px`;
+    menu.style.top = `${top}px`;
+}
+
+function openChoicePopup(title, choices, onPick) {
+    closePersonMenus();
+    const menu = ce('div', 'person-pop-menu choice-menu');
+    menu.innerHTML = `<div class="person-pop-title">${escapeHtml(title)}</div>` + choices.map(choice => `
+        <button type="button" class="person-pop-item" data-value="${escapeHtml(choice.value)}">
+            <i class="${choice.icon || 'fas fa-circle'}"></i><span>${escapeHtml(choice.label)}</span>
+        </button>
+    `).join('');
+    menu.addEventListener('click', event => {
+        const item = event.target.closest('.person-pop-item');
+        if (!item) return;
+        event.preventDefault();
+        event.stopPropagation();
+        onPick(item.dataset.value);
+        closePersonMenus();
+    });
+    document.body.appendChild(menu);
+    positionPersonMenu(menu);
+}
+
+function updatePersonGradeBadge(person) {
+    if (!person) return;
+    const grade = parseInt(person.dataset.grade) || 0;
+    const line = $('.member-main-line, .driver-main-line', person);
+    if (!line) return;
+    line.querySelector('.grade-badge')?.remove();
+    if (grade > 0) {
+        const badge = ce('span', 'grade-badge');
+        badge.dataset.grade = String(grade);
+        badge.textContent = `${grade}年`;
+        const menuBtn = line.querySelector('.member-menu-btn, .driver-menu-btn');
+        line.insertBefore(badge, menuBtn || null);
+    }
+}
+
+function setPersonGrade(person, gradeValue) {
+    const grade = Math.max(0, Math.min(4, parseInt(gradeValue) || 0));
+    person.dataset.grade = String(grade);
+    updatePersonGradeBadge(person);
+    updateUI();
+    save();
+}
+
+function setPersonGender(person, gender) {
+    const next = ['male', 'female', 'unknown'].includes(gender) ? gender : 'unknown';
+    person.dataset.gender = next;
+    updateUI();
+    save();
+}
+
+function returnOrDeleteMemberCard(card) {
+    if (!card) return;
+    if (card.dataset.locked === 'true') {
+        showAppNotice('固定されています。先に固定を解除してください。', true);
+        return;
+    }
+    if (card.parentElement?.id === 'waiting-list') {
+        if (confirm('このメンバーを完全に削除しますか？')) card.remove();
+    } else if (confirm('車から降ろして待機メンバーに戻しますか？')) {
+        $('#waiting-list')?.appendChild(card);
+    }
+    updateUI();
+    save();
+}
+
+function openCompactPersonMenu(trigger) {
+    closePersonMenus();
+    const card = trigger.closest('.member-card');
+    const driver = trigger.closest('.driver-seat');
+    const person = card || driver;
+    if (!person) return;
+    const isDriver = !!driver;
+    const inWaiting = card?.parentElement?.id === 'waiting-list';
+    const locked = card?.dataset.locked === 'true';
+    const actions = isDriver
+        ? [
+            ['memo', 'メモ', 'fas fa-sticky-note'],
+            ['grade', '学年', 'fas fa-graduation-cap'],
+            ['gender', '性別', 'fas fa-venus-mars'],
+            ['name', '名前変更', 'fas fa-pen']
+          ]
+        : [
+            ['memo', 'メモ', 'fas fa-sticky-note'],
+            ['lock', locked ? '固定解除' : '固定', locked ? 'fas fa-lock-open' : 'fas fa-lock'],
+            ['return', inWaiting ? '削除' : '戻す', inWaiting ? 'fas fa-trash-can' : 'fas fa-reply'],
+            ['grade', '学年', 'fas fa-graduation-cap'],
+            ['gender', '性別', 'fas fa-venus-mars'],
+            ['name', '名前変更', 'fas fa-pen']
+          ];
+    const menu = ce('div', 'person-pop-menu');
+    menu.innerHTML = actions.map(([action, label, icon]) => `
+        <button type="button" class="person-pop-item ${action === 'return' && inWaiting ? 'danger' : ''}" data-action="${action}">
+            <i class="${icon}"></i><span>${label}</span>
+        </button>
+    `).join('');
+    menu.addEventListener('click', event => {
+        const item = event.target.closest('.person-pop-item');
+        if (!item) return;
+        event.preventDefault();
+        event.stopPropagation();
+        const action = item.dataset.action;
+        closePersonMenus();
+        if (action === 'memo') handleEdit(isDriver ? 'driverMemo' : 'memo', person);
+        else if (action === 'lock' && card) toggleLock(card);
+        else if (action === 'return' && card) returnOrDeleteMemberCard(card);
+        else if (action === 'name') handleEdit(isDriver ? 'driverName' : 'memberName', person);
+        else if (action === 'grade') openChoicePopup('学年', [
+            { value: '0', label: '未設定', icon: 'fas fa-minus' },
+            { value: '1', label: '1年', icon: 'fas fa-1' },
+            { value: '2', label: '2年', icon: 'fas fa-2' },
+            { value: '3', label: '3年', icon: 'fas fa-3' },
+            { value: '4', label: '4年', icon: 'fas fa-4' }
+        ], value => setPersonGrade(person, value));
+        else if (action === 'gender') openChoicePopup('性別', [
+            { value: 'male', label: '男性', icon: 'fas fa-mars' },
+            { value: 'female', label: '女性', icon: 'fas fa-venus' },
+            { value: 'unknown', label: '未設定', icon: 'fas fa-circle-question' }
+        ], value => setPersonGender(person, value));
+    });
+    document.body.appendChild(menu);
+    positionPersonMenu(menu, trigger);
+}
+
+function setupCompactPersonMenu() {
+    D.addEventListener('click', event => {
+        const menuTrigger = event.target.closest?.('.member-menu-btn, .driver-menu-btn');
+        if (menuTrigger) {
+            event.preventDefault();
+            event.stopPropagation();
+            openCompactPersonMenu(menuTrigger);
+            return;
+        }
+        if (event.target.closest?.('.person-pop-menu')) return;
+        if (event.target.closest?.('.member-name-text, .driver-name-disp')) {
+            // 名前タップで性別が切り替わる旧挙動は廃止。
+            event.stopPropagation();
+            return;
+        }
+        closePersonMenus();
+    }, true);
+}
+
 function handleEdit(type, el) {
     const isCap = type === 'capacity';
     const box = isCap ? el.closest('.car-box') : null;
@@ -8530,7 +8948,9 @@ function handleEdit(type, el) {
     const driver = !isCap && !card ? el.closest('.driver-seat') : null;
 
     let initialVal = '', title = '';
-    if(isCap) { title = '定員変更'; initialVal = el.val(); } 
+    if(isCap) { title = '定員変更'; initialVal = el.val(); }
+    else if (type === 'memberName' && card) { title = '名前変更'; initialVal = card.dataset.name || $('.member-name-text', card).innerText; }
+    else if (type === 'driverName' && driver) { title = '名前変更'; initialVal = driver.dataset.name || $('.driver-name-disp', driver).innerText; }
     else if (card) { title = 'メモ編集'; initialVal = $('.memo-popup', card).innerText; } 
     else if (driver) { title = '車出しメモ'; initialVal = $('.driver-memo-text', driver).innerText; }
 
@@ -8557,12 +8977,28 @@ function handleEdit(type, el) {
                 }
                 boxEl.dataset.capacity = newC;
             }
+        } else if (type === 'memberName' && card) {
+            const nextName = v.trim();
+            if (!nextName) return;
+            card.dataset.name = nextName;
+            $('.member-name-text', card).textContent = nextName;
+        } else if (type === 'driverName' && driver) {
+            const nextName = v.trim();
+            if (!nextName) return;
+            const oldName = driver.dataset.name || $('.driver-name-disp', driver).innerText;
+            driver.dataset.name = nextName;
+            $('.driver-name-disp', driver).textContent = nextName;
+            const boxEl = driver.closest('.car-box');
+            const label = $('.car-name-label', boxEl);
+            if (label) label.textContent = `${nextName}車`;
+            if (settlementState?.cars?.[oldName] && !settlementState.cars[nextName]) {
+                settlementState.cars[nextName] = settlementState.cars[oldName];
+                delete settlementState.cars[oldName];
+            }
         } else if (card) {
             const m = $('.memo-popup', card); m.innerText = v; m.style.display = v?'block':'none';
-            $('.edit-btn', card).classList.toggle('text-warning', !!v);
         } else if (driver) {
             const m = $('.driver-memo-text', driver); m.innerText = v; m.style.display = v?'block':'none';
-            $('.edit-btn', driver).classList.toggle('text-warning', !!v);
         }
         modals.edit.hide(); updateUI(); save();
     };
@@ -9066,7 +9502,7 @@ function setupManualSheetDrag() {
             clientY: e.clientY,
             timer: null
         };
-        nextPending.timer = setTimeout(() => startManualSheetDrag(chip, nextPending), e.pointerType === 'touch' ? 220 : 80);
+        nextPending.timer = setTimeout(() => startManualSheetDrag(chip, nextPending), e.pointerType === 'touch' ? 520 : 150);
         pending = nextPending;
         chip.setPointerCapture?.(e.pointerId);
     }, { passive: false });
@@ -9195,9 +9631,11 @@ function renderSheetView() {
         let html = `<div class="sheet-car-header">${car.name}車 <span class="sheet-capacity-badge" style="color:${capColor}">${filled}/${cap}</span></div>`;
 
         const dg = car.driverGender || 'unknown';
+        const dgrade = parseInt(car.driverGrade) || 0;
+        const dgradeBadge = dgrade > 0 ? `<span class="grade-badge" data-grade="${dgrade}">${dgrade}年</span>` : '';
         html += `<div class="sheet-driver-row" data-gender="${dg}">
             <i class="fas fa-car" style="font-size:0.65rem;opacity:0.6;"></i>
-            <span style="font-weight:700;">${car.name}</span>
+            <span style="font-weight:700;">${escapeHtml(car.name)}</span>${dgradeBadge}
         </div>`;
 
         for (let i = 0; i < maxSeats; i++) {
@@ -9425,6 +9863,7 @@ function getRoomDataOnly() {
             capacity: c.dataset.capacity,
             driverMemo: $('.driver-memo-text', c).innerText,
             driverGender: $('.driver-seat', c).dataset.gender,
+            driverGrade: parseInt($('.driver-seat', c).dataset.grade)||0,
             members: Array.from($$('.seat-slot', c)).flatMap(s => getRealSeatCards(s).map(getMemData))
         }))
     };
