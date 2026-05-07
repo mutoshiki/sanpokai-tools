@@ -5937,6 +5937,316 @@ body[data-app-theme="monochrome"] .header-action.share-action {
     color: var(--accent-color) !important;
 }
 
+
+
+/* --- v42 compact car cards and unified responsive UI --- */
+/* PCでも主要UIはスマホ版に近い見た目へ寄せる */
+.header-actions .header-more .header-action,
+.header-actions #editLockBtn {
+    background: var(--hover-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-sub) !important;
+    box-shadow: none !important;
+}
+.header-actions .header-more .header-action i,
+.header-actions #editLockBtn i,
+.header-actions .header-more .header-action span,
+.header-actions #editLockBtn span {
+    color: var(--text-sub) !important;
+}
+.header-actions .share-action {
+    background: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    color: #fff !important;
+    font-weight: 900 !important;
+}
+.header-actions .share-action i,
+.header-actions .share-action span { color: #fff !important; }
+
+#view-toggle-bar {
+    padding: 2px 8px 0 !important;
+    gap: 4px !important;
+    background: var(--bg-card) !important;
+}
+.view-tab {
+    min-height: 34px !important;
+    padding: 6px 4px 7px !important;
+    border: 0 !important;
+    border-bottom: 3px solid transparent !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--text-sub) !important;
+    font-size: 0.74rem !important;
+    font-weight: 850 !important;
+}
+.view-tab.active {
+    background: transparent !important;
+    color: var(--accent-color) !important;
+    border-bottom-color: var(--accent-color) !important;
+}
+.view-tab.active i { color: var(--accent-color) !important; }
+
+.edit-header-tools-only {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 7px !important;
+    margin: 4px 0 8px !important;
+}
+.edit-header-tools-only .edit-tools {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+}
+.edit-header-tools-only .edit-tools .tool-btn {
+    min-height: 40px !important;
+    padding: 7px 8px !important;
+    gap: 5px !important;
+    flex-direction: row !important;
+    font-size: 0.78rem !important;
+    border-radius: var(--radius-sm) !important;
+}
+.edit-header-tools-only .edit-tools .tool-btn i {
+    margin: 0 !important;
+    font-size: 0.9rem !important;
+}
+.edit-header-tools-only .edit-tools .tool-btn span {
+    font-size: 0.78rem !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+}
+.auto-condition-pill {
+    width: 100% !important;
+    min-height: 34px !important;
+    padding: 7px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    border-left: 3px solid var(--accent-color) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--text-main) !important;
+    font-size: 0.75rem !important;
+    font-weight: 760 !important;
+    line-height: 1.25 !important;
+    overflow-wrap: anywhere !important;
+}
+.auto-condition-pill i {
+    flex: 0 0 auto !important;
+    font-size: 0.78rem !important;
+    color: var(--accent-color) !important;
+}
+.auto-condition-pill span { min-width: 0 !important; }
+
+.car-box {
+    padding: 9px !important;
+    margin-bottom: 9px !important;
+}
+.car-header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto 32px !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding-bottom: 7px !important;
+    margin-bottom: 7px !important;
+}
+.car-header .car-name-label,
+.car-header > span,
+.car-header > strong {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    font-size: 0.98rem !important;
+    font-weight: 850 !important;
+    line-height: 1.2 !important;
+}
+.car-header > div { display: contents !important; }
+.capacity-badge.capacity-edit-btn {
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 5px 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 0.74rem !important;
+    font-weight: 850 !important;
+}
+.capacity-badge.capacity-edit-btn > i { font-size: 0.76rem !important; }
+.capacity-badge.capacity-edit-btn .capacity-count {
+    padding: 1px 5px !important;
+    border-radius: 999px !important;
+    font-size: 0.76rem !important;
+    line-height: 1.25 !important;
+}
+.capacity-badge.capacity-edit-btn .capacity-label {
+    font-size: 0.68rem !important;
+    line-height: 1 !important;
+}
+.car-header .delete-btn,
+.car-delete-btn {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--radius-sm) !important;
+    background: transparent !important;
+    color: var(--text-sub) !important;
+    opacity: 0.72 !important;
+    font-size: 0.82rem !important;
+}
+.car-header .delete-btn:hover,
+.car-delete-btn:hover {
+    background: rgba(239, 68, 68, 0.08) !important;
+    color: #dc2626 !important;
+    opacity: 1 !important;
+}
+
+.car-layout-grid {
+    gap: 6px !important;
+}
+.member-card,
+.driver-seat {
+    min-height: 74px !important;
+    padding: 8px !important;
+    border-radius: var(--radius-sm) !important;
+}
+.member-card.in-waiting {
+    min-height: 78px !important;
+    padding: 8px !important;
+}
+.member-main-line,
+.driver-main-line {
+    min-height: 22px !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+.member-name-text,
+.driver-name-disp {
+    font-size: 0.86rem !important;
+    line-height: 1.18 !important;
+    font-weight: 800 !important;
+}
+.grade-badge {
+    padding: 2px 5px !important;
+    font-size: 0.58rem !important;
+    border-radius: 5px !important;
+    line-height: 1.2 !important;
+}
+.member-action-row,
+.driver-action-row {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 4px !important;
+    margin-top: 5px !important;
+}
+.driver-action-row {
+    grid-template-columns: minmax(72px, 96px) !important;
+}
+.member-action-btn,
+.delete-btn-overlay {
+    position: static !important;
+    width: auto !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 4px 4px !important;
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 7px !important;
+    background: var(--bg-card) !important;
+    color: var(--text-main) !important;
+    opacity: 1 !important;
+    font-weight: 850 !important;
+    line-height: 1 !important;
+}
+.member-action-btn i,
+.delete-btn-overlay i {
+    font-size: 0.78rem !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+.member-action-btn span,
+.delete-btn-overlay span {
+    font-size: 0.6rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.02em !important;
+}
+.memo-popup {
+    margin-top: 4px !important;
+    font-size: 0.64rem !important;
+    line-height: 1.25 !important;
+}
+
+@media (max-width: 640px) {
+    .header-actions .header-more .header-action,
+    .header-actions #editLockBtn {
+        min-height: 36px !important;
+        padding: 6px 7px !important;
+    }
+    .header-actions .share-action {
+        min-height: 44px !important;
+    }
+    .view-tab {
+        min-height: 32px !important;
+        padding-top: 5px !important;
+        padding-bottom: 6px !important;
+    }
+    .edit-header-tools-only .edit-tools .tool-btn {
+        min-height: 39px !important;
+    }
+    .car-header {
+        grid-template-columns: minmax(0, 1fr) auto 30px !important;
+        gap: 6px !important;
+    }
+    .car-header .delete-btn,
+    .car-delete-btn {
+        width: 30px !important;
+        height: 30px !important;
+        min-width: 30px !important;
+        min-height: 30px !important;
+    }
+    .member-card,
+    .driver-seat {
+        min-height: 70px !important;
+        padding: 7px !important;
+    }
+    .member-action-btn,
+    .delete-btn-overlay {
+        height: 31px !important;
+        min-height: 31px !important;
+        gap: 3px !important;
+    }
+    .member-action-btn span,
+    .delete-btn-overlay span {
+        font-size: 0.58rem !important;
+    }
+}
+
+[data-theme="dark"] .member-action-btn,
+[data-theme="dark"] .delete-btn-overlay {
+    background: rgba(15, 23, 42, 0.46) !important;
+    border-color: var(--border-color) !important;
+}
+[data-theme="dark"] .auto-condition-pill {
+    background: var(--bg-card) !important;
+}
+
 </style>
   </head>
   <body data-theme="light" data-app-theme="natural" class="sheet-mode">
@@ -5985,13 +6295,13 @@ body[data-app-theme="monochrome"] .header-action.share-action {
       <div id="top-area" style="display: none;">
         <div class="edit-header edit-header-tools-only">
           <div class="edit-tools">
-            <button class="btn tool-btn tool-help-btn" data-priority="high" onclick="modals.guide.show()" title="車割の作り方">
+            <button class="btn tool-btn tool-help-btn" data-priority="high" onclick="modals.guide.show()" title="使い方">
               <i class="fas fa-circle-question"></i>
-              <span>車割の作り方</span>
+              <span>使い方</span>
             </button>
-            <button class="btn tool-btn" data-priority="high" onclick="openBatchModal()" title="登録">
+            <button class="btn tool-btn" data-priority="high" onclick="openBatchModal()" title="参加者登録">
               <i class="fas fa-paste"></i>
-              <span>登録</span>
+              <span>参加者登録</span>
             </button>
           </div>
           <div id="lastAutoAssignCondition" class="auto-condition-pill" aria-live="polite">
@@ -6267,7 +6577,7 @@ body[data-app-theme="monochrome"] .header-action.share-action {
       <div class="modal-dialog modal-fullscreen-sm-down modal-lg modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" style="font-size: 1rem;">登録</h5>
+            <h5 class="modal-title fw-bold" style="font-size: 1rem;">参加者登録</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
@@ -6350,7 +6660,7 @@ body[data-app-theme="monochrome"] .header-action.share-action {
                       <div class="guide-mini-grid"><div class="driver-seat"><span class="driver-name-disp">高橋</span></div><div class="guide-mini-card person-male">田中</div><div class="guide-mini-card person-female">山本</div><div class="seat-slot"></div></div>
                     </div>
                   </div>
-                  <p class="guide-short-text">車割の作成手順は「車割の作り方」で確認できます。</p>
+                  <p class="guide-short-text">車割の作成手順は「使い方」で確認できます。</p>
                 </div>
               </div>
             </div>
@@ -6419,12 +6729,12 @@ body[data-app-theme="monochrome"] .header-action.share-action {
       <div class="modal-dialog modal-fullscreen-sm-down modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-circle-question me-2"></i>車割の作り方</h5>
+            <h5 class="modal-title fw-bold" style="font-size:1.02rem;"><i class="fas fa-circle-question me-2"></i>使い方</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body p-0 unified-guide-body" data-guide-root="car">
             <div class="guide-step-nav">
-              <button class="guide-step-btn active" data-guide="car" data-step="0" onclick="showGuideStep('car', 0)">登録</button>
+              <button class="guide-step-btn active" data-guide="car" data-step="0" onclick="showGuideStep('car', 0)">参加者登録</button>
               <button class="guide-step-btn" data-guide="car" data-step="1" onclick="showGuideStep('car', 1)">割当</button>
               <button class="guide-step-btn" data-guide="car" data-step="2" onclick="showGuideStep('car', 2)">発表</button>
             </div>
@@ -6446,7 +6756,7 @@ body[data-app-theme="monochrome"] .header-action.share-action {
                   <p class="guide-short-text">Googleフォームの回答は、学年別や車出し可否別に並べ替えてからまとめて貼り付けると、登録しやすくなります。</p>
                 </div>
                 <div class="guide-feature-card">
-                  <div class="guide-feature-title"><i class="fas fa-user-plus me-2"></i>登録画面</div>
+                  <div class="guide-feature-title"><i class="fas fa-user-plus me-2"></i>参加者登録</div>
                   <div class="guide-mini-screen">
                     <div class="guide-mini-form">
                       <div class="field">1年生：田中 太郎</div>
@@ -7421,13 +7731,13 @@ function addCar(n, cap, mems=[], dm='', dg='unknown') {
     col.innerHTML = `
         <div class="car-box" data-capacity="${c}">
             <div class="car-header">
-                <span>${name}車</span>
-                <div>
-                  <button type="button" class="capacity-badge capacity-edit-btn" onclick="window.editCapacity(this)" title="定員を変更">
+                <span class="car-name-label">${name}車</span>
+                <button type="button" class="capacity-badge capacity-edit-btn" onclick="window.editCapacity(this)" title="定員を変更">
                     <i class="fas fa-users" aria-hidden="true"></i><span class="capacity-count">0/${c}</span><span class="capacity-label">定員</span>
-                  </button>
-                  <i class="fas fa-trash-alt action-btn delete-btn"></i>
-                </div>
+                </button>
+                <button type="button" class="car-delete-btn action-btn delete-btn" title="車を削除" aria-label="車を削除">
+                    <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                </button>
             </div>
             <div class="car-layout-grid">${slotsHtml}</div>
         </div>
